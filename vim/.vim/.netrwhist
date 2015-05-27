@@ -1,0 +1,10 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =8
+let g:netrw_dirhist_1='/home/adam/code/web/website/local/routes/user'
+let g:netrw_dirhist_2='/home/adam/code/web/website/local/views'
+let g:netrw_dirhist_3='/home/adam/code/java/dervish/src/com/adamheins/dervish/function'
+let g:netrw_dirhist_4='/home/adam/code/java/dervish/build'
+let g:netrw_dirhist_5='/home/adam/code/web/website/local/views/admin/blog'
+let g:netrw_dirhist_6='/home/adam/code/web/website/local/views/user'
+let g:netrw_dirhist_7='/home/adam/code/web/website/local/models'
+let g:netrw_dirhist_8='/home/adam/code/web/base-converter'

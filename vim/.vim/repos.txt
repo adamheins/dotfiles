@@ -1,0 +1,5 @@
+git@github.com:scrooloose/nerdtree.git
+git@github.com:rust-lang/rust.vim.git
+git@github.com:ntpeters/vim-better-whitespace.git
+git@github.com:digitaltoad/vim-jade.git
+git@github.com:jeffkreeftmeijer/vim-numbertoggle.git
