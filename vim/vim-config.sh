@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # Set up vim configuration and plugins.
+cd $(dirname $0)
 cp -r .vim/ ~/.vim
-cp vim/.vimrc ~/.vimrc
-./~/.vim/install-repos.sh
+cp .vimrc ~/.vimrc
+~/.vim/install-plugins.sh
