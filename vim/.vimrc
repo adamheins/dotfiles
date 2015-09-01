@@ -1,10 +1,5 @@
-"URL: http://vim.wikia.com/wiki/Example_vimrc
-" Authors: http://vim.wikia.com/wiki/Vim_on_Freenode
-" Description: A minimal, but feature rich, example .vimrc. If you are a
-"              newbie, basing your first .vimrc on this file is a good choice.
-"              If you're a more advanced user, building your own .vimrc based
-"              on this file is still a good idea.
-
+" Plugins {{{1
+"
 " Pathogen plugin manager.
 execute pathogen#infect()
 
@@ -28,23 +23,6 @@ if $COLORTERM == 'gnome-terminal'
   set t_Co=256
 endif
 
-" Enable syntax highlighting and set the color scheme
-syntax on
-colorscheme twilight256
-
-" Disable arrow keys
-noremap <Up> <NOP>
-noremap <Down> <NOP>
-noremap <Left> <NOP>
-noremap <Right> <NOP>
-
-" Highlight the current line.
-set cursorline
-hi CursorLine cterm=NONE ctermbg=236
-
-" Map h,k to include wrapped lines.
-noremap j gj
-noremap k gk
 
 "------------------------------------------------------------
 " Must have options {{{1
@@ -151,15 +129,9 @@ set pastetoggle=<F11>
 " Indentation settings according to personal preference.
 
 " Indentation settings for using 2 spaces instead of tabs.
-" Do not change 'tabstop' from its default value of 8 with this setup.
 set shiftwidth=2
 set tabstop=2
 set expandtab
-
-" Indentation settings for using hard tabs for indent. Display tabs as
-" two characters wide.
-"set shiftwidth=2
-"set tabstop=2
 
 
 "------------------------------------------------------------
@@ -174,3 +146,39 @@ map Y y$
 " Map <C-L> (redraw screen) to also turn off search highlighting until the
 " next search
 nnoremap <C-L> :nohl<CR><C-L>
+
+" Map h,k to include wrapped lines.
+" This makes editing files with very long lines much more pleasant.
+noremap j gj
+noremap k gk
+
+" Disable arrow keys.
+noremap <Up> <NOP>
+noremap <Down> <NOP>
+noremap <Left> <NOP>
+noremap <Right> <NOP>
+
+
+"------------------------------------------------------------
+" Colours {{{1
+"
+" Colour and highlighting options.
+"
+" Enable syntax highlighting and set the color scheme
+syntax on
+colorscheme twilight256
+
+" Highlight the current line.
+set cursorline
+hi CursorLine cterm=NONE ctermbg=236
+
+" Highlight area past line 80.
+hi ColorColumn ctermbg=234
+let &colorcolumn=join(range(81,999),",")
+
+
+"------------------------------------------------------------
+" Miscellaneous {{{1
+"
+" Treat .ejs like .html
+au BufNewFile,BufRead *.ejs set filetype=html
