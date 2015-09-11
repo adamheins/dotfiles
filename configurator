@@ -1,0 +1,95 @@
+#!/usr/bin/env python
+
+import argparse
+import os
+import shutil
+import subprocess
+
+CONF_ROOT = os.path.dirname(os.path.realpath(__file__))
+HOME_DIR = os.path.expanduser('~')
+FILE_DIR = os.path.join(CONF_ROOT, 'files')
+BASH_DIR = os.path.join(FILE_DIR, 'bash')
+VIM_DIR  = os.path.join(FILE_DIR, 'vim')
+TMUX_DIR = os.path.join(FILE_DIR, 'tmux')
+
+BASH_FILES = ['.bashrc', '.bash_profile', '.bash_aliases', '.profile']
+
+def clean():
+    """ Remove the configuration files from the repo. """
+    shutil.rmtree(FILE_DIR)
+
+def copy():
+    """ Copy files from the local machine to the repo. """
+    os.mkdir(FILE_DIR)
+
+    # Copy bash files.
+    os.mkdir(BASH_DIR)
+    for f in BASH_FILES:
+        shutil.copy(os.path.join(HOME_DIR, f), BASH_DIR)
+    shutil.copytree(os.path.join(HOME_DIR, '.scripts'),
+                    os.path.join(BASH_DIR, '.scripts'))
+
+    # Copy tmux configuration.
+    os.mkdir(TMUX_DIR)
+    shutil.copy(os.path.join(HOME_DIR, '.tmux.conf'), TMUX_DIR)
+
+    # Copy vim files.
+    os.mkdir(VIM_DIR)
+    shutil.copy(os.path.join(HOME_DIR, '.vimrc'), VIM_DIR)
+    shutil.copytree(os.path.join(HOME_DIR, '.vim'),
+                    os.path.join(VIM_DIR, '.vim'))
+
+def paste():
+    """ Paste configuration files into the correct places on the system. """
+
+    # Paste bash files.
+    for f in BASH_FILES:
+        shutil.copy(os.path.join(BASH_DIR, f),
+                    os.path.join(HOME_DIR, f))
+    try:
+        shutil.rmtree(os.path.join(HOME_DIR, '.scripts'))
+    except OSError:
+        pass
+    shutil.copytree(os.path.join(BASH_DIR, '.scripts'),
+                    os.path.join(HOME_DIR, '.scripts'))
+
+    # Copy tmux configuration file.
+    shutil.copy(os.path.join(TMUX_DIR, '.tmux.conf'), HOME_DIR)
+
+    shutil.copy(os.path.join(VIM_DIR, '.vimrc'), HOME_DIR)
+    try:
+        shutil.rmtree(os.path.join(HOME_DIR, '.vim'))
+    except OSError:
+        pass
+    shutil.copytree(os.path.join(VIM_DIR, '.vim'),
+                    os.path.join(HOME_DIR, '.vim'))
+
+def install():
+    print 'Not currently implemented.'
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('command', help='Command to perform.')
+    args = parser.parse_args()
+
+    command = args.command
+    if command == 'help':
+        pass
+    elif command == 'clean':
+        clean()
+        print 'Configuration cleaned.'
+    elif command == 'copy':
+        copy()
+        print 'Configuration copied.'
+    elif command == 'paste':
+        paste()
+        print 'Configuration pasted.'
+    elif command == 'install':
+        install()
+    else:
+        print 'Unrecognized command.'
+
+
+if __name__ == '__main__':
+    main()
+

@@ -3,6 +3,11 @@
 " Pathogen plugin manager.
 execute pathogen#infect()
 
+" Neocomplete
+let g:neocomplete#enable_at_startup = 1
+let g:neocomplete#enable_smart_case = 1
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+
 "------------------------------------------------------------
 " Features {{{1
 "
@@ -122,6 +127,9 @@ set notimeout ttimeout ttimeoutlen=200
 " Use <F11> to toggle between 'paste' and 'nopaste'
 set pastetoggle=<F11>
 
+" Set style of the file explorer. TODO unknown option?
+" set g:netrw_liststyle=3
+
 
 "------------------------------------------------------------
 " Indentation options {{{1
@@ -158,6 +166,19 @@ noremap <Down> <NOP>
 noremap <Left> <NOP>
 noremap <Right> <NOP>
 
+" Press ENTER or Shift-ENTER to add new line before or after, respectively,
+" without entering insert mode. TODO broken currently
+" noremap <S-Enter> O<Esc>
+" noremap <CR> o<Esc>
+
+" Make switching between splits easier.
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+
+" Shortcut for opening current file directory in Explore mode.
+noremap <C-m> :Explore<CR>
 
 "------------------------------------------------------------
 " Colours {{{1
@@ -172,13 +193,20 @@ colorscheme twilight256
 set cursorline
 hi CursorLine cterm=NONE ctermbg=236
 
-" Highlight area past line 80.
+" Highlight area past line 100.
 hi ColorColumn ctermbg=234
-let &colorcolumn=join(range(81,999),",")
+let &colorcolumn=join(range(101,999),",")
 
 
 "------------------------------------------------------------
-" Miscellaneous {{{1
+" Filetypes {{{1
 "
 " Treat .ejs like .html
-au BufNewFile,BufRead *.ejs set filetype=html
+au BufNewFile,BufRead *.ejs set ft=html
+
+" Treat wscript like python
+au BufNewFile,BufRead */wscript set ft=python
+
+" Any file beginning with '.bash' should be treated as having shell syntax.
+" TODO broken
+au BufNewFile,BufRead .bash* setf bash

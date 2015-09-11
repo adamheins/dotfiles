@@ -2,7 +2,13 @@
 . ~/.bashrc
 
 # Non-bash-specific things go in .profile.
-. ~/.profile
+[ -f ~/.profile ] && . ~/.profile
+
+# Local configuration.
+[ -f ~/.bash_local ] && . ~/.bash_local
+
+# Aliases.
+[ -f ~/.bash_aliases ] && . ~/.bash_aliases
 
 # Source everything in the .scripts folder.
 for f in ~/.scripts/*; do
