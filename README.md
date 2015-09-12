@@ -4,6 +4,7 @@
 - [Bash](#bash)
 - [Tmux](#tmux)
 - [Vim](#vim)
+- [Other tool](#other tools)
 
 ## Intro
 This repo contains my standard configurations for unix systems. The intention is that this repo can be easily cloned and deployed to configure new machines and users. Use the `configurator` script to interact with the repo.
@@ -32,3 +33,8 @@ Highlights trailing whitespace. Use `:StripWhitespace` to remove trailing whites
 
 #### vim-numbertoggle
 Toggle line numbers between absolute and relative mode with `<C-n>`.
+
+## Other Tools
+* ack
+* brew (on OSX)
+* fzf
