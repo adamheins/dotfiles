@@ -11,9 +11,9 @@ _update_tmux_status() {
     if [ ${#branch} -gt ${#short_branch} ]; then
       short_branch=${short_branch}...
     fi
-    tmux set -g status-right "#[fg=black] [$short_branch] |%l:%M %p | %Y-%m-%d "
+    tmux set -g status-right "#[fg=black] [$short_branch] | %I:%M %p | %Y-%m-%d "
   else
-    tmux set -g status-right "#[fg=black]%l:%M %p | %Y-%m-%d "
+    tmux set -g status-right "#[fg=black] %I:%M %p | %Y-%m-%d "
   fi
 }
 
