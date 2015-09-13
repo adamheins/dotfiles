@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 
 import argparse
+import git
 import os
 import shutil
-import subprocess
 
 CONF_ROOT = os.path.dirname(os.path.realpath(__file__))
 HOME_DIR = os.path.expanduser('~')
@@ -11,6 +11,8 @@ FILE_DIR = os.path.join(CONF_ROOT, 'files')
 BASH_DIR = os.path.join(FILE_DIR, 'bash')
 VIM_DIR  = os.path.join(FILE_DIR, 'vim')
 TMUX_DIR = os.path.join(FILE_DIR, 'tmux')
+
+VIM_REPO = 'git@github.com:adamheins/.vim.git'
 
 BASH_FILES = ['.bashrc', '.bash_profile', '.bash_aliases', '.profile']
 
@@ -36,8 +38,6 @@ def copy():
     # Copy vim files.
     os.mkdir(VIM_DIR)
     shutil.copy(os.path.join(HOME_DIR, '.vimrc'), VIM_DIR)
-    shutil.copytree(os.path.join(HOME_DIR, '.vim'),
-                    os.path.join(VIM_DIR, '.vim'))
 
 def paste():
     """ Paste configuration files into the correct places on the system. """
@@ -56,13 +56,14 @@ def paste():
     # Copy tmux configuration file.
     shutil.copy(os.path.join(TMUX_DIR, '.tmux.conf'), HOME_DIR)
 
+    # Copy the .vimrc and clone the .vim directory.
     shutil.copy(os.path.join(VIM_DIR, '.vimrc'), HOME_DIR)
     try:
         shutil.rmtree(os.path.join(HOME_DIR, '.vim'))
     except OSError:
         pass
-    shutil.copytree(os.path.join(VIM_DIR, '.vim'),
-                    os.path.join(HOME_DIR, '.vim'))
+    repo = git.Repo().clone_from(VIM_REPO, os.path.join(HOME_DIR, '.vim'))
+    repo.submodule_update()
 
 def install():
     print 'Not currently implemented.'

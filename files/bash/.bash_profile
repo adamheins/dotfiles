@@ -10,7 +10,7 @@
 # Aliases.
 [ -f ~/.bash_aliases ] && . ~/.bash_aliases
 
-# Source everything in the .scripts folder.
-for f in ~/.scripts/*; do
+# Custom shell scripts.
+for f in ~/.scripts/sh/*; do
    . $f
 done

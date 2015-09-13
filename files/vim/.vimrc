@@ -127,14 +127,12 @@ set notimeout ttimeout ttimeoutlen=200
 " Use <F11> to toggle between 'paste' and 'nopaste'
 set pastetoggle=<F11>
 
-" Set style of the file explorer. TODO unknown option?
-" set g:netrw_liststyle=3
+" Hide the mode status messages.
+set noshowmode
 
 
 "------------------------------------------------------------
 " Indentation options {{{1
-"
-" Indentation settings according to personal preference.
 
 " Indentation settings for using 2 spaces instead of tabs.
 set shiftwidth=2
@@ -177,26 +175,26 @@ nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
-" Shortcut for opening current file directory in Explore mode.
-noremap <C-m> :Explore<CR>
+" Shortcut for toggling netrw.
+noremap <C-m> :Lexplore<CR>
+
+" Shorten the command to strip trailing whitespace.
+noremap :sws :StripWhitespace
 
 "------------------------------------------------------------
 " Colours {{{1
 "
 " Colour and highlighting options.
-"
+
 " Enable syntax highlighting and set the color scheme
 syntax on
-colorscheme twilight256
+colorscheme lucid
 
 " Highlight the current line.
 set cursorline
-hi CursorLine cterm=NONE ctermbg=236
 
 " Highlight area past line 100.
-hi ColorColumn ctermbg=234
 let &colorcolumn=join(range(101,999),",")
-
 
 "------------------------------------------------------------
 " Filetypes {{{1
