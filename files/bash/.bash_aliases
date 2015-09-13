@@ -3,7 +3,7 @@ alias ls="ls -G"
 alias pwaf="pypy waf"
 
 # Reload bash things.
-alias reload=". ~/.bash_profile"
+#alias reload=". ~/.bash_profile"
 
 # Aliases for ls.
 alias ll='ls -alF'
@@ -21,5 +21,5 @@ alias gst="git status"
 alias ga="git add -A"
 alias gb="git branch"
 alias gc="git commit"
-alias gp="git push"
+alias gp="git pull"
 alias gch="git checkout"

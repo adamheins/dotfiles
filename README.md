@@ -4,7 +4,7 @@
 - [Bash](#bash)
 - [Tmux](#tmux)
 - [Vim](#vim)
-- [Other tool](#other tools)
+- [Other Tools](#other tools)
 
 ## Intro
 This repo contains my standard configurations for unix systems. The intention is that this repo can be easily cloned and deployed to configure new machines and users. Use the `configurator` script to interact with the repo.
