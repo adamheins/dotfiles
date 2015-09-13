@@ -4,7 +4,7 @@
 - [Bash](#bash)
 - [Tmux](#tmux)
 - [Vim](#vim)
-- [Other Tools](#other tools)
+- [Other Tools](#other-tools)
 
 ## Intro
 This repo contains my standard configurations for POSIX systems. The intention
