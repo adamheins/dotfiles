@@ -49,6 +49,7 @@ whitespace.
 Toggle line numbers between absolute and relative mode with `<C-n>`.
 
 ## Other Tools
-* [ack](http://beyondgrep.com/)
-* [Homebrew](http://brew.sh/) (on OSX)
-* [fzf](https://github.com/junegunn/fzf)
+* [ack](http://beyondgrep.com/): A source code search tool.
+* [Homebrew](http://brew.sh/): A package manager for OSX.
+* [fzf](https://github.com/junegunn/fzf): A fuzzy-finder for the command line.
+* [pass](http://www.passwordstore.org/): A local password manager.
