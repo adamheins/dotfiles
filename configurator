@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 
+# TODO add .inputrc
+
 import argparse
 import git
 import os
@@ -11,6 +13,7 @@ FILE_DIR = os.path.join(CONF_ROOT, 'files')
 BASH_DIR = os.path.join(FILE_DIR, 'bash')
 VIM_DIR  = os.path.join(FILE_DIR, 'vim')
 TMUX_DIR = os.path.join(FILE_DIR, 'tmux')
+INPUT_DIR = os.path.join(FILE_DIR, 'input')
 
 VIM_REPO = 'git@github.com:adamheins/.vim.git'
 
@@ -39,6 +42,10 @@ def copy():
     os.mkdir(VIM_DIR)
     shutil.copy(os.path.join(HOME_DIR, '.vimrc'), VIM_DIR)
 
+    # Copy .inputrc file.
+    os.mkdir(INPUT_DIR)
+    shutil.copy(os.path.join(HOME_DIR, '.inputrc'), INPUT_DIR)
+
 def paste():
     """ Paste configuration files into the correct places on the system. """
 
@@ -53,10 +60,10 @@ def paste():
     shutil.copytree(os.path.join(BASH_DIR, '.scripts'),
                     os.path.join(HOME_DIR, '.scripts'))
 
-    # Copy tmux configuration file.
+    # Paste tmux configuration file.
     shutil.copy(os.path.join(TMUX_DIR, '.tmux.conf'), HOME_DIR)
 
-    # Copy the .vimrc and clone the .vim directory.
+    # Paste the .vimrc and clone the .vim directory.
     shutil.copy(os.path.join(VIM_DIR, '.vimrc'), HOME_DIR)
     try:
         shutil.rmtree(os.path.join(HOME_DIR, '.vim'))
@@ -65,7 +72,11 @@ def paste():
     repo = git.Repo().clone_from(VIM_REPO, os.path.join(HOME_DIR, '.vim'))
     repo.submodule_update()
 
+    # Paste .inputrc file.
+    shutil.copy(os.path.join(INPUT_DIR, '.inputrc'), HOME_DIR)
+
 def install():
+    """ Install useful tools. """
     print 'Not currently implemented.'
 
 def main():
