@@ -11,6 +11,6 @@
 [ -f ~/.bash_aliases ] && . ~/.bash_aliases
 
 # Custom shell scripts.
-for f in ~/.scripts/sh/*; do
+for f in ~/.scripts/bash/*; do
    . $f
 done

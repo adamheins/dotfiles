@@ -14,9 +14,9 @@ export EDITOR="$VISUAL"
 # Don't put duplicate lines or lines starting with space in the history.
 HISTCONTROL=ignoreboth
 
-# Amount of bash history.
-HISTSIZE=1000
-HISTFILESIZE=2000
+# Amount of bash history. TODO less so fzf is fast...
+HISTSIZE=500
+HISTFILESIZE=1000
 
 # Append to the history file, don't overwrite it.
 shopt -s histappend
@@ -61,12 +61,12 @@ if ! shopt -oq posix; then
   fi
 fi
 
-# Get 256 color support.
-#export TERM=xterm-256color
-
 # Launch tmux automatically.
 [[ $- != *i* ]] && return
 [[ -z "$TMUX" ]] && exec tmux
 
 # Use fzf for fuzzy-searching.
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+# Use the fuck.
+eval "$(thefuck --alias)"

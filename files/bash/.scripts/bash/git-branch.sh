@@ -1,7 +1,7 @@
 #/bin/bash
 
 # If the cwd is a git repo, display the branch name in the tmux status bar.
-_update_tmux_status() {
+get_git_branch() {
   if [ "$(git rev-parse --is-inside-work-tree 2>/dev/null)" ]; then
     local branch short_branch
     branch=$(git symbolic-ref -q HEAD)
@@ -11,10 +11,10 @@ _update_tmux_status() {
     if [ ${#branch} -gt ${#short_branch} ]; then
       short_branch=${short_branch}...
     fi
-    tmux set -g status-right "#[fg=black] [$short_branch] | %I:%M %p | %Y-%m-%d "
+    GIT_BRANCH=$short_branch
   else
-    tmux set -g status-right "#[fg=black] %I:%M %p | %Y-%m-%d "
+    GIT_BRANCH=
   fi
 }
 
-PROMPT_COMMAND="_update_tmux_status; $PROMPT_COMMAND"
+PROMPT_COMMAND="get_git_branch; $PROMPT_COMMAND"

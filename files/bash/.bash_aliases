@@ -2,23 +2,22 @@ alias vim=/usr/local/bin/vim # Use vim installed by brew instead of system vim.
 alias ls="ls -G"
 alias pwaf="pypy waf"
 
-# Reload bash things.
-#alias reload=". ~/.bash_profile"
-
 # Aliases for ls.
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
 
-# Aliases for changing to parent directories.
+# Aliases for changing directories.
 alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
 alias .....="cd ../../../.."
+alias -- -="cd - >/dev/null 2>&1"
 
-# Git aliases.
+# Git aliases. Note that git push is intentionally left out because I don't
+# want to fuck around with pushing.
 alias gst="git status"
-alias ga="git add -A"
+alias ga="git add"
 alias gb="git branch"
 alias gc="git commit"
 alias gp="git pull"

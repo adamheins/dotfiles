@@ -8,16 +8,6 @@ mkcd() {
   cd "$@"
 }
 
-# Update the tmux config.
-update_tmux_config() {
-  tmux source-file ~/.tmux.conf
-}
-
-# Update xterm config.
-update_xterm_config() {
-  xrdb -merge ~/.Xresources
-}
-
 # Run a command an arbitrary number of times.
 repeat() {
   for((i=0; i<"$1"; i++)); do
@@ -35,4 +25,7 @@ vimf() {
   vim $(find . -name "$1")
 }
 
-
+# Print OS version.
+version() {
+  echo $(sw_vers -productVersion)
+}

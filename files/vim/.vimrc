@@ -6,7 +6,16 @@ execute pathogen#infect()
 " Neocomplete
 let g:neocomplete#enable_at_startup = 1
 let g:neocomplete#enable_smart_case = 1
+
+" Neocomplete tab completion.
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "<TAB>"
+
+" NERDTree
+let NERDTreeQuitOnOpen = 1
+
+" Use .. to move up a dir in NERDTree.
+let NERDTreeMapUpdir = '..'
 
 "------------------------------------------------------------
 " Features {{{1
@@ -27,7 +36,6 @@ filetype indent plugin on
 if $COLORTERM == 'gnome-terminal'
   set t_Co=256
 endif
-
 
 "------------------------------------------------------------
 " Must have options {{{1
@@ -127,9 +135,15 @@ set notimeout ttimeout ttimeoutlen=200
 " Use <F11> to toggle between 'paste' and 'nopaste'
 set pastetoggle=<F11>
 
-" Hide the mode status messages.
+" Hide the mode status messages, since neatstatus shows the mode.
 set noshowmode
 
+" The vim C syntax highlighter has a grudge against compound struct literals.
+" Make it stop.
+let c_no_curly_error=1
+
+" Get rid of the preview scratch window.
+set completeopt-=preview
 
 "------------------------------------------------------------
 " Indentation options {{{1
@@ -139,19 +153,12 @@ set shiftwidth=2
 set tabstop=2
 set expandtab
 
-
 "------------------------------------------------------------
 " Mappings {{{1
-"
-" Useful mappings
 
 " Map Y to act like D and C, i.e. to yank until EOL, rather than act as yy,
 " which is the default
 map Y y$
-
-" Map <C-L> (redraw screen) to also turn off search highlighting until the
-" next search
-nnoremap <C-L> :nohl<CR><C-L>
 
 " Map h,k to include wrapped lines.
 " This makes editing files with very long lines much more pleasant.
@@ -164,10 +171,17 @@ noremap <Down> <NOP>
 noremap <Left> <NOP>
 noremap <Right> <NOP>
 
-" Press ENTER or Shift-ENTER to add new line before or after, respectively,
-" without entering insert mode. TODO broken currently
-" noremap <S-Enter> O<Esc>
-" noremap <CR> o<Esc>
+" Insert blank lines without entering insert mode.
+nnoremap gj o<Esc>
+nnoremap gk O<Esc>
+
+" Avoid accidentally triggering J/K behaviour when navigating.
+nnoremap gJ J
+nnoremap gK K
+
+" Move up/down regardless of case.
+nnoremap J j
+nnoremap K k
 
 " Make switching between splits easier.
 nnoremap <C-J> <C-W><C-J>
@@ -175,11 +189,30 @@ nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
-" Shortcut for toggling netrw.
-noremap <C-m> :Lexplore<CR>
+" More useful window mappings.
+nnoremap ,<C-J> :split<CR><C-W><C-J>
+nnoremap ,<C-K> :split<CR>
+nnoremap ,<C-H> :vsplit<CR>
+nnoremap ,<C-L> :vsplit<CR><C-W><C-L>
+nnoremap ,, :bNext<CR>
+nnoremap ,m :enew<CR>
 
-" Shorten the command to strip trailing whitespace.
-noremap :sws :StripWhitespace
+" CtrlP buffer search.
+noremap ,b :CtrlPBuffer<CR>
+
+" Toggle NERDTree.
+noremap ,n :NERDTreeFind<CR>
+
+" Make interaction with the system clipboard easier.
+noremap "" "+p
+vnoremap "' "+y
+
+"------------------------------------------------------------
+" Commands {{{1
+
+" Sometimes I still have shift pressed when I type these.
+command! Q q
+command! W w
 
 "------------------------------------------------------------
 " Colours {{{1
@@ -195,16 +228,3 @@ set cursorline
 
 " Highlight area past line 100.
 let &colorcolumn=join(range(101,999),",")
-
-"------------------------------------------------------------
-" Filetypes {{{1
-"
-" Treat .ejs like .html
-au BufNewFile,BufRead *.ejs set ft=html
-
-" Treat wscript like python
-au BufNewFile,BufRead */wscript set ft=python
-
-" Any file beginning with '.bash' should be treated as having shell syntax.
-" TODO broken
-au BufNewFile,BufRead .bash* setf bash
