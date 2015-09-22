@@ -142,8 +142,13 @@ def main():
         copy(files)
         print 'Configuration copied.'
     elif command == 'paste':
-        paste(files)
-        print 'Configuration pasted.'
+        prompt = raw_input('Are you sure you want to overwrite your'
+                           + ' configuration? [y/n] ')
+        if prompt[0].upper() == 'Y':
+            paste(files)
+            print 'Configuration pasted.'
+        else:
+            print 'Aborted.'
     elif command == 'install':
         install(files)
     else:
