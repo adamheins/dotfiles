@@ -1,7 +1,5 @@
 #!/usr/bin/env python
 
-# TODO add .inputrc
-
 import argparse
 import git
 import os
@@ -15,89 +13,139 @@ VIM_DIR  = os.path.join(FILE_DIR, 'vim')
 TMUX_DIR = os.path.join(FILE_DIR, 'tmux')
 INPUT_DIR = os.path.join(FILE_DIR, 'input')
 
+FILES = {
+    'bash': os.path.join(FILE_DIR, 'bash'),
+    'vim': os.path.join(FILE_DIR, 'vim'),
+    'tmux': os.path.join(FILE_DIR, 'tmux'),
+    'input': os.path.join(FILE_DIR, 'input'),
+}
+
 VIM_REPO = 'git@github.com:adamheins/.vim.git'
 
 BASH_FILES = ['.bashrc', '.bash_profile', '.bash_aliases', '.profile']
 
-def clean():
+def clean(files):
     """ Remove the configuration files from the repo. """
-    shutil.rmtree(FILE_DIR)
+    for f in files:
+        try:
+            shutil.rmtree(FILES[f])
+        except OSError:
+            pass
+    if len(os.listdir(FILE_DIR)) == 0:
+        try:
+            shutil.rmtree(FILE_DIR)
+        except OSError:
+            pass
 
-def copy():
+def copy(files):
     """ Copy files from the local machine to the repo. """
+    if len(files) == 0:
+        return
     os.mkdir(FILE_DIR)
 
     # Copy bash files.
-    os.mkdir(BASH_DIR)
-    for f in BASH_FILES:
-        shutil.copy(os.path.join(HOME_DIR, f), BASH_DIR)
-    shutil.copytree(os.path.join(HOME_DIR, '.scripts'),
-                    os.path.join(BASH_DIR, '.scripts'))
+    if 'bash' in files:
+        os.mkdir(BASH_DIR)
+        for f in BASH_FILES:
+            shutil.copy(os.path.join(HOME_DIR, f), BASH_DIR)
+        shutil.copytree(os.path.join(HOME_DIR, '.scripts'),
+                        os.path.join(BASH_DIR, '.scripts'))
 
     # Copy tmux configuration.
-    os.mkdir(TMUX_DIR)
-    shutil.copy(os.path.join(HOME_DIR, '.tmux.conf'), TMUX_DIR)
+    if 'tmux' in files:
+        os.mkdir(TMUX_DIR)
+        shutil.copy(os.path.join(HOME_DIR, '.tmux.conf'), TMUX_DIR)
 
     # Copy vim files.
-    os.mkdir(VIM_DIR)
-    shutil.copy(os.path.join(HOME_DIR, '.vimrc'), VIM_DIR)
+    if 'vim' in files:
+        os.mkdir(VIM_DIR)
+        shutil.copy(os.path.join(HOME_DIR, '.vimrc'), VIM_DIR)
 
     # Copy .inputrc file.
-    os.mkdir(INPUT_DIR)
-    shutil.copy(os.path.join(HOME_DIR, '.inputrc'), INPUT_DIR)
+    if 'input' in files:
+        os.mkdir(INPUT_DIR)
+        shutil.copy(os.path.join(HOME_DIR, '.inputrc'), INPUT_DIR)
 
-def paste():
+def paste(files):
     """ Paste configuration files into the correct places on the system. """
 
     # Paste bash files.
-    for f in BASH_FILES:
-        shutil.copy(os.path.join(BASH_DIR, f),
-                    os.path.join(HOME_DIR, f))
-    try:
-        shutil.rmtree(os.path.join(HOME_DIR, '.scripts'))
-    except OSError:
-        pass
-    shutil.copytree(os.path.join(BASH_DIR, '.scripts'),
-                    os.path.join(HOME_DIR, '.scripts'))
+    if 'bash' in files:
+        for f in BASH_FILES:
+            shutil.copy(os.path.join(BASH_DIR, f),
+                        os.path.join(HOME_DIR, f))
+        try:
+            shutil.rmtree(os.path.join(HOME_DIR, '.scripts'))
+        except OSError:
+            pass
+        shutil.copytree(os.path.join(BASH_DIR, '.scripts'),
+                        os.path.join(HOME_DIR, '.scripts'))
 
     # Paste tmux configuration file.
-    shutil.copy(os.path.join(TMUX_DIR, '.tmux.conf'), HOME_DIR)
+    if 'tmux' in files:
+        shutil.copy(os.path.join(TMUX_DIR, '.tmux.conf'), HOME_DIR)
 
     # Paste the .vimrc and clone the .vim directory.
-    shutil.copy(os.path.join(VIM_DIR, '.vimrc'), HOME_DIR)
-    try:
-        shutil.rmtree(os.path.join(HOME_DIR, '.vim'))
-    except OSError:
-        pass
-    repo = git.Repo().clone_from(VIM_REPO, os.path.join(HOME_DIR, '.vim'))
-    repo.submodule_update()
+    if 'vim' in files:
+        shutil.copy(os.path.join(VIM_DIR, '.vimrc'), HOME_DIR)
+        try:
+            shutil.rmtree(os.path.join(HOME_DIR, '.vim'))
+        except OSError:
+            pass
+        repo = git.Repo().clone_from(VIM_REPO, os.path.join(HOME_DIR, '.vim'))
+        repo.submodule_update()
 
     # Paste .inputrc file.
-    shutil.copy(os.path.join(INPUT_DIR, '.inputrc'), HOME_DIR)
+    if 'input' in files:
+        shutil.copy(os.path.join(INPUT_DIR, '.inputrc'), HOME_DIR)
 
-def install():
+def install(files):
     """ Install useful tools. """
     print 'Not currently implemented.'
+
+def get_files_to_configure(only_files, not_files):
+    """ Determine which files to operate on. """
+    if only_files:
+        only_files = set(only_files.split(' '))
+    else:
+        only_files = set()
+
+    if not_files:
+        not_files = set(not_files.split(' '))
+    else:
+        not_files = set()
+
+    files = set(FILES.keys())
+    if len(only_files) > 0:
+        return only_files
+    else:
+        return files - not_files
 
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('command', help='Command to perform.')
+    parser.add_argument('--not', help='File types to exclude.',
+                        dest="not_files")
+    parser.add_argument('--only', help='Only include these file types.',
+                        dest="only_files")
     args = parser.parse_args()
+
+    files = get_files_to_configure(args.only_files, args.not_files)
 
     command = args.command
     if command == 'help':
         pass
     elif command == 'clean':
-        clean()
+        clean(files)
         print 'Configuration cleaned.'
     elif command == 'copy':
-        copy()
+        copy(files)
         print 'Configuration copied.'
     elif command == 'paste':
-        paste()
+        paste(files)
         print 'Configuration pasted.'
     elif command == 'install':
-        install()
+        install(files)
     else:
         print 'Unrecognized command.'
 
