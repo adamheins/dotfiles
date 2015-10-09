@@ -42,7 +42,7 @@ Some of the plugins I use for vim.
   engine that is very featureful and easy to setup.
 * [Cscope](http://cscope.sourceforge.net/cscope_vim_tutorial.html): A plugin
   for the code search tool mentioned above.
-* [ctrlp](https://github.com/kien/ctrlp.vim) File search plugin.
+* [ctrlp](https://github.com/kien/ctrlp.vim): File search plugin.
 * [better-whitespace](https://github.com/ntpeters/vim-better-whitespace):
   Highlights trailing whitespace and makes it easy to remove.
 * [numbertoggle](https://github.com/jeffkreeftmeijer/vim-numbertoggle): Toggle
