@@ -113,7 +113,7 @@ def install(files):
     """ Install useful tools. """
     print('Not currently implemented.')
 
-def get_files_to_configure(only_files, not_files, config):
+def types_to_configure(only_files, not_files, config):
     """ Determine which files to operate on. """
 
     # Types to be included exclusively.
@@ -149,7 +149,7 @@ def main():
     args = parser.parse_args()
 
     config = load_config(CONFIGURATION_FILE)
-    types = get_files_to_configure(args.only_files, args.not_files, config)
+    types = types_to_configure(args.only_files, args.not_files, config)
 
     command = args.command
     if command == 'clean':
