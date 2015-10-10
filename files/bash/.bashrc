@@ -7,6 +7,11 @@ esac
 # Use vi-style command line editing mode.
 set -o vi
 
+# My modified version of fzf depends on this as an alternative binding to \e to
+# get into vi-movement-mode. \e causes a delay since it is bound as a prefix
+# to so many other command. Run `bind -p | grep -F "\e"` to see.
+bind "\C-a":vi-movement-mode
+
 # Use vim.
 export VISUAL=vim
 export EDITOR="$VISUAL"
@@ -14,7 +19,7 @@ export EDITOR="$VISUAL"
 # Don't put duplicate lines or lines starting with space in the history.
 HISTCONTROL=ignoreboth
 
-# Amount of bash history. TODO less so fzf is fast...
+# Amount of bash history.
 HISTSIZE=500
 HISTFILESIZE=1000
 
@@ -31,7 +36,7 @@ shopt -s checkwinsize
 
 # Set the PS1.
 if [ "$(tput colors)" -ge 8 ]; then
-  PS1='\[\033[38;5;010m\]\u@\h:\[\033[00m\]\w\[\033[38;5;010m\] ~>\[\033[00m\] '
+  PS1='\[\033[38;5;010m\]\u@\h \[\033[00m\]\w\[\033[38;5;010m\] ~>\[\033[00m\] '
 else
   PS1='\u@\h:\w\$ '
 fi
@@ -45,10 +50,6 @@ if [ -x /usr/bin/dircolors ]; then
     alias fgrep='fgrep --color=auto'
     alias egrep='egrep --color=auto'
 fi
-
-# Add an "alert" alias for long running commands.  Use like so:
-#   sleep 10; alert
-alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
@@ -65,8 +66,8 @@ fi
 [[ $- != *i* ]] && return
 [[ -z "$TMUX" ]] && exec tmux
 
-# Use fzf for fuzzy-searching.
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
-
 # Use the fuck.
 eval "$(thefuck --alias)"
+
+# Bash completion for pass.
+source /usr/local/etc/bash_completion.d/password-store
