@@ -15,6 +15,7 @@
     },{
       "type": "vim",
       "root": "~",
+      "files": [".vimrc"],
       "repos": [{
           "url": "git@github.com:adamheins/.vim.git",
           "dir": ".vim"
