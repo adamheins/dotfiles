@@ -10,7 +10,9 @@ The `configurator` python script is used to interact with the repo:
 * `./configurator copy` will copy the configuration files from the local
   machine to the repo's directory.
 * `./configurator paste` will paste the configuration files in the repo's
-  directory into the correct places on the local machine.
+  directory into the correct places on the local machine. This will
+  automatically backup the local machine's files to `backup` in the dotfiles
+  directory.
 
 ## Current Tools
 A list of many of the tools I find useful.
