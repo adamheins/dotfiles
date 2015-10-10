@@ -1,0 +1,25 @@
+{
+  "dotfiles": [{
+      "type": "bash",
+      "root": "~",
+      "dirs": [".scripts"],
+      "files": [".bash_profile", ".bashrc", ".bash_aliases", ".profile"]
+    },{
+      "type": "tmux",
+      "root": "~",
+      "files": [".tmux.conf"]
+    },{
+      "type": "readline",
+      "root": "~",
+      "files": [".inputrc"]
+    },{
+      "type": "vim",
+      "root": "~",
+      "repos": [{
+          "url": "git@github.com:adamheins/.vim.git",
+          "dir": ".vim"
+        }
+      ]
+    }
+  ]
+}
