@@ -12,7 +12,10 @@ alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
 alias .....="cd ../../../.."
+
 alias -- -="cd - >/dev/null 2>&1"
+alias -- --="cd -2 >/dev/null 2>&1"
+alias -- ---="cd -3 >/dev/null 2>&1"
 
 # Git aliases. Note that git push is intentionally left out because I don't
 # want to fuck around with pushing.
