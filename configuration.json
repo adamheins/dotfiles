@@ -1,9 +1,17 @@
 {
   "dotfiles": [{
-      "type": "bash",
+      "type": "sh",
       "root": "~",
       "dirs": [".scripts"],
-      "files": [".bash_profile", ".bashrc", ".bash_aliases", ".profile"]
+      "files": [".aliases"]
+    },{
+      "type": "bash",
+      "root": "~",
+      "files": [".bash_profile", ".bashrc"]
+    },{
+      "type": "zsh",
+      "root": "~",
+      "files": [".zshrc"]
     },{
       "type": "tmux",
       "root": "~",
