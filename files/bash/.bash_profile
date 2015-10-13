@@ -7,7 +7,7 @@ source ~/.bashrc
 [ -f ~/.profile ] && . ~/.profile
 
 # Bash aliases.
-[ -f ~/.bash_aliases ] && . ~/.bash_aliases
+[ -f ~/.aliases ] && . ~/.aliases
 
 # Local configuration.
 if [ -d ~/.bash_local ]; then
@@ -24,8 +24,8 @@ if [ -d ~/.scripts/source/bash ]; then
 fi
 
 # External scripts.
-if [ -d ~/.scripts/source/ext ]; then
-  for f in ~/.scripts/source/ext/*; do
+if [ -d ~/.scripts/source/ext/bash ]; then
+  for f in ~/.scripts/source/ext/bash/*; do
     source "$f"
   done
 fi
