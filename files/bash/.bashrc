@@ -66,8 +66,5 @@ fi
 [[ $- != *i* ]] && return
 [[ -z "$TMUX" ]] && exec tmux
 
-# Use the fuck.
-eval "$(thefuck --alias)"
-
 # Bash completion for pass.
 source /usr/local/etc/bash_completion.d/password-store
