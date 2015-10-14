@@ -16,7 +16,8 @@ The `configurator` python script is used to interact with the repo:
 
 ## Current Tools
 A list of many of the tools I find useful.
-* [ack](http://beyondgrep.com/): A source code search tool.
+* [ag](https://github.com/ggreer/the_silver_searcher): A wicked fast source
+  code search tool.
 * [Cscope](http://cscope.sourceforge.net/): A code search tool for C and other
   languages.
 * [fzf](https://github.com/junegunn/fzf): A fuzzy-finder for the command line.
@@ -26,17 +27,14 @@ A list of many of the tools I find useful.
 * [vim](http://www.vim.org/): An excellent text editor.
 * [z](https://github.com/rupa/z): Learns which directories you visit most and
   takes you there based on a regex.
-* [zsh](http://www.zsh.org/): zsh is the shell I currently use. Its mostly compatible with bash and
-  is somewhat more refined.
+* [zsh](http://www.zsh.org/): zsh is the shell I currently use. Its mostly
+  compatible with bash and is somewhat more refined.
 
 ## Prospective Tools
 These are tools that I am interested in using in the future, once the projects
 are more mature.
 * [neovim](https://neovim.io/): A rewrite of vim to strip out the cruft.
   Doesn't currently have full lua support so it breaks some plugins.
-* [xonsh](http://xonsh.org/): A cool shell that fully supports Python and parses
-  some bash configuration. Still in a fairly early phase and lacking some
-  features.
 
 ## Vim Plugins
 Some of the plugins I use for vim.
