@@ -237,4 +237,4 @@ colorscheme lucid
 set cursorline
 
 " Highlight area past line 100.
-let &colorcolumn=join(range(101,999),",")
+let &colorcolumn=100
