@@ -22,7 +22,7 @@ export VISUAL=vim
 export EDITOR="$VISUAL"
 
 # Prompt
-export PS1='%F{10}%n@%m %F{3}%~ %F{10}~> %F{250}'
+export PS1='%F{10}%n@%m %F{6}%~ %F{10}~> %F{250}'
 
 # Change prompt based on vi mode.
 function zle-line-init zle-keymap-select {
