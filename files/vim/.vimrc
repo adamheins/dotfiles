@@ -236,5 +236,8 @@ colorscheme lucid
 " Highlight the current line.
 set cursorline
 
-" Highlight area past line 100.
-let &colorcolumn=100
+" Highlight line 100.
+" let &colorcolumn=100
+
+autocmd BufEnter * highlight OverLength ctermbg=236
+autocmd BufEnter * match OverLength /\%100v.*/
