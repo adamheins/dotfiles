@@ -9,7 +9,6 @@ import json
 import os
 import shutil
 
-
 # Paths.
 CONF_ROOT = os.path.dirname(os.path.realpath(__file__))
 CONFIGURATION_FILE = os.path.join(CONF_ROOT, 'configuration.json')
@@ -75,7 +74,7 @@ def copy(types, to_dir, config):
         for dp in item['dirs']:
             if os.path.exists(dp):
                 shutil.copytree(dp, os.path.join(item_dir,
-                                                 dp.split(os.path.sep)[-1])) # FIXME
+                                                 dp.split(os.path.sep)[-1]))
             else:
                 print('Did not find {}.'.format(dp))
 
@@ -89,10 +88,10 @@ def paste(types, config):
             continue
         item_dir = os.path.join(FILE_DIR, item['type'])
         for fp in item['files']:
-            file_name = fp.split(os.path.sep)[-1] # FIXME
+            file_name = fp.split(os.path.sep)[-1]
             shutil.copy(os.path.join(item_dir, file_name), fp)
         for dp in item['dirs']:
-            dir_name = dp.split(os.path.sep)[-1] # FIXME
+            dir_name = dp.split(os.path.sep)[-1]
             if os.path.isdir(dp):
                 shutil.rmtree(dp)
             shutil.copytree(os.path.join(item_dir, dir_name), dp)
@@ -100,6 +99,7 @@ def paste(types, config):
             repo_dir = os.path.join(item['root'], repo['dir'])
             if os.path.isdir(repo_dir):
                 shutil.rmtree(repo_dir)
+            print('Cloning {}...'.format(repo['url']))
             git_repo = git.Repo().clone_from(repo['url'], repo_dir)
             git_repo.submodule_update()
 
