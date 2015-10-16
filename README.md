@@ -15,7 +15,7 @@ The `configurator` python script is used to interact with the repo:
   directory.
 
 ## Current Tools
-A list of many of the tools I find useful.
+A list of many of the tools I find useful. All of them are command line-based.
 * [ag](https://github.com/ggreer/the_silver_searcher): A wicked fast source
   code search tool.
 * [Cscope](http://cscope.sourceforge.net/): A code search tool for C and other
@@ -27,7 +27,7 @@ A list of many of the tools I find useful.
 * [vim](http://www.vim.org/): An excellent text editor.
 * [z](https://github.com/rupa/z): Learns which directories you visit most and
   takes you there based on a regex.
-* [zsh](http://www.zsh.org/): zsh is the shell I currently use. Its mostly
+* [zsh](http://www.zsh.org/): zsh is the shell I currently use. It's mostly
   compatible with bash and is somewhat more refined.
 
 ## Prospective Tools
