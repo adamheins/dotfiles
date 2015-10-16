@@ -1,7 +1,5 @@
-
 alias vim=/usr/local/bin/vim # Use vim installed by brew instead of system vim.
 alias ls="ls -G"
-alias pwaf="pypy waf"
 
 alias dirs="dirs -v"
 
