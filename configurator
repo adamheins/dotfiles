@@ -4,7 +4,6 @@ from __future__ import print_function
 __author__ = 'adam'
 
 import argparse
-import git
 import json
 import os
 import shutil
@@ -82,6 +81,12 @@ def paste(types, config):
     """ Paste configuration files into the correct places on the system. """
     if len(types) == 0:
         return
+
+    # Import git if required.
+    for item in config:
+        if len(item['repos']) > 0:
+            import git
+            break
 
     for item in config:
         if item['type'] not in types:
