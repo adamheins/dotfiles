@@ -1,16 +1,17 @@
 {
   "dotfiles": [{
-      "type": "sh",
+      "type": "git",
       "root": "~",
-      "dirs": [".scripts"],
-      "files": [".aliases"]
+      "files": [".gitconfig"]
     },{
       "type": "bash",
       "root": "~",
+      "dirs": [".bash"],
       "files": [".bash_profile", ".bashrc"]
     },{
       "type": "zsh",
       "root": "~",
+      "dirs": [".zsh"],
       "files": [".zshrc"]
     },{
       "type": "tmux",

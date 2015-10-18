@@ -1,4 +1,4 @@
-#/bin/zsh
+#!/bin/zsh
 
 # If the cwd is a git repo, display the branch name in the tmux status bar.
 _update_tmux_status() {

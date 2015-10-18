@@ -4,31 +4,23 @@
 source ~/.bashrc
 
 # Non-bash-specific things go in .profile.
-[ -f ~/.profile ] && . ~/.profile
+[ -f ~/.profile ] && source ~/.profile
 
 # Bash aliases.
-[ -f ~/.aliases ] && . ~/.aliases
+[ -f ~/.bash/aliases.bash ] && source ~/.bash/aliases.bash
 
 # Local configuration.
-if [ -d ~/.bash_local ]; then
-  for f in ~/.bash_local/*; do
+if [ -d ~/.bash/local ]; then
+  for f in ~/.bash/local/*; do
     source "$f"
   done
 fi
 
 # Custom shell scripts.
-if [ -d ~/.scripts/source/bash ]; then
-  for f in ~/.scripts/source/bash/*; do
-    source "$f"
-  done
+if [ -d ~/.bash/source ]; then
+  for f in ~/.bash/source/*.sh; do source "$f"; done
+  for f in ~/.bash/source/*.zsh; do source "$f"; done
 fi
 
-# External scripts.
-if [ -d ~/.scripts/source/ext/bash ]; then
-  for f in ~/.scripts/source/ext/bash/*; do
-    source "$f"
-  done
-fi
-
-# Custom executables.
-[ -d ~/.scripts/exec ] && export PATH=~/.scripts/exec:$PATH
+# Executables.
+[ -d ~/.bash/bin ] && export PATH=~/.bash/bin:$PATH
