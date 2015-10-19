@@ -42,6 +42,10 @@ def load_config(config_path):
 def clean(types, config):
     """ Remove the configuration files from the repo. """
 
+    # If we are removing all types, just get rid of the whole directory.
+    if len(types) == len(config) and os.path.isdir(FILE_DIR):
+        shutil.rmtree(FILE_DIR)
+
     # Remove individual file type directories.
     for item in config:
         if item['type'] in types:
