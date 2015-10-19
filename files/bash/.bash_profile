@@ -19,7 +19,7 @@ fi
 # Custom shell scripts.
 if [ -d ~/.bash/source ]; then
   for f in ~/.bash/source/*.sh; do source "$f"; done
-  for f in ~/.bash/source/*.zsh; do source "$f"; done
+  for f in ~/.bash/source/*.bash; do source "$f"; done
 fi
 
 # Executables.
