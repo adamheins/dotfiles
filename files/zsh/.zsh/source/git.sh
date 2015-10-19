@@ -1,6 +1,9 @@
 #!/bin/zsh
+
 # Sourced here:
 # https://gist.github.com/2491147
+#
+# Modified by: Adam Heins
 
 function actual_path() {
   if [ [ -z "$1" ] -a [ -d $1 ] ]; then
@@ -55,11 +58,12 @@ function remove_submodule() {
   if is_gitroot; then
     # finally check whether the given path is a submodule
     if $(is_submodule "${1}"); then
-      echo "let's remove those submodules"
       # using ${1%/} to remove trailing slashes
       git config -f .gitmodules --remove-section submodule.${1%/}
       git config -f .git/config --remove-section submodule.${1%/}
+      git add .gitmodules
       git rm --cached ${1%/}
+      git status
     else
       echo "git submodule rm is not recursive yet, aborting."
     fi
@@ -68,7 +72,10 @@ function remove_submodule() {
   fi
 }
 
-echo 'hello'
-if [ "$1" == "rm"]; then
-  remove_submodule "${@:2}"
-fi
+function git() {
+  if [[ $argv[1] == 'submodule' && $argv[2] == 'rm' ]]; then
+    remove_submodule $argv[3,-1]
+  else
+    command git "$@";
+  fi;
+}
