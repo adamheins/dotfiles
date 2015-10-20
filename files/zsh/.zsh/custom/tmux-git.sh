@@ -18,3 +18,7 @@ _update_tmux_status() {
 }
 
 precmd_functions=(_update_tmux_status)
+
+# Launch tmux
+[[ $- != *i* ]] && return
+[[ -z "$TMUX" ]] && exec tmux
