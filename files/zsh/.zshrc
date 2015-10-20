@@ -19,6 +19,7 @@ HISTSIZE=1000
 SAVEHIST=1000
 HISTFILE=~/.zsh_history
 setopt SHARE_HISTORY
+setopt HIST_IGNORE_ALL_DUPS
 
 # Use vi-style command line editing mode.
 bindkey -v
@@ -47,11 +48,11 @@ bindkey "^?" backward-delete-char
 
 #----------------------------- External Programs ------------------------------#
 
-# Aliases.
-[ -f ~/.zsh/aliases.zsh ] && source ~/.zsh/aliases.zsh
-
 # Executables.
 [ -d ~/.zsh/bin ] && export PATH=~/.zsh/bin:$PATH
+
+# Aliases.
+[ -f ~/.zsh/aliases.zsh ] && source ~/.zsh/aliases.zsh
 
 # Scripts.
 if [ -d ~/.zsh/source ]; then
@@ -61,11 +62,9 @@ fi
 
 # Local configuration.
 if [ -d ~/.zsh/local ]; then
-  for f in ~/.zsh/local/*; do source "$f"; done
+  for f in ~/.zsh/local/*.sh; do source "$f"; done
+  for f in ~/.zsh/local/*.zsh; do source "$f"; done
 fi
 
-#------------------------------------ Tmux ------------------------------------#
-
-# Launch tmux automatically.
-[[ $- != *i* ]] && return
-[[ -z "$TMUX" ]] && exec tmux
+# Tmux.
+[ -f ~/.zsh/custom/tmux.sh ] && source ~/.zsh/custom/tmux.sh
