@@ -11,7 +11,6 @@ import shutil
 # Paths.
 CONF_ROOT = os.path.dirname(os.path.realpath(__file__))
 CONFIGURATION_FILE = os.path.join(CONF_ROOT, 'configuration.json')
-HOME_DIR = os.path.expanduser('~')
 FILE_DIR = os.path.join(CONF_ROOT, 'files')
 BACKUP_DIR = os.path.join(CONF_ROOT, 'backup')
 
@@ -39,11 +38,11 @@ def load_config(config_path):
             item['repos'] = []
     return config
 
-def clean(types, config):
+def clean(types, config, force):
     """ Remove the configuration files from the repo. """
 
     # If we are removing all types, just get rid of the whole directory.
-    if len(types) == len(config) and os.path.isdir(FILE_DIR):
+    if force and os.path.isdir(FILE_DIR):
         shutil.rmtree(FILE_DIR)
 
     # Remove individual file type directories.
@@ -155,6 +154,8 @@ def main():
                         dest='not_files')
     parser.add_argument('--only', help='Only include these file types.',
                         dest='only_files')
+    parser.add_argument('-f', '--force', help='Force clean command to remove '
+                        'all files.', action='store_true')
     args = parser.parse_args()
 
     config = load_config(CONFIGURATION_FILE)
@@ -162,10 +163,10 @@ def main():
 
     command = args.command
     if command == 'clean':
-        clean(types, config)
+        clean(types, config, args.force)
         print('Configuration cleaned.')
     elif command == 'copy':
-        clean(types, config)
+        clean(types, config, args.force)
         copy(types, FILE_DIR, config)
         print('Configuration copied.')
     elif command == 'paste':
