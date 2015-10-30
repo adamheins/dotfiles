@@ -3,16 +3,17 @@ This repo contains my standard configurations for POSIX systems. The intention
 is that this repo can be easily cloned and deployed to configure new machines
 and users.
 
-## Configurator Tool
-The `configurator` python script is used to interact with the repo:
-* `./configurator clean` will remove all configuration files from the repo's
+## dotfiler
+The `dotfiler` script is used to interact with the repo:
+* `./dotfiler clean` will remove all configuration files from the repo's
   directory.
-* `./configurator copy` will copy the configuration files from the local
+* `./dotfiler copy` will copy the configuration files from the local
   machine to the repo's directory.
-* `./configurator paste` will paste the configuration files in the repo's
+* `./dotfiler paste` will paste the configuration files in the repo's
   directory into the correct places on the local machine. This will
   automatically backup the local machine's files to `backup` in the dotfiles
   directory.
+* `./dotfiler tar` will create a tar file containing all dotfiles.
 
 ## Current Tools
 A list of many of the tools I find useful. All of them are command line-based.

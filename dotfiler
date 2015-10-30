@@ -30,6 +30,8 @@ case "$1" in
         rsync -r "files/$file" ~/"$file"
       fi
     done
+    [ -d ~/.vim ] && rm -r ~/.vim
+    git clone git@github.com:adamheins/.vim ~/.vim --recursive
     ;;
   "clean")
     if [ -d files ]; rm -r files || echo "nothing to clean"; exit 1
