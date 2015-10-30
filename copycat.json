@@ -1,0 +1,37 @@
+{
+  "location": "dotfiles",
+  "backup": "backup",
+  "groups": [{
+      "name": "git",
+      "root": "~",
+      "files": [".gitconfig"]
+    },{
+      "name": "bash",
+      "root": "~",
+      "exclude": ["local"],
+      "files": [".bash", ".bash_profile", ".bashrc"]
+    },{
+      "name": "zsh",
+      "root": "~",
+      "exclude": ["local"],
+      "files": [".zsh", ".zshrc"]
+    },{
+      "name": "tmux",
+      "root": "~",
+      "files": [".tmux.conf"]
+    },{
+      "name": "readline",
+      "root": "~",
+      "files": [".inputrc"]
+    },{
+      "name": "vim",
+      "root": "~",
+      "files": [".vimrc"],
+      "repos": [{
+          "url": "git@github.com:adamheins/.vim.git",
+          "dir": ".vim"
+        }
+      ]
+    }
+  ]
+}
