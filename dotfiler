@@ -4,8 +4,7 @@
 # Adam Heins
 # 2015-10-30
 
-DOTFILES=(.bash .bashrc .bash_profile
-          .zsh .zshrc
+DOTFILES=(.zsh .zshrc
           .gitconfig .gitignore
           .inputrc
           .vimrc
