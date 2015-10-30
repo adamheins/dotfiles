@@ -1,7 +1,0 @@
-[push]
-  default = simple
-[user]
-  name = Adam Heins
-  email = mail@adamheins.com
-[core]
-	excludesfile = /Users/adam/.gitignore
