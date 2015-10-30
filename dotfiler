@@ -1,0 +1,47 @@
+#!/bin/zsh
+
+# Tool to copy and paste dotfiles.
+# Adam Heins
+# 2015-10-29
+
+DOTFILES=(.bash .bashrc .bash_profile
+          .zsh .zshrc
+          .gitconfig .gitignore
+          .inputrc
+          .vimrc
+          .tmux.conf)
+
+case "$1" in
+  "copy")
+    [ -d files ] && rm -r files
+    mkdir files
+    for file in $DOTFILES; do
+      [ -e ~/"$file" ] && rsync -r ~/"$file" "files" --exclude local
+    done
+    ;;
+  "paste")
+    [ -d backup ] && rm -r backup
+    [ ! -d files ] && echo "no dotfiles to paste"; exit 1
+    mkdir backup
+    for file in $DOTFILES; do
+      [ -e ~/"$file" ] && rsync -r ~/"$file" "backup/$file"
+      if [ -e "files/$file" ]; then
+        [ -e ~/"$file" ] && rm -r ~/"$file"
+        rsync -r "files/$file" ~/"$file"
+      fi
+    done
+    ;;
+  "clean")
+    if [ -d files ]; rm -r files || echo "nothing to clean"; exit 1
+    ;;
+  "tar")
+    [ -f dotfiles.tar.gz ] && rm dotfiles.tar.gz
+    tar czvf dotfiles.tar.gz $(for file in $DOTFILES; do echo ~/"$file"; done)
+    ;;
+  *)
+    echo "unknown command"
+    exit 1
+    ;;
+esac
+
+exit 0
