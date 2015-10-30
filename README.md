@@ -20,8 +20,11 @@ The `dotfiler` script is used to interact with the repo:
   machine's dotfiles to a directory named `backup`.
 * `./dotfiler tar` will create a tar file containing all dotfiles.
 
-## Current Tools
-A list of many of the tools I find useful. All of them are command line-based.
+## Tools
+A list of many of the tools I like. Most of them are CLI-based.
+
+### Current Tools
+Tools that I currently use.
 * [ag](https://github.com/ggreer/the_silver_searcher): A wicked fast source
   code search tool.
 * [Cscope](http://cscope.sourceforge.net/): A code search tool for C and other
@@ -40,13 +43,13 @@ A list of many of the tools I find useful. All of them are command line-based.
 * [zsh](http://www.zsh.org/): The shell I currently use. It's mostly compatible
   with bash and is somewhat more featureful.
 
-## Prospective Tools
+### Prospective Tools
 These are tools that I am interested in using in the future, once the projects
 are more mature.
 * [neovim](https://neovim.io/): A rewrite of vim to strip out the cruft.
   Doesn't currently have full lua support so it breaks some plugins.
 
-## Vim Plugins
+### Vim Plugins
 Some of the plugins I use for vim. For the full list, look in my
 [~/.vim](https://github.com/adamheins/.vim/tree/master/bundle) repository.
 * [a](http://www.vim.org/scripts/script.php?script_id=31): Toggles between
