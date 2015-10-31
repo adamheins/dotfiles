@@ -6,7 +6,6 @@
 
 DOTFILES=(.zsh .zshrc
           .gitconfig .gitignore
-          .inputrc
           .vimrc
           .tmux.conf)
 
@@ -20,7 +19,10 @@ case "$1" in
     ;;
   "paste")
     [ -d backup ] && rm -r backup
-    [ ! -d files ] && echo "no dotfiles to paste"; exit 1
+    if [ ! -d files ]; then
+      echo "no dotfiles to paste"
+      exit 1
+    fi
     mkdir backup
     for file in ${DOTFILES[@]}; do
       [ -e ~/"$file" ] && rsync -r ~/"$file" "backup/$file"
@@ -33,7 +35,12 @@ case "$1" in
     git clone git@github.com:adamheins/.vim ~/.vim --recursive
     ;;
   "clean")
-    [ -d files ] && rm -r files || echo "nothing to clean"; exit 1
+    if [ -d files ]; then
+      rm -r files
+    else
+      echo "nothing to clean"
+      exit 1
+    fi
     ;;
   "tar")
     [ -f dotfiles.tar.gz ] && rm dotfiles.tar.gz
