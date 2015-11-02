@@ -31,7 +31,7 @@ case "$1" in
         rsync -r "files/$file" ~/"$file"
       fi
     done
-    [ -d ~/.vim ] && rm -r ~/.vim
+    [ -d ~/.vim ] && rm -rf ~/.vim
     git clone git@github.com:adamheins/.vim ~/.vim --recursive
     ;;
   "clean")
