@@ -51,8 +51,8 @@ are more mature.
 ### Vim Plugins
 Some of the plugins I use for vim. For the full list, look in my
 [~/.vim](https://github.com/adamheins/.vim/tree/master/bundle) repository.
-* [a](http://www.vim.org/scripts/script.php?script_id=31): Toggles between
-  header (.h) and (.c) files.
+* [a](http://www.vim.org/scripts/script.php?script_id=31): Toggles between C
+  header (.h) and source (.c) files.
 * [gitgutter](https://github.com/airblade/vim-gitgutter): Shows a git diff in
   the page gutter.
 * [better-whitespace](https://github.com/ntpeters/vim-better-whitespace):
