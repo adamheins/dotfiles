@@ -4,7 +4,7 @@ alias dirs="dirs -v"
 alias x="exit"
 
 # Aliases for ls.
-alias ls="ls -G"
+alias ls="ls --color=auto"
 alias ll="ls -alF"
 alias la="ls -A"
 alias l="ls -CF"
