@@ -27,11 +27,11 @@ case "$1" in
     for file in ${DOTFILES[@]}; do
       [ -e ~/"$file" ] && rsync -r ~/"$file" "backup/$file"
       if [ -e "files/$file" ]; then
-        [ -e ~/"$file" ] && rm -r ~/"$file"
-        rsync -r "files/$file" ~/"$file"
+        [ -e ~/"$file" ] && rm -rf ~/"$file"
+        rsync -r "files/$file" ~
       fi
     done
-    [ -d ~/.vim ] && rm -r ~/.vim
+    [ -d ~/.vim ] && rm -rf ~/.vim
     git clone git@github.com:adamheins/.vim ~/.vim --recursive
     ;;
   "clean")
