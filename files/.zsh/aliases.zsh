@@ -4,6 +4,9 @@ alias dirs="dirs -v"
 alias x="exit"
 alias psg="ps aux | grep"
 
+# Make cd follow symlinks by default.
+alias cd="cd -P"
+
 # Aliases for ls.
 alias ls="ls -G"
 alias ll="ls -alF"
