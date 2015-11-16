@@ -19,6 +19,23 @@ _update_tmux_status() {
 
 precmd_functions=(_update_tmux_status)
 
+# Restart the current tmux-pane anew.
+restart() {
+  [ -z $TMUX ] && return 1
+  tmux restart-pane -k
+}
+
+# Shortcut to even out the current tmux layout.
+even() {
+  [ -z $TMUX ] && return 1
+  [ -z $1 ] && return 1
+  case "$1" in
+    "h"|"-h"|"horizontal") tmux select-layout even-horizontal ;;
+    "v"|"-v"|"vertical") tmux select-layout even-vertical ;;
+  esac
+}
+
 # Launch tmux
 [[ $- != *i* ]] && return
 [[ -z "$TMUX" ]] && exec tmux
+

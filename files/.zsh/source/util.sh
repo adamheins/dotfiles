@@ -32,3 +32,7 @@ mvall() {
   mv * "$to_dir"
   GLOBIGNORE=
 }
+
+function findn {
+  find . -name "$1"
+}
