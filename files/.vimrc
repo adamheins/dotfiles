@@ -2,7 +2,7 @@
 " Adam Heins
 
 " ================================ General =================================== "
-"
+
 " Turn off compatibility with vi.
 set nocompatible
 
@@ -80,6 +80,12 @@ let NERDTreeMapUpdir = '..'
 " Gitgutter.
 let g:gitgutter_realtime = 1
 call gitgutter#disable()
+
+" Syntastic
+" let g:syntastic_always_populate_loc_list = 1
+" let g:syntastic_auto_loc_list = 1
+" let g:syntastic_check_on_open = 1
+" let g:syntastic_check_on_wq = 0
 
 " ================================= Search =================================== "
 

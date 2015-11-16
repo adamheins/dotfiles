@@ -80,3 +80,5 @@ unsetopt null_glob
 # Tmux.
 [ -f ~/.zsh/custom/tmux.sh ] && source ~/.zsh/custom/tmux.sh
 
+# Syntax highlighting.
+source ~/.zsh/custom/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh

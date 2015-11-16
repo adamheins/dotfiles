@@ -2,6 +2,7 @@
 alias dirs="dirs -v"
 
 alias x="exit"
+alias psg="ps aux | grep"
 
 # Aliases for ls.
 alias ls="ls -G"
