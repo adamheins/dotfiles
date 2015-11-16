@@ -2,7 +2,6 @@
 
 # Tool to copy and paste dotfiles.
 # Adam Heins
-# 2015-10-30
 
 DOTFILES=(.zsh .zshrc
           .gitconfig .gitignore
@@ -10,7 +9,7 @@ DOTFILES=(.zsh .zshrc
           .tmux.conf)
 
 for arg in "$@"; do
-  case "$1" in
+  case "$arg" in
     # Copy this machine's dotfiles to the files directory.
     "copy")
       [ -d files ] && rm -r files
@@ -66,7 +65,7 @@ for arg in "$@"; do
       done)
       ;;
     "clean")
-      [ -d files ] && rm -r files
+      [ -d files ] && rm -rf files
       ;;
     *)
       echo "unknown command"
