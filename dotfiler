@@ -9,49 +9,68 @@ DOTFILES=(.zsh .zshrc
           .vimrc
           .tmux.conf)
 
-case "$1" in
-  "copy")
-    [ -d files ] && rm -r files
-    mkdir files
-    for file in ${DOTFILES[@]}; do
-      [ -e ~/"$file" ] && rsync -r ~/"$file" "files" --exclude local
-    done
-    ;;
-  "paste")
-    [ -d backup ] && rm -r backup
-    if [ ! -d files ]; then
-      echo "no dotfiles to paste"
-      exit 1
-    fi
-    mkdir backup
-    for file in ${DOTFILES[@]}; do
-      [ -e ~/"$file" ] && rsync -r ~/"$file" "backup/$file"
-      if [ -e "files/$file" ]; then
-        [ -e ~/"$file" ] && rm -rf ~/"$file"
-        rsync -r "files/$file" ~
+for arg in "$@"; do
+  case "$1" in
+    # Copy this machine's dotfiles to the files directory.
+    "copy")
+      [ -d files ] && rm -r files
+      mkdir files
+      for file in ${DOTFILES[@]}; do
+        [ -e ~/"$file" ] && rsync -r ~/"$file" "files" --exclude local
+      done
+      ;;
+    # Paste dotfiles into the correct places on the local machine.
+    # A backup is made of this machine's current dotfiles.
+    "paste")
+      if [ ! -d files ]; then
+        echo "no dotfiles to paste"
+        exit 1
       fi
-    done
-    [ -d ~/.vim ] && rm -rf ~/.vim
-    git clone git@github.com:adamheins/.vim ~/.vim --recursive
-    ;;
-  "clean")
-    if [ -d files ]; then
-      rm -r files
-    else
-      echo "nothing to clean"
+      [ -d backup ] && rm -r backup
+      mkdir backup
+      for file in ${DOTFILES[@]}; do
+        [ -e ~/"$file" ] && rsync -r ~/"$file" "backup/$file"
+        if [ -e "files/$file" ]; then
+          [ -e ~/"$file" ] && rm -rf ~/"$file"
+          rsync -r "files/$file" ~
+        fi
+      done
+      ;;
+    # Create symlinks from local machine dotfile locations to this repository.
+    # A backup is made of this machine's current dotfiles.
+    "link")
+      if [ ! -d files ]; then
+        echo "no dotfiles to paste"
+        exit 1
+      fi
+      [ -d backup ] && rm -r backup
+      mkdir backup
+      for file in ${DOTFILES[@]}; do
+        [ -e ~/"$file" ] && rsync -r ~/"$file" "backup/$file"
+        if [ -e "files/$file" ]; then
+          [ -e ~/"$file" ] && rm -rf ~/"$file"
+          ln -s "files/$file" ~/"$file"
+        fi
+      done
+      ;;
+    # Clone necessary repos to configure the local machine.
+    "clone")
+      [ -d ~/.vim ] && rm -rf ~/.vim
+      git clone git@github.com:adamheins/.vim ~/.vim --recursive
+      ;;
+    # Create a tar.gz of this machine's dotfiles.
+    "tar")
+      [ -f dotfiles.tar.gz ] && rm dotfiles.tar.gz
+      tar czvf dotfiles.tar.gz $(for file in ${DOTFILES[@]}; do
+        echo ~/"$file"
+      done)
+      ;;
+    "clean")
+      [ -d files ] && rm -r files
+      ;;
+    *)
+      echo "unknown command"
       exit 1
-    fi
-    ;;
-  "tar")
-    [ -f dotfiles.tar.gz ] && rm dotfiles.tar.gz
-    tar czvf dotfiles.tar.gz $(for file in ${DOTFILES[@]}; do
-      echo ~/"$file"
-    done)
-    ;;
-  *)
-    echo "unknown command"
-    exit 1
-    ;;
-esac
-
-exit 0
+      ;;
+  esac
+done
