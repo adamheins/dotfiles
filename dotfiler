@@ -25,7 +25,7 @@ for arg in "$@"; do
         echo "no dotfiles to paste"
         exit 1
       fi
-      [ -d backup ] && rm -r backup
+      [ -d backup ] && rm -rf backup
       mkdir backup
       for file in ${DOTFILES[@]}; do
         [ -e ~/"$file" ] && rsync -r ~/"$file" "backup/$file"
@@ -42,13 +42,13 @@ for arg in "$@"; do
         echo "no dotfiles to paste"
         exit 1
       fi
-      [ -d backup ] && rm -r backup
+      [ -d backup ] && rm -rf backup
       mkdir backup
       for file in ${DOTFILES[@]}; do
         [ -e ~/"$file" ] && rsync -r ~/"$file" "backup/$file"
         if [ -e "files/$file" ]; then
           [ -e ~/"$file" ] && rm -rf ~/"$file"
-          ln -s "files/$file" ~/"$file"
+          ln -s $(realpath "files/$file") ~/"$file"
         fi
       done
       ;;
