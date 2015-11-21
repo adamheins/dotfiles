@@ -2,3 +2,4 @@
 backup
 .DS_Store
 *.tar.gz
+local/
