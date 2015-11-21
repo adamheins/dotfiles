@@ -28,7 +28,7 @@ for arg in "$@"; do
       [ -d backup ] && rm -rf backup
       mkdir backup
       for file in ${DOTFILES[@]}; do
-        [ -e ~/"$file" ] && rsync -r ~/"$file" "backup/$file"
+        [ -e ~/"$file" ] && rsync -r ~/"$file" "backup"
         if [ -e "files/$file" ]; then
           [ -e ~/"$file" ] && rm -rf ~/"$file"
           rsync -r "files/$file" ~
@@ -45,7 +45,7 @@ for arg in "$@"; do
       [ -d backup ] && rm -rf backup
       mkdir backup
       for file in ${DOTFILES[@]}; do
-        [ -e ~/"$file" ] && rsync -r ~/"$file" "backup/$file"
+        [ -e ~/"$file" ] && rsync -r ~/"$file" "backup"
         if [ -e "files/$file" ]; then
           [ -e ~/"$file" ] && rm -rf ~/"$file"
           ln -s $(realpath "files/$file") ~/"$file"
