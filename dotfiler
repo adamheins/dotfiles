@@ -5,71 +5,21 @@
 
 DOTFILES=(.zsh .zshrc
           .gitconfig .gitignore
-          .vimrc
+          .vimrc .vim
           .tmux.conf)
 
-for arg in "$@"; do
-  case "$arg" in
-    # Copy this machine's dotfiles to the files directory.
-    "copy")
-      [ -d files ] && rm -r files
-      mkdir files
-      for file in ${DOTFILES[@]}; do
-        [ -e ~/"$file" ] && rsync -r ~/"$file" "files" --exclude local
-      done
-      ;;
-    # Paste dotfiles into the correct places on the local machine.
-    # A backup is made of this machine's current dotfiles.
-    "paste")
-      if [ ! -d files ]; then
-        echo "no dotfiles to paste"
-        exit 1
-      fi
-      [ -d backup ] && rm -rf backup
-      mkdir backup
-      for file in ${DOTFILES[@]}; do
-        [ -e ~/"$file" ] && rsync -r ~/"$file" "backup"
-        if [ -e "files/$file" ]; then
-          [ -e ~/"$file" ] && rm -rf ~/"$file"
-          rsync -r "files/$file" ~
-        fi
-      done
-      ;;
-    # Create symlinks from local machine dotfile locations to this repository.
-    # A backup is made of this machine's current dotfiles.
-    "link")
-      if [ ! -d files ]; then
-        echo "no dotfiles to paste"
-        exit 1
-      fi
-      [ -d backup ] && rm -rf backup
-      mkdir backup
-      for file in ${DOTFILES[@]}; do
-        [ -e ~/"$file" ] && rsync -r ~/"$file" "backup"
-        if [ -e "files/$file" ]; then
-          [ -e ~/"$file" ] && rm -rf ~/"$file"
-          ln -s $(realpath "files/$file") ~/"$file"
-        fi
-      done
-      ;;
-    # Clone necessary repos to configure the local machine.
-    "clone")
-      [ -d ~/.vim ] && rm -rf ~/.vim
-      git clone git@github.com:adamheins/.vim ~/.vim --recursive
-      ;;
-    # Create a tar.gz of this machine's dotfiles.
-    "tar")
-      [ -f dotfiles.tar.gz ] && rm dotfiles.tar.gz
-      tar czvf dotfiles.tar.gz $(for file in ${DOTFILES[@]}; do
-        echo ~/"$file"
-      done)
-      ;;
-    "clean")
-      [ -d files ] && rm -rf files
-      ;;
-    *)
-      echo "unknown command"
-      exit 1
-      ;;
-  esac
+if [ ! -d files ]; then
+  echo "no dotfiles are here"
+  exit 1
+fi
+
+[ -d backup ] && rm -rf backup
+mkdir backup
+
+for file in ${DOTFILES[@]}; do
+  [ -e ~/"$file" ] && rsync -r ~/"$file" "backup"
+  if [ -e "files/$file" ]; then
+    [ -e ~/"$file" ] && rm -rf ~/"$file"
+    ln -s $(realpath "files/$file") ~/"$file"
+  fi
 done

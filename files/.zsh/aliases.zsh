@@ -1,6 +1,7 @@
 # Display detailed info about cd directory stack.
 alias dirs="dirs -v"
 
+alias v="vim"
 alias x="exit"
 alias psg="ps aux | grep"
 
