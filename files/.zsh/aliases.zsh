@@ -4,6 +4,7 @@ alias dirs="dirs -v"
 alias v="vim"
 alias x="exit"
 alias psg="ps aux | grep"
+alias t="vim ~/.todo"
 
 # Make cd follow symlinks by default.
 alias cd="cd -P"
