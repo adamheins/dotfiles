@@ -6,7 +6,8 @@
 DOTFILES=(.zsh .zshrc
           .gitconfig .gitignore
           .vimrc .vim
-          .tmux.conf)
+          .tmux.conf
+          .editrc)
 
 if [ ! -d files ]; then
   echo "no dotfiles are here"
