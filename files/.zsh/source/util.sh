@@ -33,6 +33,6 @@ mvall() {
   GLOBIGNORE=
 }
 
-function findn {
+findn() {
   find . -name "$1"
 }
