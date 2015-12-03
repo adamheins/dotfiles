@@ -1,16 +1,37 @@
+# Shell Aliases
+# Adam Heins
+
 # Display detailed info about cd directory stack.
 alias dirs="dirs -v"
 
+alias cl="clear"
 alias v="vim"
 alias x="exit"
 alias psg="ps aux | grep"
-alias t="vim ~/.todo"
+
+# Today's date and time, in a nice format.
+alias now="date +%F\ %T"
+
+# Make cscope recursive by default, and shorter.
+alias cs="cscope -R"
+
+# Handy todo list.
+alias t="$EDITOR ~/.todo"
+
+# Start the calculator with math support.
+alias bc="bc -l"
 
 # Make cd follow symlinks by default.
 alias cd="cd -P"
 
+# Allow mkdir to create intermediate directories.
+alias mkdir="mkdir -pv"
+
 # Aliases for ls.
-alias ls="ls -G"
+case $OS in
+  Darwin) alias ls="ls -G" ;;
+  *) alias ls="ls --color=auto" ;;
+esac
 alias ll="ls -alF"
 alias la="ls -A"
 alias l="ls -CF"

@@ -3,6 +3,9 @@
 
 # ================================= General ================================== #
 
+# Store the name of the OS globally.
+export OS=$(uname)
+
 # Don't wait around after hitting a prefix key.
 export KEYTIMEOUT=1
 
