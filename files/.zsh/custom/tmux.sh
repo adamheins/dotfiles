@@ -37,5 +37,5 @@ even() {
 
 # Launch tmux
 [[ $- != *i* ]] && return
-[[ -z "$TMUX" ]] && exec tmux
+[[ -z "$TMUX" ]] && exec tmux -2
 
