@@ -9,6 +9,8 @@ alias v="vim"
 alias x="exit"
 alias psg="ps aux | grep"
 
+alias untar="tar xzf"
+
 # Today's date and time, in a nice format.
 alias now="date +%F\ %T"
 
@@ -25,7 +27,7 @@ alias bc="bc -l"
 alias cd="cd -P"
 
 # Allow mkdir to create intermediate directories.
-alias mkdir="mkdir -pv"
+alias mkdir="mkdir -p"
 
 # Aliases for ls.
 case $OS in
