@@ -11,6 +11,8 @@ alias psg="ps aux | grep"
 
 alias untar="tar xzf"
 
+alias lisp="sbcl"
+
 # Today's date and time, in a nice format.
 alias now="date +%F\ %T"
 
@@ -56,3 +58,4 @@ alias gb="git branch"
 alias gc="git commit"
 alias gp="git pull"
 alias gch="git checkout"
+alias g-="git checkout -"
