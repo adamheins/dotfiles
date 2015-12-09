@@ -11,8 +11,6 @@ alias psg="ps aux | grep"
 
 alias untar="tar xzf"
 
-alias lisp="sbcl"
-
 # Today's date and time, in a nice format.
 alias now="date +%F\ %T"
 
