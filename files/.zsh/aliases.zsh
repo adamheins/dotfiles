@@ -29,6 +29,10 @@ alias cd="cd -P"
 # Allow mkdir to create intermediate directories.
 alias mkdir="mkdir -p"
 
+# Base conversion.
+alias hex="base 10:16"
+alias unhex="base 16:10"
+
 # Aliases for ls.
 case $OS in
   Darwin) alias ls="ls -G" ;;
