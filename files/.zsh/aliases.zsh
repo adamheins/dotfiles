@@ -1,8 +1,7 @@
 # Shell Aliases
 # Adam Heins
 
-# Display detailed info about cd directory stack.
-alias dirs="dirs -v"
+# ================================= General ================================== #
 
 alias cl="clear"
 alias v="vim"
@@ -20,6 +19,15 @@ alias cs="cscope -R"
 # Handy todo list.
 alias t="$EDITOR ~/.todo"
 
+# Base conversion. Note that the `base' tool must be installed.
+alias hex="base 10:16"
+alias unhex="base 16:10"
+
+# ============================ Modified Builtins ============================= #
+
+# Display detailed info about cd directory stack.
+alias dirs="dirs -v"
+
 # Start the calculator with math support.
 alias bc="bc -l"
 
@@ -29,10 +37,6 @@ alias cd="cd -P"
 # Allow mkdir to create intermediate directories.
 alias mkdir="mkdir -p"
 
-# Base conversion.
-alias hex="base 10:16"
-alias unhex="base 16:10"
-
 # Aliases for ls.
 case $OS in
   Darwin) alias ls="ls -G" ;;
@@ -41,6 +45,8 @@ esac
 alias ll="ls -alF"
 alias la="ls -A"
 alias l="ls -CF"
+
+# =========================== Directory navigation =========================== #
 
 # Easily navigate to parent directories.
 alias ..="cd .."
@@ -53,8 +59,9 @@ alias -- -="cd +1 >/dev/null 2>&1"
 alias -- --="cd +2 >/dev/null 2>&1"
 alias -- ---="cd +3 >/dev/null 2>&1"
 
-# Git aliases.
-alias gst="git status"
+# =================================== Git ==================================== #
+
+alias gs="git status"
 alias ga="git add"
 alias gb="git branch"
 alias gc="git commit"
