@@ -23,6 +23,10 @@ alias t="$EDITOR ~/.todo"
 alias hex="base 10:16"
 alias unhex="base 16:10"
 
+# Change file's executability permissions.
+alias -- +x="chmod +x"
+alias -- -x="chmod -x"
+
 # ============================ Modified Builtins ============================= #
 
 # Display detailed info about cd directory stack.
