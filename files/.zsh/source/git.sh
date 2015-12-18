@@ -92,3 +92,11 @@ function git() {
     command git "$@";
   fi;
 }
+
+function gs() {
+  if [ -z $1 ]; then
+    git status
+  else
+    git --git-dir=$1/.git --work-tree=$1 status
+  fi
+}

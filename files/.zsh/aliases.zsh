@@ -65,7 +65,8 @@ alias -- ---="cd +3 >/dev/null 2>&1"
 
 # =================================== Git ==================================== #
 
-alias gs="git status"
+# Note that git status's is wrapped by a function `gs' which adds some
+# additional functionality.
 alias ga="git add"
 alias gb="git branch"
 alias gc="git commit"
