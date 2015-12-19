@@ -1,5 +1,3 @@
-#!/bin/zsh
-
 # Reload configuration files.
 reload() {
   # With no arguments, the default action is to reload the current shell

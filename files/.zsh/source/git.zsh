@@ -1,7 +1,7 @@
 # Sourced here:
 # https://gist.github.com/2491147
 #
-# Modified by Adam Heins
+# Modified and augmented by Adam Heins
 #
 # Usage: git submodule rm [-c] <path/to/submodule>
 # You must be in the root of the git repository to use this command. The -c
@@ -85,6 +85,7 @@ function remove_submodule() {
   fi
 }
 
+# Wrapper for git that adds additional submodule functionality.
 function git() {
   if [[ $argv[1] == 'submodule' && $argv[2] == 'rm' ]]; then
     remove_submodule $argv[3,-1]
@@ -93,10 +94,13 @@ function git() {
   fi;
 }
 
+# Short form for `git status'. Adds the ability to use it on directories
+# besides the current one, much like `ls'.
 function gs() {
   if [ -z $1 ]; then
     git status
   else
+    echo "In repository $1"
     git --git-dir=$1/.git --work-tree=$1 status
   fi
 }
