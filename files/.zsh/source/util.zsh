@@ -15,6 +15,7 @@ dox() {
 
 # Run a process as a daemon.
 d() {
+  [ -z "$1" ] && return 1
   nohup "$@" >/dev/null 2>&1 &
 }
 

@@ -6,9 +6,10 @@
 alias cl="clear"
 alias v="vim"
 alias x="exit"
+alias lo="logout"
 alias psg="ps aux | grep"
-
-alias untar="tar xzf"
+alias untar="tar -xf"
+alias c="gcc -std=c99"
 
 # Today's date and time, in a nice format.
 alias now="date +%F\ %T"
@@ -48,7 +49,6 @@ case $OS in
 esac
 alias ll="ls -alF"
 alias la="ls -A"
-alias l="ls -CF"
 
 # =========================== Directory navigation =========================== #
 
@@ -65,9 +65,15 @@ alias -- ---="cd +3 >/dev/null 2>&1"
 
 # =================================== Git ==================================== #
 
-# Note that git status's is wrapped by a function `gs' which adds some
-# additional functionality.
-alias ga="git add"
+# Note that git status is wrapped by a function `gs' which adds some additional
+# functionality.
+ga() {
+  if [ -z "$1" ]; then
+    git add -A
+  else
+    git add ${@:1}
+  fi
+}
 alias gb="git branch"
 alias gc="git commit"
 alias gp="git pull"
