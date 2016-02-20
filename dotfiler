@@ -8,7 +8,8 @@ DOTFILES=(.zsh .zshrc
           .vimrc .vim
           .tmux.conf
           .editrc
-          .inputrc)
+          .inputrc
+          .dircolors)
 
 if [ ! -d files ]; then
   echo "no dotfiles are here"

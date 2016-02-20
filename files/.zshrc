@@ -85,3 +85,7 @@ unsetopt null_glob
 
 # Syntax highlighting.
 source ~/.zsh/custom/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh
+
+eval "`dircolors ~/.dircolors`"
+#LS_COLORS=$LS_COLORS:'ln=0;35'
+#export LS_COLORS
