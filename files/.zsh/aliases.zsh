@@ -18,7 +18,7 @@ alias now="date +%F\ %T"
 alias cs="cscope -R"
 
 # Handy todo list.
-alias t="$EDITOR ~/.todo"
+alias t="$EDITOR ~/.todo/todo.md"
 
 # Base conversion. Note that the `base' tool must be installed.
 alias hex="base 10:16"
