@@ -11,11 +11,14 @@ DOTFILES=(.zsh .zshrc
           .inputrc
           .dircolors)
 
-if [ ! -d files ]; then
-  echo "no dotfiles are here"
-  exit 1
-fi
+# Check that dependencies are installed.
+command -v rsync >/dev/null 2>&1 || { echo >&2 "rsync not installed, aborting"; exit 1 }
+command -v realpath >/dev/null 2>&1 || { echo >&2 "realpath not installed, aborting"; exit 1 }
 
+# Check that the `files' directory exists.
+[ -d files ] || { echo >&2 "no dotfiles are here"; exit 1 }
+
+# Create a directory to hold a backup of the current dotfiles on this machine.
 [ -d backup ] && rm -rf backup
 mkdir backup
 
