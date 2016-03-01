@@ -81,9 +81,12 @@ fi
 unsetopt null_glob
 
 # Tmux.
-[ -f ~/.zsh/custom/tmux.sh ] && source ~/.zsh/custom/tmux.sh
+if [ -z "$SSH_CLIENT" ] || [ -z "$SSH_TTY" ]; then
+  [ -f ~/.zsh/custom/tmux.sh ] && source ~/.zsh/custom/tmux.sh
+fi
 
 # Syntax highlighting.
 source ~/.zsh/custom/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh
 
+# Custom ls colors.
 eval "`dircolors ~/.dircolors`"
