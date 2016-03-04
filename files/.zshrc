@@ -36,13 +36,13 @@ bindkey "^?" backward-delete-char
 
 # ================================== Prompt ================================== #
 
-export PS1='%F{4}%n@%m %F{6}%~ %F{4}$ %F{250}'
+export PS1='%F{11}%n@%m %F{245}%~ %F{11}$ %F{250}'
 
 # Change prompt based on vi mode.
 function zle-line-init zle-keymap-select {
   case $KEYMAP in
-    vicmd) export PS1='%F{4}%n@%m %F{6}%~ %F{4}$ %F{250}' ;;
-    viins|main) export PS1='%F{10}%n@%m %F{6}%~ %F{10}$ %F{250}' ;;
+    vicmd) export PS1='%F{139}%n@%m %F{245}%~ %F{139}$ %F{250}' ;;
+    viins|main) export PS1='%F{11}%n@%m %F{245}%~ %F{11}$ %F{250}' ;;
   esac
   zle reset-prompt
 }
