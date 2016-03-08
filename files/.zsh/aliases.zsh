@@ -11,6 +11,8 @@ alias psg="ps aux | grep"
 alias untar="tar -xf"
 alias c="gcc -std=c99"
 
+alias update="sudo apt-get update && sudo apt-get upgrade"
+
 # Today's date and time, in a nice format.
 alias now="date +%F\ %T"
 
