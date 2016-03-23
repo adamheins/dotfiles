@@ -8,10 +8,20 @@ alias v="vim"
 alias x="exit"
 alias lo="logout"
 alias psg="ps aux | grep"
+
+# Update packages.
+alias update="sudo apt-get update && sudo apt-get upgrade"
+
+# Unpack tarballs.
 alias untar="tar -xf"
+
+# Quick C compilation.
 alias c="gcc -std=c99"
 
-alias update="sudo apt-get update && sudo apt-get upgrade"
+# Calendar shortcuts.
+alias today="pal -d today"
+alias tomorrow="pal -d tomorrow"
+alias week="pal -r 7"
 
 # Today's date and time, in a nice format.
 alias now="date +%F\ %T"
