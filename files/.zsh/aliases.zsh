@@ -9,6 +9,9 @@ alias x="exit"
 alias lo="logout"
 alias psg="ps aux | grep"
 
+# Todo list
+alias t="vim ~/.todo/todo.md"
+
 # Update packages.
 alias update="sudo apt-get update && sudo apt-get upgrade"
 
@@ -18,6 +21,20 @@ alias untar="tar -xf"
 # Quick C compilation.
 alias c="gcc -std=c99"
 
+# Make cscope recursive by default, and shorter.
+alias cs="cscope -R"
+
+# Base conversion. Note that the `base' tool must be installed.
+# https://github.com/adamheins/base
+alias hex="base 10:16"
+alias unhex="base 16:10"
+
+# Change file's executability permissions.
+alias -- +x="chmod +x"
+alias -- -x="chmod -x"
+
+# =============================== Date & Time ================================ #
+#
 # Calendar shortcuts.
 alias today="pal -d today"
 alias tomorrow="pal -d tomorrow"
@@ -25,20 +42,6 @@ alias week="pal -r 7"
 
 # Today's date and time, in a nice format.
 alias now="date +%F\ %T"
-
-# Make cscope recursive by default, and shorter.
-alias cs="cscope -R"
-
-# Handy todo list.
-alias t="$EDITOR ~/.todo/todo.md"
-
-# Base conversion. Note that the `base' tool must be installed.
-alias hex="base 10:16"
-alias unhex="base 16:10"
-
-# Change file's executability permissions.
-alias -- +x="chmod +x"
-alias -- -x="chmod -x"
 
 # ============================ Modified Builtins ============================= #
 
