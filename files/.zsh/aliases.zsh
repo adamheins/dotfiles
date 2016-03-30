@@ -9,8 +9,11 @@ alias x="exit"
 alias lo="logout"
 alias psg="ps aux | grep"
 
-# Todo list
-alias t="vim ~/.todo/todo.md"
+# Install debian packages.
+alias deb="sudo dpkg -i"
+
+# Web browser.
+alias ff="nohup firefox > /dev/null 2>&1 &"
 
 # Update packages.
 alias update="sudo apt-get update && sudo apt-get upgrade"
@@ -33,8 +36,28 @@ alias unhex="base 16:10"
 alias -- +x="chmod +x"
 alias -- -x="chmod -x"
 
+# Convert html files to pdfs.
+alias htmltopdf=wkhtmltopdf
+
+# Get the duration of an mp3 file.
+alias mp3len="mp3info -p \"%m:%s\\n\""
+
+# ================================== Lists =================================== #
+
+if [ -z "$SSH_CLIENT" ] || [ -z "$SSH_TTY" ]; then
+  alias todo="vim scp://adamheins.com/.todo/todo.md"
+  alias films="vim scp://adamheins.com/.todo/films.yml"
+  alias books="vim scp://adamheins.com/.todo/books.yml"
+else
+  alias todo="vim ~/.todo/todo.md"
+  alias films="vim ~/.todo/films.yml"
+  alias books="vim ~/.todo/books.yml"
+fi
+
+alias t="todo"
+
 # =============================== Date & Time ================================ #
-#
+
 # Calendar shortcuts.
 alias today="pal -d today"
 alias tomorrow="pal -d tomorrow"

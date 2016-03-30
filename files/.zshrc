@@ -1,6 +1,10 @@
 # Run time configuration for zsh.
 # Adam Heins
 
+# ================================= Globals ================================== #
+
+export MY_EMAIL=mail@adamheins.com
+
 # ================================= General ================================== #
 
 # Store the name of the OS globally.
