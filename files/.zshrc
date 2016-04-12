@@ -5,10 +5,14 @@
 
 export MY_EMAIL=mail@adamheins.com
 
-# ================================= General ================================== #
-
 # Store the name of the OS globally.
 export OS=$(uname)
+
+export GOPATH="/home/adam/dev/go"
+export PATH=$GOPATH/bin:$PATH
+
+# ================================= General ================================== #
+
 
 # Don't wait around after hitting a prefix key.
 export KEYTIMEOUT=1

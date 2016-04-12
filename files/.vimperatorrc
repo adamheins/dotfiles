@@ -1,0 +1,36 @@
+" Run time configuration for vimperator.
+" Adam Heins
+
+" ================================ General =================================== "
+
+" Only show smart completions when :open used.
+set complete=l
+
+" ================================ Mappings ================================== "
+
+" Faster scrolling
+nnoremap h 5h
+nnoremap j 5j
+nnoremap k 5k
+nnoremap l 5l
+nnoremap <Space> <C-d>
+nnoremap <S-Space> <C-u>
+
+" Easily cycle through tabs
+nnoremap H gT
+nnoremap L gt
+
+" Make escape stop highlighting searches.
+nnoremap <Esc> :noh<CR><Esc>
+
+" ================================= Search =================================== "
+
+set hlsearch
+set ignorecase
+set smartcase
+set incsearch
+
+" =================================== UI ===================================== "
+"
+" Make hints a little easier to see (larger font).
+highlight! Hint font-family: monospace; font-size: 14px; font-weight: bold; text-transform: uppercase; color: white; background-color: red; border-color: ButtonShadow; border-width: 0px; border-style: solid; padding: 0px 1px 0px 1px;

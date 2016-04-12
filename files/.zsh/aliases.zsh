@@ -42,10 +42,13 @@ alias htmltopdf=wkhtmltopdf
 # Get the duration of an mp3 file.
 alias mp3len="mp3info -p \"%m:%s\\n\""
 
+# Use foxit for PDFs.
+alias pdf="d foxit"
+
 # ================================== Lists =================================== #
 
 if [ -z "$SSH_CLIENT" ] || [ -z "$SSH_TTY" ]; then
-  alias todo="vim scp://adamheins.com/.todo/todo.md"
+  alias todo="vim scp://adamheins.com/.todo/todo"
   alias films="vim scp://adamheins.com/.todo/films.yml"
   alias books="vim scp://adamheins.com/.todo/books.yml"
 else
