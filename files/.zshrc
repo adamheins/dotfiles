@@ -8,7 +8,7 @@ export MY_EMAIL=mail@adamheins.com
 # Store the name of the OS globally.
 export OS=$(uname)
 
-export GOPATH="/home/adam/dev/go"
+export GOPATH="/home/adam/dev/lang/go"
 export PATH=$GOPATH/bin:$PATH
 
 # ================================= General ================================== #

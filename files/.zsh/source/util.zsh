@@ -44,12 +44,37 @@ nest() {
   done
 }
 
-# Move everything out a directory and then remove it.
+# Move everything out of a directory.
 unnest() {
-  mv $1/* .
-  rm -r $1
+  if [ -z $1 ]; then
+    mv ./* ..
+  else
+    mv "$1"/* .
+  fi
 }
 
+# Find by name, a shortcut.
 findn() {
   find . -name "$1"
+}
+
+# Symlinking without the hassle of non-relative paths.
+lns() {
+  ln -s $(realpath "$1") "$2"
+}
+
+# I'm always afraid I'll forget to type the double `>'.
+append() {
+  cat "$1" >> "$2"
+}
+
+# Delete all git stuff from a directory.
+ungit() {
+  if [ -z "$1" ]; then
+    echo "Ungitting $(pwd)"
+    rm -r .git*
+  else
+    rm -r "$1"/.git*
+    echo "Ungitting $(pwd)/$1"
+  fi
 }

@@ -45,6 +45,14 @@ alias mp3len="mp3info -p \"%m:%s\\n\""
 # Use foxit for PDFs.
 alias pdf="d foxit"
 
+# Decrypt files to stdout.
+alias show="gpg --decrypt --quiet --batch"
+
+m() {
+  cd ~/dev/lang/matlab
+  matlab
+}
+
 # ================================== Lists =================================== #
 
 if [ -z "$SSH_CLIENT" ] || [ -z "$SSH_TTY" ]; then
@@ -108,6 +116,7 @@ alias -- ---="cd +3 >/dev/null 2>&1"
 
 # Note that git status is wrapped by a function `gs' which adds some additional
 # functionality.
+
 ga() {
   if [ -z "$1" ]; then
     git add -A
