@@ -78,3 +78,11 @@ ungit() {
     echo "Ungitting $(pwd)/$1"
   fi
 }
+
+define() {
+  dict "$1" | less
+}
+
+synonym() {
+  dict -d moby-thesaurus "$1"
+}
