@@ -78,3 +78,8 @@ ungit() {
     echo "Ungitting $(pwd)/$1"
   fi
 }
+
+# Open all git merge conflicts with vim.
+gcon() {
+    vim +/"<<<<<<<" $(git diff --name-only --diff-filter=U | xargs )
+}
