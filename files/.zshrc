@@ -72,6 +72,11 @@ compinit -D
 # Aliases.
 [ -f ~/.zsh/aliases.zsh ] && source ~/.zsh/aliases.zsh
 
+# Binaries.
+if [ -d ~/.zsh/bin ]; then
+  export PATH=~/.zsh/bin:$PATH
+fi
+
 # Scripts.
 setopt null_glob
 if [ -d ~/.zsh/source ]; then
@@ -88,13 +93,17 @@ if [ -d ~/.zsh/local ]; then
 fi
 unsetopt null_glob
 
-# Tmux.
+# Tmux. Only activate when not connected over ssh.
 if [ -z "$SSH_CLIENT" ] || [ -z "$SSH_TTY" ]; then
   [ -f ~/.zsh/custom/tmux.sh ] && source ~/.zsh/custom/tmux.sh
 fi
 
 # Syntax highlighting.
-source ~/.zsh/custom/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh
+if [ -d ~/.zsh/custom/zsh-syntax-highlighting ]; then
+  source ~/.zsh/custom/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh
+fi
 
 # Custom ls colors.
-eval "`dircolors ~/.dircolors`"
+if [ ! $OS = "Darwin" ]; then
+  eval "`dircolors ~/.dircolors`"
+fi
