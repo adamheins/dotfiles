@@ -86,3 +86,7 @@ define() {
 synonym() {
   dict -d moby-thesaurus "$1"
 }
+
+zipdir() {
+  zip -r "$1".zip "$1"
+}
