@@ -35,6 +35,8 @@ even() {
   esac
 }
 
+tmux bind \< run "wlower"
+
 # Launch tmux
 [[ $- != *i* ]] && return
 [[ -z "$TMUX" ]] && exec tmux -2
