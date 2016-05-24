@@ -104,3 +104,20 @@ function gs() {
     git --git-dir=$1/.git --work-tree=$1 status
   fi
 }
+
+# Git add.
+function ga() {
+  if [ -z "$1" ]; then
+    git add -A
+  else
+    git add ${@:1}
+  fi
+}
+
+# Open all merge conflicts in vim.
+function gcon() {
+  # Change directory to the root of the git repo. This allows the function to
+  # work from anywhere in the repo's tree.
+  cd $(git rev-parse --show-toplevel)
+  vim +/"<<<<<<<" $(git diff --name-only --diff-filter=U | xargs)
+}
