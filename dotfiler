@@ -24,9 +24,16 @@ command -v realpath >/dev/null 2>&1 || { echo >&2 "realpath not installed, abort
 mkdir backup
 
 for file in ${DOTFILES[@]}; do
+  # Backup each local file.
   [ -e ~/"$file" ] && rsync -r ~/"$file" "backup"
+
+  # Remove existing local copy (if needed) and create a symlink to the one in
+  # this repo.
   if [ -e "files/$file" ]; then
     [ -e ~/"$file" ] && rm -rf ~/"$file"
     ln -s $(realpath "files/$file") ~/"$file"
   fi
 done
+
+# Create vim aliases symlink.
+ln -s ~/.vim/aliases.vim ~/.vim/after/plugin/aliases.vim
