@@ -1,0 +1,27 @@
+#!/bin/sh
+
+tmux list-windows > /tmp/tmux_window_list
+
+window=$(
+python << END
+with open('/tmp/tmux_window_list', 'r') as f:
+    lines = f.readlines()
+
+expected_count = 0
+
+for line in lines:
+    num = int(line.split(':')[0])
+    if num > expected_count:
+        print(expected_count)
+        exit()
+    if line.split(' ')[1][-1] == '*':
+        print(-1)
+        exit()
+    expected_count += 1
+print(expected_count) # Should never happen
+END
+)
+
+if [ $window -gt -1 ]; then
+  tmux move-window -t $window
+fi

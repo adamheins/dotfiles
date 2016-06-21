@@ -41,6 +41,11 @@ bindkey -M vicmd '\e' noop
 # Fix default delete key behaviour for vi mode.
 bindkey "^?" backward-delete-char
 
+# Custom ls colors.
+if [ ! $OS = "Darwin" ]; then
+  dircolors ~/.dircolors
+fi
+
 # Turn off legacy behaviour of stopping/resuming tty I/O.
 stty -ixon
 
@@ -60,43 +65,23 @@ function zle-line-init zle-keymap-select {
 zle -N zle-line-init
 zle -N zle-keymap-select
 
+# ================================= External ================================= #
+
+# Configuration common on all systems.
+if [ -f ~/.zsh/common/.rc ]; then
+  source ~/.zsh/common/.rc
+fi
+
+# Configuration local to this system.
+if [ -f ~/.zsh/local/.rc ]; then
+  source ~/.zsh/local/.rc
+fi
+
 # ============================== Autocompletion ============================== #
 
-# External completions.
-fpath=($fpath ~/.zsh/comp)
-
-# Autocompletion.
 autoload -U compinit
 compinit -D
 
-# ============================= External Scripts ============================= #
 
-# Aliases.
-[ -f ~/.zsh/aliases.zsh ] && source ~/.zsh/aliases.zsh
 
-# Scripts.
-setopt null_glob
-if [ -d ~/.zsh/source ]; then
-  for f in ~/.zsh/source/*.sh(.N); do source "$f"; done
-  for f in ~/.zsh/source/*.zsh(.N); do source "$f"; done
-fi
-unsetopt null_glob
 
-# Local configuration.
-setopt null_glob
-if [ -d ~/.zsh/local ]; then
-  for f in ~/.zsh/local/*.sh(.N); do source "$f"; done
-  for f in ~/.zsh/local/*.zsh(.N); do source "$f"; done
-fi
-unsetopt null_glob
-
-# Tmux.
-if [ -z "$SSH_CLIENT" ] || [ -z "$SSH_TTY" ]; then
-  [ -f ~/.zsh/custom/tmux.sh ] && source ~/.zsh/custom/tmux.sh
-fi
-
-# Syntax highlighting.
-source ~/.zsh/custom/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh
-
-# Custom ls colors.
-eval "`dircolors ~/.dircolors`"

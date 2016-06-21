@@ -17,10 +17,13 @@ reload() {
       bash) source ~/.bash_profile ;;
       tmux) tmux source-file ~/.tmux.conf ;;
       xterm) xrdb -merge ~/.Xresources ;;
+      i3) i3-msg reload ;;
+      i3status) i3-msg restart ;;
       all)
         source ~/.zshrc
         tmux source-file ~/.tmux.conf
         xrdb -merge ~/.Xresources
+        i3-msg reload
         ;;
     esac
   done

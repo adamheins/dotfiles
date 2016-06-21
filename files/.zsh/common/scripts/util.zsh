@@ -100,3 +100,16 @@ recent() {
     ls -rt | tail -n "$1"
   fi
 }
+
+define() {
+  dict "$1" | less
+}
+
+synonym() {
+  dict -d moby-thesaurus "$1"
+}
+
+# Zip up a directory.
+zipdir() {
+  zip -r "$1".zip "$1"
+}
