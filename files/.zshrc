@@ -43,7 +43,7 @@ bindkey "^?" backward-delete-char
 
 # Custom ls colors.
 if [ ! $OS = "Darwin" ]; then
-  dircolors ~/.dircolors
+  eval "`dircolors ~/.dircolors`"
 fi
 
 # Turn off legacy behaviour of stopping/resuming tty I/O.
