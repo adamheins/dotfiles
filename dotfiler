@@ -21,7 +21,7 @@ command -v rsync >/dev/null 2>&1 || { echo >&2 "rsync not installed, aborting"; 
 [ -d files ] || { echo >&2 "no dotfiles are here"; exit 1; }
 
 # Create a directory to hold a backup of the current dotfiles on this machine.
-backup_dir="backup_$(date +%Y-%m-%d_%H-%M-%S)"
+backup_dir=".backup_$(date +%Y-%m-%d_%H-%M-%S)"
 mkdir $here/$backup_dir
 
 # Create a symlink to the current backup directory.

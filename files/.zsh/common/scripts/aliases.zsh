@@ -3,8 +3,11 @@
 
 # ================================= General ================================== #
 
+# vim
+alias v="nvim"
+alias vim="nvim"
+
 alias cl="clear"
-alias v="vim"
 alias x="exit"
 alias lo="logout"
 alias psg="ps aux | grep"
