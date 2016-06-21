@@ -24,8 +24,9 @@ alias untar="tar -xf"
 # Quick C compilation.
 alias c="gcc -std=c99"
 
-# Make cscope recursive by default, and shorter.
-alias cs="cscope -R"
+# Cscope aliases.
+alias cs="cscope -d"
+alias csb="cscope -bq"
 
 # Base conversion. Note that the `base' tool must be installed.
 # https://github.com/adamheins/base

@@ -53,9 +53,14 @@ unnest() {
   fi
 }
 
-# Find by name, a shortcut.
+# Find by name.
 findn() {
   find . -name "$1"
+}
+
+# Find by name, but only part of the name is required.
+findr() {
+  find . -name "*$1*"
 }
 
 # Symlinking without the hassle of non-relative paths.
@@ -81,5 +86,17 @@ ungit() {
 
 # Open all git merge conflicts with vim.
 gcon() {
+    # cd to root directory so we can call this from anywhere in the repository
+    # tree.
+    cd $(git rev-parse --show-toplevel)
     vim +/"<<<<<<<" $(git diff --name-only --diff-filter=U | xargs )
+}
+
+# List most recent files in directory.
+recent() {
+  if [ -z "$1" ]; then
+    ls -rt | tail -n 1
+  else
+    ls -rt | tail -n "$1"
+  fi
 }

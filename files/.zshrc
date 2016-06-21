@@ -13,7 +13,6 @@ export PATH=$GOPATH/bin:$PATH
 
 # ================================= General ================================== #
 
-
 # Don't wait around after hitting a prefix key.
 export KEYTIMEOUT=1
 
@@ -41,6 +40,9 @@ bindkey -M vicmd '\e' noop
 
 # Fix default delete key behaviour for vi mode.
 bindkey "^?" backward-delete-char
+
+# Turn off legacy behaviour of stopping/resuming tty I/O.
+stty -ixon
 
 # ================================== Prompt ================================== #
 
