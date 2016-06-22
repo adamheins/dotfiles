@@ -3,13 +3,8 @@
 
 # ================================= Globals ================================== #
 
-export MY_EMAIL=mail@adamheins.com
-
 # Store the name of the OS globally.
 export OS=$(uname)
-
-export GOPATH="/home/adam/dev/lang/go"
-export PATH=$GOPATH/bin:$PATH
 
 # ================================= General ================================== #
 
@@ -93,8 +88,9 @@ if [ -z "$SSH_CLIENT" ] || [ -z "$SSH_TTY" ]; then
   [ -f ~/.zsh/custom/tmux.sh ] && source ~/.zsh/custom/tmux.sh
 fi
 
+# Modify ls colors.
+# This syntax only works on BSDs (such as OSX).
+export LSCOLORS="gxfxcxdxbxegedabagacad"
+
 # Syntax highlighting.
 source ~/.zsh/custom/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh
-
-# Custom ls colors.
-eval "`dircolors ~/.dircolors`"

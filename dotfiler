@@ -16,6 +16,13 @@ DOTFILES=(.zsh .zshrc
 command -v rsync >/dev/null 2>&1 || { echo >&2 "rsync not installed, aborting"; exit 1; }
 command -v realpath >/dev/null 2>&1 || { echo >&2 "realpath not installed, aborting"; exit 1; }
 
+# OSX-only dependencies.
+case $OS in
+  Darwin)
+    command -v reattach-to-user-namespace >/dev/null 2>&1 || { echo >&2 "install reattach-to-user-namespace before using tmux" }
+    ;;
+esac
+
 # Check that the `files' directory exists.
 [ -d files ] || { echo >&2 "no dotfiles are here"; exit 1; }
 
