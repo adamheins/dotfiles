@@ -1,6 +1,12 @@
 [submodule "files/.vim"]
 	path = files/.vim
 	url = git@github.com:adamheins/.vim.git
-[submodule "files/.zsh/custom/zsh-syntax-highlighting"]
-	path = files/.zsh/custom/zsh-syntax-highlighting
+[submodule "files/.zsh/common/tps/zsh-syntax-highlighting"]
+	path = files/.zsh/common/tps/zsh-syntax-highlighting
 	url = git@github.com:zsh-users/zsh-syntax-highlighting.git
+[submodule "files/.zsh/common/tps/tmux-scroll-copy-mode"]
+	path = files/.zsh/common/tps/tmux-scroll-copy-mode
+	url = git@github.com:nhdaly/tmux-scroll-copy-mode
+[submodule "files/.zsh/common/tps/fzf"]
+	path = files/.zsh/common/tps/fzf
+	url = git@github.com:junegunn/fzf.git

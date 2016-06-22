@@ -1,0 +1,26 @@
+here=${0:a:h}
+
+# Autocompletion.
+if [ -d $here/comp ]; then
+  fpath=($fpath $here/comp)
+fi
+
+# Binaries.
+if [ -d $here/bin ]; then
+  export PATH=$here/bin:$PATH
+fi
+
+# Scripts to be sourced.
+if [ -d $here/scripts ]; then
+  for f in $here/scripts/*.sh(.N); do source "$f"; done
+  for f in $here/scripts/*.zsh(.N); do source "$f"; done
+fi
+
+# Plugins.
+if [ -d $here/tps/zsh-syntax-highlighting ]; then
+  source $here/tps/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh
+fi
+
+if [ -f $here/tps/.fzf.zsh ]; then
+  source $here/tps/.fzf.zsh
+fi

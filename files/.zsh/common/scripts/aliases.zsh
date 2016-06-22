@@ -3,8 +3,11 @@
 
 # ================================= General ================================== #
 
+# vim
+alias v="nvim"
+alias vim="nvim"
+
 alias cl="clear"
-alias v="vim"
 alias x="exit"
 alias lo="logout"
 alias psg="ps aux | grep"
@@ -24,8 +27,9 @@ alias untar="tar -xf"
 # Quick C compilation.
 alias c="gcc -std=c99"
 
-# Make cscope recursive by default, and shorter.
-alias cs="cscope -R"
+# Cscope aliases.
+alias cs="cscope -d"
+alias csb="cscope -bq"
 
 # Base conversion. Note that the `base' tool must be installed.
 # https://github.com/adamheins/base
@@ -48,6 +52,9 @@ alias pdf="d foxit"
 # Decrypt files to stdout.
 alias show="gpg --decrypt --quiet --batch"
 
+# Dict
+alias syn=synonym
+
 m() {
   cd ~/dev/lang/matlab
   matlab
@@ -55,15 +62,9 @@ m() {
 
 # ================================== Lists =================================== #
 
-if [ -z "$SSH_CLIENT" ] || [ -z "$SSH_TTY" ]; then
-  alias todo="vim scp://adamheins.com/.todo/todo"
-  alias films="vim scp://adamheins.com/.todo/films.yml"
-  alias books="vim scp://adamheins.com/.todo/books.yml"
-else
-  alias todo="vim ~/.todo/todo.md"
-  alias films="vim ~/.todo/films.yml"
-  alias books="vim ~/.todo/books.yml"
-fi
+alias todo="vim ~/.todo/todo.md"
+alias films="vim ~/.todo/media/films.yml"
+alias books="vim ~/.todo/media/books.yml"
 
 alias t="todo"
 
@@ -114,21 +115,16 @@ alias -- ---="cd +3 >/dev/null 2>&1"
 
 # =================================== Git ==================================== #
 
-# Note that git status is wrapped by a function `gs' which adds some additional
-# functionality.
+# See source/git.zsh for git-related functions.
 
-ga() {
-  if [ -z "$1" ]; then
-    git add -A
-  else
-    git add ${@:1}
-  fi
-}
 alias gb="git branch"
 alias gc="git commit"
 alias gp="git pull"
 alias gch="git checkout"
 alias gg="git grep"
 alias grhh="git reset --hard HEAD"
+alias grl="git revert HEAD"
 alias g-="git checkout -"
 alias gl="git log"
+alias gd="git diff"
+alias gdl="git diff HEAD~1..HEAD"

@@ -1,7 +1,9 @@
-#!/bin/bash
+#!/bin/zsh
 
 # Tool to copy and paste dotfiles.
 # Adam Heins
+
+here=${0:a:h}
 
 DOTFILES=(.zsh .zshrc
           .gitconfig .gitignore
@@ -14,7 +16,6 @@ DOTFILES=(.zsh .zshrc
 
 # Check that dependencies are installed.
 command -v rsync >/dev/null 2>&1 || { echo >&2 "rsync not installed, aborting"; exit 1; }
-command -v realpath >/dev/null 2>&1 || { echo >&2 "realpath not installed, aborting"; exit 1; }
 
 # OSX-only dependencies.
 case $OS in
@@ -27,13 +28,24 @@ esac
 [ -d files ] || { echo >&2 "no dotfiles are here"; exit 1; }
 
 # Create a directory to hold a backup of the current dotfiles on this machine.
-[ -d backup ] && rm -rf backup
-mkdir backup
+backup_dir=".backup_$(date +%Y-%m-%d_%H-%M-%S)"
+mkdir $here/$backup_dir
 
-for file in ${DOTFILES[@]}; do
-  [ -e ~/"$file" ] && rsync -r ~/"$file" "backup"
+# Create a symlink to the current backup directory.
+readlink $here/backup > /dev/null && rm $here/backup
+ln -s $here/$backup_dir $here/backup
+
+for file in $DOTFILES; do
+  # Backup each local file.
+  [ -e ~/"$file" ] && rsync -r ~/"$file" $here/backup
+
+  # Remove existing local copy (if needed) and create a symlink to the one in
+  # this repo.
   if [ -e "files/$file" ]; then
     [ -e ~/"$file" ] && rm -rf ~/"$file"
-    ln -s $(realpath "files/$file") ~/"$file"
+    ln -s $here/files/$file ~/"$file"
   fi
 done
+
+# Create vim aliases symlink.
+ln -s ~/.vim/aliases.vim ~/.vim/after/plugin/aliases.vim

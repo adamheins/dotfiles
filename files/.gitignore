@@ -1,2 +1,7 @@
 *.swp
+*.swo
+
 .DS_Store
+
+cscope.out
+cscope.files
