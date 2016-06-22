@@ -121,3 +121,26 @@ function gcon() {
   cd $(git rev-parse --show-toplevel)
   vim +/"<<<<<<<" $(git diff --name-only --diff-filter=U | xargs)
 }
+
+# Delete all git stuff from a directory.
+ungit() {
+  if [ -z "$1" ]; then
+    echo "Ungitting $(pwd)"
+    rm -r .git*
+  else
+    rm -r "$1"/.git*
+    echo "Ungitting $(pwd)/$1"
+  fi
+}
+
+alias gb="git branch"
+alias gc="git commit"
+alias gp="git pull"
+alias gch="git checkout"
+alias gg="git grep"
+alias grhh="git reset --hard HEAD"
+alias grl="git revert HEAD"
+alias g-="git checkout -"
+alias gl="git log"
+alias gd="git diff"
+alias gdl="git diff HEAD~1..HEAD"

@@ -63,9 +63,6 @@ m() {
 # ================================== Lists =================================== #
 
 alias todo="vim ~/.todo/todo.md"
-alias films="vim ~/.todo/media/films.yml"
-alias books="vim ~/.todo/media/books.yml"
-
 alias t="todo"
 
 # =============================== Date & Time ================================ #
@@ -79,9 +76,6 @@ alias week="pal -r 7"
 alias now="date +%F\ %T"
 
 # ============================ Modified Builtins ============================= #
-
-# Display detailed info about cd directory stack.
-alias dirs="dirs -v"
 
 # Start the calculator with math support.
 alias bc="bc -l"
@@ -99,32 +93,3 @@ case $OS in
 esac
 alias ll="ls -alF"
 alias la="ls -A"
-
-# =========================== Directory navigation =========================== #
-
-# Easily navigate to parent directories.
-alias ..="cd .."
-alias ...="cd ../.."
-alias ....="cd ../../.."
-alias .....="cd ../../../.."
-
-# Easily switch back to previous directories.
-alias -- -="cd +1 >/dev/null 2>&1"
-alias -- --="cd +2 >/dev/null 2>&1"
-alias -- ---="cd +3 >/dev/null 2>&1"
-
-# =================================== Git ==================================== #
-
-# See source/git.zsh for git-related functions.
-
-alias gb="git branch"
-alias gc="git commit"
-alias gp="git pull"
-alias gch="git checkout"
-alias gg="git grep"
-alias grhh="git reset --hard HEAD"
-alias grl="git revert HEAD"
-alias g-="git checkout -"
-alias gl="git log"
-alias gd="git diff"
-alias gdl="git diff HEAD~1..HEAD"

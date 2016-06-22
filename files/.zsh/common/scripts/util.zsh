@@ -73,25 +73,6 @@ append() {
   cat "$1" >> "$2"
 }
 
-# Delete all git stuff from a directory.
-ungit() {
-  if [ -z "$1" ]; then
-    echo "Ungitting $(pwd)"
-    rm -r .git*
-  else
-    rm -r "$1"/.git*
-    echo "Ungitting $(pwd)/$1"
-  fi
-}
-
-# Open all git merge conflicts with vim.
-gcon() {
-    # cd to root directory so we can call this from anywhere in the repository
-    # tree.
-    cd $(git rev-parse --show-toplevel)
-    vim +/"<<<<<<<" $(git diff --name-only --diff-filter=U | xargs )
-}
-
 # List most recent files in directory.
 recent() {
   if [ -z "$1" ]; then
