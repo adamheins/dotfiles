@@ -65,13 +65,13 @@ zle -N zle-keymap-select
 # ================================= External ================================= #
 
 # Configuration common on all systems.
-if [ -f ~/.zsh/common/.rc ]; then
-  source ~/.zsh/common/.rc
+if [ -f ~/.zsh/.commonrc ]; then
+  source ~/.zsh/.commonrc
 fi
 
 # Configuration local to this system.
-if [ -f ~/.zsh/local/.rc ]; then
-  source ~/.zsh/local/.rc
+if [ -f ~/.zsh/.localrc ]; then
+  source ~/.zsh/.localrc
 fi
 
 # ============================== Autocompletion ============================== #
