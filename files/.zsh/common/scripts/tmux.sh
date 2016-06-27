@@ -1,6 +1,5 @@
 #!/bin/zsh
 
-
 # If the cwd is a git repo, display the branch name in the tmux status bar.
 _update_tmux_status() {
   if [ "$(git rev-parse --is-inside-work-tree 2>/dev/null)" ]; then
@@ -18,8 +17,6 @@ _update_tmux_status() {
   fi
 }
 
-precmd_functions=(_update_tmux_status)
-
 # Restart the current tmux-pane anew.
 restart() {
   [ -z $TMUX ] && return 1
@@ -36,10 +33,11 @@ even() {
   esac
 }
 
-
 # We generally don't want to run tmux in an ssh session.
 if [ -z "$SSH_CLIENT" ] || [ -z "$SSH_TTY" ]; then
-  tmux bind \< run "wlower"
+  precmd_functions=(_update_tmux_status)
+
+  tmux bind \< run "tmux-window-lower"
 
   [[ $- != *i* ]] && return
   [[ -z "$TMUX" ]] && exec tmux -2

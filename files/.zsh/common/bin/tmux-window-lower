@@ -4,10 +4,13 @@ tmux list-windows > /tmp/tmux_window_list
 
 window=$(
 python << END
+
+MIN_WINDOW_INDEX = 1
+
 with open('/tmp/tmux_window_list', 'r') as f:
     lines = f.readlines()
 
-expected_count = 1
+expected_count = MIN_WINDOW_INDEX
 
 for line in lines:
     num = int(line.split(':')[0])
