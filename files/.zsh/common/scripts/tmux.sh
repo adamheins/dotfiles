@@ -38,6 +38,7 @@ if [ -z "$SSH_CLIENT" ] || [ -z "$SSH_TTY" ]; then
   precmd_functions=(_update_tmux_status)
 
   tmux bind \< run "tmux-window-lower"
+  tmux bind / run "tmux-window-lower --all"
 
   [[ $- != *i* ]] && return
   [[ -z "$TMUX" ]] && exec tmux -2

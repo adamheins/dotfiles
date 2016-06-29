@@ -1,30 +1,56 @@
-#!/bin/sh
+#!/usr/bin/env python
 
-tmux list-windows > /tmp/tmux_window_list
+from __future__ import print_function
 
-window=$(
-python << END
+import subprocess
+import sys
 
 MIN_WINDOW_INDEX = 1
 
-with open('/tmp/tmux_window_list', 'r') as f:
-    lines = f.readlines()
+def get_tmux_windows():
+    ''' Get a list of the current tmux windows. '''
+    out = subprocess.check_output(['tmux', 'list-windows'])
+    return out.strip().split('\n')
 
-expected_count = MIN_WINDOW_INDEX
+def is_current_window(window):
+    ''' Returns True if the window is the current tmux window. '''
+    return window.split(' ')[1][-1] == '*'
 
-for line in lines:
-    num = int(line.split(':')[0])
-    if num > expected_count:
-        print(expected_count)
-        exit()
-    if line.split(' ')[1][-1] == '*':
-        print(-1)
-        exit()
-    expected_count += 1
-print(expected_count) # Should never happen
-END
-)
+def lower_all_windows(windows):
+    ''' Lower all tmux windows so all window indexes are minimized. '''
+    expected_count = MIN_WINDOW_INDEX
+    for window in windows:
+        num = int(window.split(':')[0])
+        if num > expected_count:
+            subprocess.call(['tmux', 'move-window', '-s', str(num), '-t',
+                             str(expected_count)])
+        if is_current_window(window):
+            current_window = expected_count
+        expected_count += 1
+    subprocess.call(['tmux', 'select-window', '-t', str(current_window)])
 
-if [ $window -gt -1 ]; then
-  tmux move-window -t $window
-fi
+def lower_current_window(windows):
+    ''' Lower the current tmux window to the lowest available index. '''
+    expected_count = MIN_WINDOW_INDEX
+    dest_index = -1
+    for window in windows:
+        num = int(window.split(':')[0])
+        if num > expected_count:
+            dest_index = expected_count
+            break
+        if is_current_window(window):
+            break
+        expected_count += 1
+    if dest_index > -1:
+        subprocess.call(['tmux', 'move-window', '-t', str(dest_index)])
+
+def main():
+    windows = get_tmux_windows()
+
+    if len(sys.argv) > 1 and sys.argv[1] == '--all':
+        lower_all_windows(windows)
+    else:
+        lower_current_window(windows)
+
+if __name__ == '__main__':
+    main()
