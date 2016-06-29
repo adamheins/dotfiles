@@ -25,3 +25,7 @@ fi
 if [ -f $common/tps/.fzf.zsh ]; then
   source $common/tps/.fzf.zsh
 fi
+
+if [ -d $common/tps/f ]; then
+  source $common/tps/f/f.zsh
+fi

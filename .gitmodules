@@ -10,3 +10,6 @@
 [submodule "files/.zsh/common/tps/fzf"]
 	path = files/.zsh/common/tps/fzf
 	url = git@github.com:junegunn/fzf.git
+[submodule "files/.zsh/common/tps/f"]
+	path = files/.zsh/common/tps/f
+	url = git@github.com:adamheins/f.git
