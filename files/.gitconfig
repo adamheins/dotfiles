@@ -2,7 +2,6 @@
   default = simple
 [user]
   name = Adam Heins
-  email = mail@adamheins.com
 [core]
 	excludesfile = /home/adam/.gitignore
 [diff]
