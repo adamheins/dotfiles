@@ -90,7 +90,12 @@ synonym() {
   dict -d moby-thesaurus "$1"
 }
 
-# Zip up a directory.
+# Zip a directory.
 zipdir() {
   zip -r "$1".zip "$1"
+}
+
+# Tar a directory.
+tardir() {
+  tar -zcvf "$1".tar.gz "$1"
 }
