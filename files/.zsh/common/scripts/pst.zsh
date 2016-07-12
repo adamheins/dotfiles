@@ -41,16 +41,23 @@ mv() {
 pst() {
   [ ! -d $PST_DIR ] && return
   if [ -z $1 ]; then
-    mv $PST_DIR/* .
+    cp -r $PST_DIR/* .
   else
     case "$1" in
       "-l"|"--list") ls -A $PST_DIR ;;
-      "-h"|"--help") echo "usage: pst [-chl] [dest]" ;;
+      "-h"|"--help")
+        echo "usage: pst [-chl] [dest]"
+        echo ""
+        echo "arguments:"
+        echo "  -c, --clean  Remove all files from \$PST_DIR."
+        echo "  -h, --help   Print this help message."
+        echo "  -l, --list   List files in the \$PST_DIR."
+      ;;
       "-c"|"--clean")
         setopt localoptions rmstarsilent
         rm -rf $PST_DIR/*(.N)
       ;;
-      *) mv $PST_DIR/* "$1" ;;
+      *) cp -r $PST_DIR/* "$1" ;;
     esac
   fi
 }
