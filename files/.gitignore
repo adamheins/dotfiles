@@ -1,7 +1,16 @@
+# vim
 *.swp
 *.swo
 
+# macOS
 .DS_Store
 
-cscope.out
-cscope.files
+# cscope
+*cscope*
+
+# gdb
+.gdbinit
+gdbserver_log
+
+# python
+*.pyc
