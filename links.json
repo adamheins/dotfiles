@@ -1,0 +1,23 @@
+{
+  "all": {
+    ".zsh": "~/.zsh",
+    ".zshrc": "~/.zshrc",
+
+    ".gitconfig": "~/.gitconfig",
+    ".gitignore": "~/.gitignore",
+
+    ".vimrc": "~/.vimrc",
+    ".vim": "~/.vim",
+    ".vim": "~/.config/nvim",
+    ".vim/aliases.vim": "~/.vim/after/plugin/aliases.vim",
+
+    ".tmux.conf": "~/.tmux.conf",
+    ".editrc": "~/.editrc",
+    ".inputrc": "~/.inputrc",
+    ".vimperatorrc": "~/.vimperatorrc"
+  },
+  "linux": {
+    ".dircolors": "~/.dircolors"
+  }
+}
+

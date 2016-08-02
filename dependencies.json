@@ -1,0 +1,5 @@
+{
+  "darwin": [
+    "reattach-to-user-namespace"
+  ]
+}
