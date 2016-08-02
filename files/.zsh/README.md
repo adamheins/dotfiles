@@ -14,10 +14,6 @@ manage the common and local directories, respectively. These are sourced by the
 
 The common and local directories each (optionally) contain the following:
 * tps: Third-party software, often stored in git submodules.
-* exe: Executable files.
+* tools: Executables. Further divided into util (miscellaneous tools) and
+  install (scripts to install various programs).
 * scripts: Shell scripts which are sourced on startup.
-
-The exe directory is further divided into recipes and util. Util are executable
-scripts for miscellaneous utility tasks. Recipes, on the other hand, are for
-software that should be installed on the system. This software may require
-extra steps to install, such as compilation.
