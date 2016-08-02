@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
 
+# Needed to print() errors if using Python 2.
+from __future__ import print_function
+
 import json
 import os
 import platform
