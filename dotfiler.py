@@ -27,21 +27,26 @@ class Version(object):
 
 
 MIN_PYTHON_VERSION = Version(3, 4)
-BACKUPS_PATH = os.path.realpath('./backups')
-FILES_PATH = os.path.realpath('./files')
 
+BACKUPS_DIR_PATH = os.path.realpath('./backups')
+FILES_DIR_PATH = os.path.realpath('./files')
+CONFIG_DIR_PATH = os.path.realpath('./config')
+
+LINKS_FILE_PATH = os.path.join(CONFIG_DIR_PATH, 'links.json')
+DEPS_FILE_PATH = os.path.join(CONFIG_DIR_PATH, 'dependencies.json')
+NEXT_STEPS_FILE_PATH = os.path.join(CONFIG_DIR_PATH, 'next.txt')
 
 class Backup(object):
     ''' A backup of files being replaced by running the dotfiler. '''
     def __init__(self):
         timestamp = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
         self.name = '-'.join(['backup', timestamp])
-        self.path = os.path.join(BACKUPS_PATH, self.name)
+        self.path = os.path.join(BACKUPS_DIR_PATH, self.name)
 
     def touch(self):
         ''' Create the backup directory. '''
-        if not os.path.isdir(BACKUPS_PATH):
-            os.mkdir(BACKUPS_PATH)
+        if not os.path.isdir(BACKUPS_DIR_PATH):
+            os.mkdir(BACKUPS_DIR_PATH)
         os.mkdir(self.path)
 
     def move_to(self, path):
@@ -58,7 +63,12 @@ class Backup(object):
 
 def missing_dependencies():
     ''' Generate a list of missing dependencies required for dotfile set up. '''
-    with open('dependencies.json', 'r') as f:
+
+    # If there's no dependencies file, assume there aren't any dependencies.
+    if not os.path.isfile(DEPS_FILE_PATH):
+        return []
+
+    with open(DEPS_FILE_PATH, 'r') as f:
         deps = json.load(f)
 
     missing_deps = []
@@ -84,7 +94,7 @@ def make_links(items, backup=None, verbose=False):
     for src, dest in items.items():
         msg = 'Symlinking {} to {}.'.format(src, dest)
 
-        src = os.path.join(FILES_PATH, src)
+        src = os.path.join(FILES_DIR_PATH, src)
         dest = os.path.expanduser(dest)
 
         # Create necessary directory structure before creating the symlink.
@@ -123,7 +133,11 @@ def main():
             print(dep)
         return 1
 
-    with open('links.json', 'r') as f:
+    if not os.path.isfile(LINKS_FILE_PATH):
+        print('Links file not found; nothing to do.')
+        return 1
+
+    with open(LINKS_FILE_PATH, 'r') as f:
          links = json.load(f)
 
     # Create a backup directory.
@@ -143,6 +157,11 @@ def main():
     if backup.empty():
         print('Nothing backed up. Removing {}.'.format(backup.name))
         backup.remove()
+
+    if os.path.isfile(NEXT_STEPS_FILE_PATH):
+        with open(NEXT_STEPS_FILE_PATH, 'r') as f:
+            next_steps = f.read().strip()
+        print('\n' + next_steps)
 
 
 if __name__ == '__main__':
