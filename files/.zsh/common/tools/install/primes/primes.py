@@ -35,18 +35,23 @@ if upper_bound < lower_bound:
 lower_bound = max(2, lower_bound)
 upper_bound = max(2, upper_bound)
 
-nums = [True for _ in xrange(upper_bound + 1)]
+nums = [0 for _ in xrange(upper_bound + 1)]
 
 for i in xrange(2, int(math.ceil(math.sqrt(upper_bound + 1)))):
-    if nums[i]:
+    if nums[i] == 0:
         for j in xrange(i * i, upper_bound + 1, i):
-            nums[j] = False
+            nums[j] = i
 
 found_primes = False
 for i in xrange(lower_bound, upper_bound + 1):
-    if nums[i]:
+    if nums[i] == 0:
         found_primes = True
         print(i)
+
+# Print out the lowest divisor if we're looking at a single number and its not
+# prime.
+if lower_bound == upper_bound and not found_primes:
+    print('/{}'.format(nums[lower_bound]))
 
 # If no primes are found, exit with an error.
 if not found_primes:

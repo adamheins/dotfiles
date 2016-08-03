@@ -58,8 +58,8 @@ findn() {
   find . -name "$1"
 }
 
-# Find by name, but only part of the name is required.
-findr() {
+# Find by substring: only part of the name is required.
+finds() {
   find . -name "*$1*"
 }
 
