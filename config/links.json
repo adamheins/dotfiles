@@ -3,7 +3,6 @@
     ".zsh": "~/.zsh",
     ".zshrc": "~/.zshrc",
 
-    ".gitconfig": "~/.gitconfig",
     ".gitignore": "~/.gitignore",
 
     ".vimrc": "~/.vimrc",
