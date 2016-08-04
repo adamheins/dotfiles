@@ -34,9 +34,13 @@ FILES_DIR_PATH = os.path.realpath('./files')
 CONFIG_DIR_PATH = os.path.realpath('./config')
 TOOLS_DIR_PATH = os.path.realpath('./tools')
 
-LINKS_FILE_PATH = os.path.join(CONFIG_DIR_PATH, 'links.json')
-DEPS_FILE_PATH = os.path.join(CONFIG_DIR_PATH, 'dependencies.json')
-NEXT_STEPS_FILE_PATH = os.path.join(CONFIG_DIR_PATH, 'next.txt')
+LINKS_FILE_NAME = 'links.json'
+DEPS_FILE_NAME = 'dependencies.json'
+NEXT_STEPS_FILE_NAME = 'next.json'
+
+LINKS_FILE_PATH = os.path.join(CONFIG_DIR_PATH, LINKS_FILE_NAME)
+DEPS_FILE_PATH = os.path.join(CONFIG_DIR_PATH, DEPS_FILE_NAME)
+NEXT_STEPS_FILE_PATH = os.path.join(CONFIG_DIR_PATH, NEXT_STEPS_FILE_NAME)
 
 class Backup(object):
     ''' A backup of files being replaced by running the dotfiler. '''
@@ -63,16 +67,8 @@ class Backup(object):
         ''' Delete the backup. '''
         shutil.rmtree(self.path)
 
-def missing_dependencies():
+def missing_dependencies(deps, system):
     ''' Generate a list of missing dependencies required for dotfile set up. '''
-
-    # If there's no dependencies file, assume there aren't any dependencies.
-    if not os.path.isfile(DEPS_FILE_PATH):
-        return []
-
-    with open(DEPS_FILE_PATH, 'r') as f:
-        deps = json.load(f)
-
     missing_deps = []
 
     # System-independent dependencies.
@@ -82,7 +78,6 @@ def missing_dependencies():
                 missing_deps.append(dep)
 
     # System-dependent dependencies.
-    system = platform.system().lower()
     if system in deps.keys():
         for dep in deps[system]:
             if not shutil.which(dep):
@@ -119,6 +114,14 @@ def make_links(items, backup=None, verbose=False):
             print(msg)
 
 
+def run_next_step(path):
+    ''' Run a script specified by the next steps file. '''
+    print('Running {}...'.format(path), end='')
+    path = os.path.join(TOOLS_DIR_PATH, path)
+    subprocess.call([path])
+    print(' done.')
+
+
 def main():
     # Check Python version is compatible.
     version = Version(sys.version_info.major, sys.version_info.minor)
@@ -127,49 +130,54 @@ def main():
                 .format(version, MIN_PYTHON_VERSION))
         return 1
 
-    # Check dependencies.
-    missing_deps = missing_dependencies()
-    if len(missing_deps) > 0:
-        print('Error: The following dependencies are missing:')
-        for dep in missing_deps:
-            print(dep)
-        return 1
-
-    # TODO: can't exit with next steps stuff to do
-    if not os.path.isfile(LINKS_FILE_PATH):
-        print('Links file not found; nothing to do.')
-        return 1
-
-    with open(LINKS_FILE_PATH, 'r') as f:
-         links = json.load(f)
-
-    # Create a backup directory.
-    backup = Backup()
-    backup.touch()
-
-    # System-independent symlinks.
-    if 'all' in links.keys():
-        make_links(links['all'], backup=backup, verbose=True)
-
-    # System-dependent symlinks.
     system = platform.system().lower()
-    if system in links.keys():
-        make_links(links[system], backup=backup, verbose=True)
 
-    # Remove backup if it is empty to avoid polluting the backups directory.
-    if backup.empty():
-        print('Nothing backed up. Removing {}.'.format(backup.name))
-        backup.remove()
+    # Check dependencies.
+    if os.path.isfile(DEPS_FILE_PATH):
+        with open(DEPS_FILE_PATH, 'r') as f:
+            deps = json.load(f)
+        missing_deps = missing_dependencies(deps, system)
+        if len(missing_deps) > 0:
+            print('Error: The following dependencies are missing:')
+            for dep in missing_deps:
+                print(dep)
+            return 1
 
+    # Make symlinks.
+    if os.path.isfile(LINKS_FILE_PATH):
+        with open(LINKS_FILE_PATH, 'r') as f:
+             links = json.load(f)
+
+        # Create a backup directory.
+        backup = Backup()
+        backup.touch()
+
+        # System-independent symlinks.
+        if 'all' in links.keys():
+            make_links(links['all'], backup=backup, verbose=True)
+
+        # System-dependent symlinks.
+        if system in links.keys():
+            make_links(links[system], backup=backup, verbose=True)
+
+        # Remove backup if it is empty to avoid polluting the backups directory.
+        if backup.empty():
+            print('\nNothing backed up.')
+            backup.remove()
+    else:
+        print('No {} file not found.'.format(LINKS_FILE_NAME))
+
+    # Run additional configuration.
     if os.path.isfile(NEXT_STEPS_FILE_PATH):
         print('')
         with open(NEXT_STEPS_FILE_PATH, 'r') as f:
-            next_steps = [line.strip() for line in f.readlines()]
-        for step in next_steps:
-            print('Running {}...'.format(step), end='')
-            path = os.path.join(TOOLS_DIR_PATH, step)
-            subprocess.call([path])
-            print(' done.')
+            next_steps = json.load(f)
+        if 'all' in next_steps.keys():
+            for step in next_steps['all']:
+                run_next_step(step)
+        if system in next_steps.keys():
+            for step in next_steps[system]:
+                run_next_step(step)
 
 
 if __name__ == '__main__':
