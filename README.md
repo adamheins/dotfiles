@@ -35,4 +35,4 @@ config/dependencies.json file.
 ## Running shell scripts
 The dotfiler is also capable of running shell scripts as its final step, to
 further configure the system. The shell scripts are assumed to reside somewhere
-in the tools directory, and should be listed in the next.txt file.
+in the tools directory, and should be listed in the next.json file.

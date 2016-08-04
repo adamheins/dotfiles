@@ -6,11 +6,6 @@ if [ -d $local/comp ]; then
   fpath=($fpath $local/comp)
 fi
 
-# Binaries.
-if [ -d $local/bin ]; then
-  export PATH=$local/bin:$PATH
-fi
-
 # Scripts to be sourced.
 if [ -d $local/scripts ]; then
   for f in $local/scripts/*.sh(.N); do source "$f"; done

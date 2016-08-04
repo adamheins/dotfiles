@@ -13,7 +13,6 @@ manage the common and local directories, respectively. These are sourced by the
 .zshrc.
 
 The common and local directories each (optionally) contain the following:
-* tps: Third-party software, often stored in git submodules.
-* tools: Executables. Further divided into util (miscellaneous tools) and
-  install (scripts to install various programs).
+* comp: zsh tab-completion scripts.
 * scripts: Shell scripts which are sourced on startup.
+* tps: Third-party software, often stored in git submodules.
