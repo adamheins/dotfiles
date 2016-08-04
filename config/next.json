@@ -1,0 +1,5 @@
+{
+  "all": [
+    "util/gen-git-config.sh"
+  ]
+}

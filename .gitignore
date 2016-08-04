@@ -1,6 +1,5 @@
-*.swp
-backup
-.backup*
-.DS_Store
-*.tar.gz
+# Backup archives.
+backup*
+
+# Local-only files.
 local/

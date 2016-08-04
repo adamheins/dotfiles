@@ -7,6 +7,7 @@ import json
 import os
 import platform
 import shutil
+import subprocess
 import sys
 
 from datetime import datetime
@@ -31,6 +32,7 @@ MIN_PYTHON_VERSION = Version(3, 4)
 BACKUPS_DIR_PATH = os.path.realpath('./backups')
 FILES_DIR_PATH = os.path.realpath('./files')
 CONFIG_DIR_PATH = os.path.realpath('./config')
+TOOLS_DIR_PATH = os.path.realpath('./tools')
 
 LINKS_FILE_PATH = os.path.join(CONFIG_DIR_PATH, 'links.json')
 DEPS_FILE_PATH = os.path.join(CONFIG_DIR_PATH, 'dependencies.json')
@@ -133,6 +135,7 @@ def main():
             print(dep)
         return 1
 
+    # TODO: can't exit with next steps stuff to do
     if not os.path.isfile(LINKS_FILE_PATH):
         print('Links file not found; nothing to do.')
         return 1
@@ -159,9 +162,14 @@ def main():
         backup.remove()
 
     if os.path.isfile(NEXT_STEPS_FILE_PATH):
+        print('')
         with open(NEXT_STEPS_FILE_PATH, 'r') as f:
-            next_steps = f.read().strip()
-        print('\n' + next_steps)
+            next_steps = [line.strip() for line in f.readlines()]
+        for step in next_steps:
+            print('Running {}...'.format(step), end='')
+            path = os.path.join(TOOLS_DIR_PATH, step)
+            subprocess.call([path])
+            print(' done.')
 
 
 if __name__ == '__main__':

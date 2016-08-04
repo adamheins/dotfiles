@@ -23,5 +23,16 @@ then creates symlinks to the dotfiles in this repo.
 
 ## Add a dotfile
 1. Move the dotfile from its current location to `~/.dotfiles/files/`.
-2. Add the file to the links.json file.
+2. Add the file to the config/links.json file.
 3. Run the dotfiler.py script to create the symlink.
+
+## Managing Dependencies
+There may be dependencies that must be installed on the system before the
+dotfiler is run. These would be programs without which the system would be
+unusable with the dotfile set up. These programs should be added to the
+config/dependencies.json file.
+
+## Running shell scripts
+The dotfiler is also capable of running shell scripts as its final step, to
+further configure the system. The shell scripts are assumed to reside somewhere
+in the tools directory, and should be listed in the next.txt file.
