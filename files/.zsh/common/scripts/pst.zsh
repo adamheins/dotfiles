@@ -12,7 +12,7 @@ cp() {
     if [ "$first_char" != "-" ]; then
       [ ! -d $PST_DIR ] && mkdir $PST_DIR
       setopt localoptions rmstarsilent
-      rm -rf $PST_DIR/*(.N)
+      rm -rf $PST_DIR/*
       cp -r "$1" "$PST_DIR/$1"
       return
     fi
@@ -29,7 +29,7 @@ mv() {
     if [ "$first_char" != "-" ]; then
       [ ! -d $PST_DIR ] && mkdir $PST_DIR
       setopt localoptions rmstarsilent
-      rm -rf $PST_DIR/*(.N)
+      rm -rf $PST_DIR/*
       mv "$1" "$PST_DIR/$1"
       return
     fi
@@ -55,7 +55,7 @@ pst() {
       ;;
       "-c"|"--clean")
         setopt localoptions rmstarsilent
-        rm -rf $PST_DIR/*(.N)
+        rm -rf $PST_DIR/*
       ;;
       *) cp -r $PST_DIR/* "$1" ;;
     esac
