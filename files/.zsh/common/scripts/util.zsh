@@ -34,10 +34,18 @@ os() {
 # Move all files in a directory to another directory in that directory.
 # Creates the directory if it does not exist.
 nest() {
+  if [ -z $1 ]; then
+    echo "error: must specify directory name to nest files under"
+    return 1
+  fi
+
+  # Create the destination directory if it does not already exist.
+  if [ ! -d "$1" ]; then
+    mkdir -p "$1"
+  fi
+
+  # Move everything into the destination directory.
   for f in $(pwd)/*; do
-    if [ ! -d "$1" ]; then
-      mkdir "$1"
-    fi
     if [ $(basename $f) != "$1" ]; then
       mv "$f" "$1"
     fi

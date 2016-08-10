@@ -14,3 +14,6 @@ gdbserver_log
 
 # python
 *.pyc
+
+# c
+a.out
