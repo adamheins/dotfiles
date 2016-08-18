@@ -47,6 +47,8 @@ if [ -z "$SSH_CLIENT" ] || [ -z "$SSH_TTY" ]; then
   if [[ $- == *i* ]] && [ -z "$TMUX" ]; then
     if ! tmux list-sessions; then
       tmux -2
+    else
+      echo "Tmux sessions exist. Run 'tmux attach-session -t <num>' to restore one."
     fi
   fi
 fi
