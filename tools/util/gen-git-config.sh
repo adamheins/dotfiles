@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # Get rid of what's already there.
-rm ~/.gitconfig
+[ -f ~/.gitconfig ] && rm ~/.gitconfig
 
 # Generate the global git config file.
 git config --global push.default "simple"
