@@ -63,12 +63,12 @@ unnest() {
 
 # Find by name.
 findn() {
-  find . -name "$1"
+  find . -name "$1" "${@:2}"
 }
 
 # Find by substring: only part of the name is required.
 finds() {
-  find . -name "*$1*"
+  find . -name "*$1*" "${@:2}"
 }
 
 # Symlinking without the hassle of non-relative paths.

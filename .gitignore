@@ -1,5 +1,2 @@
 # Backup archives.
 backup*
-
-# Local-only files.
-local/
