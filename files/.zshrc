@@ -54,7 +54,7 @@ export PS1='%F{11}%n@%m %F{245}%~ %F{11}$ %F{250}'
 function zle-line-init zle-keymap-select {
   case $KEYMAP in
     vicmd) export PS1='%F{139}%n@%m %F{245}%~ %F{139}$ %F{250}' ;;
-    viins|main) export PS1='%F{11}%n@%m %F{245}%~ %F{11}$ %F{250}' ;;
+    viins|main) export PS1='%F{222}%n@%m %F{245}%~ %F{222}$ %F{250}' ;;
   esac
   zle reset-prompt
 }
