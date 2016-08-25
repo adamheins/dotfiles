@@ -24,12 +24,22 @@ restart() {
 }
 
 # Shortcut to even out the current tmux layout.
-even() {
+layout() {
   [ -z $TMUX ] && return 1
-  [ -z $1 ] && return 1
+
+  local usage_text="usage: layout {h|v|t}"
+
+  if [ -z $1 ]; then
+    echo $usage_text
+    return 1
+  fi
+
   case "$1" in
-    "h"|"-h"|"horizontal") tmux select-layout even-horizontal ;;
-    "v"|"-v"|"vertical") tmux select-layout even-vertical ;;
+    "h"|"horizontal") tmux select-layout even-horizontal ;;
+    "v"|"vertical")   tmux select-layout even-vertical ;;
+    "t"|"tiled")      tmux select-layout tiled ;;
+    "-h"|"--help") echo $usage_text ;;
+    *) echo "unrecognized argument '$1'" ;;
   esac
 }
 
