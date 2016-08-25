@@ -5,6 +5,10 @@ mkcd() {
   mkdir -p "$@" && cd "$@"
 }
 
+mkdate() {
+  mkdir $(date +%F)
+}
+
 # Run a command an arbitrary number of times.
 # (do x times)
 dox() {
@@ -106,4 +110,23 @@ zipdir() {
 # Tar a directory.
 tardir() {
   tar -zcvf "$1".tar.gz "$1"
+}
+
+# Shred a file.
+shredf() {
+  if [ -z $1 ]; then
+    echo "usage: shredf file"
+    return 1
+  fi
+  shred -fuz $1
+}
+
+# Shred a directory.
+shreddir() {
+  if [ -z $1 ]; then
+    echo "usage: shreddir directory"
+    return 1
+  fi
+  find $1 -type f -print0 | xargs -0 shred -fuz
+  rm -rf $1
 }

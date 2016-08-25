@@ -70,8 +70,8 @@ if [ -f ~/.zsh/common.sh ]; then
 fi
 
 # Configuration local to this system.
-if [ -f ~/.zsh/.localrc ]; then
-  source ~/.zsh/.localrc
+if [ -f ~/.zsh/local.sh ]; then
+  source ~/.zsh/local.sh
 fi
 
 # ============================== Autocompletion ============================== #

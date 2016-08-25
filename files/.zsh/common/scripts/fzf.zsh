@@ -12,7 +12,7 @@ fi
 [[ $- == *i* ]] && source "/usr/local/opt/fzf/shell/completion.zsh" 2> /dev/null
 
 # Key bindings.
-source "/usr/local/opt/fzf/shell/key-bindings.zsh"
+[ -f "/usr/local/opt/fzf/shell/key-bindings.zsh" ] && source "/usr/local/opt/fzf/shell/key-bindings.zsh"
 
 # This is the same functionality as fzf's ctrl-t, except that the file or
 # directory selected is now automatically cd'ed or opened, respectively.
