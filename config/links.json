@@ -12,9 +12,11 @@
 
     ".tmux.conf": "~/.tmux.conf",
     ".tmux": "~/.tmux",
+
     ".editrc": "~/.editrc",
     ".inputrc": "~/.inputrc",
-    ".vimperatorrc": "~/.vimperatorrc"
+    ".vimperatorrc": "~/.vimperatorrc",
+    ".f": "~/.f"
   },
   "linux": {
     ".dircolors": "~/.dircolors"
