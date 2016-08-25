@@ -65,8 +65,8 @@ zle -N zle-keymap-select
 # ================================= External ================================= #
 
 # Configuration common on all systems.
-if [ -f ~/.zsh/.commonrc ]; then
-  source ~/.zsh/.commonrc
+if [ -f ~/.zsh/common.sh ]; then
+  source ~/.zsh/common.sh
 fi
 
 # Configuration local to this system.

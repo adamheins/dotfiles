@@ -8,6 +8,6 @@ if [ -d $common/scripts ]; then
 fi
 
 # Plugins.
-if [ -d $common/tps/zsh-syntax-highlighting ]; then
-  source $common/tps/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh
+if [ -d $common/plugins/zsh-syntax-highlighting ]; then
+  source $common/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh
 fi
