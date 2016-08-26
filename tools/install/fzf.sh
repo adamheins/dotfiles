@@ -11,7 +11,7 @@ fi
 sudo chown -R $(whoami) "$FZF_INSTALL_PATH"
 
 # Clone fzf into the install directory.
-git clone git@github.com:junegunn/fzf.git "$FZF_INSTALL_PATH"
+git clone https://github.com/junegunn/fzf.git "$FZF_INSTALL_PATH"
 
 # Move fzf binary into the bin directory.
 mv "$FZF_INSTALL_PATH"/fzf "$FZF_INSTALL_PATH"/bin
