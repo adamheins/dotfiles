@@ -1,6 +1,7 @@
 # Todo list utilities.
 
-TODO_LIST_PATH=~/.todo/todo.md
+TODO_LIST_DIR=~/.todo
+TODO_LIST_PATH=$TODO_LIST_DIR/todo.md
 REMOTE=adam@adamheins.com
 
 todo() {
@@ -10,10 +11,19 @@ todo() {
   fi
 
   case "$1" in
-    "-l"|"--local") vim "$TODO_LIST_PATH" ;;
-    "-r"|"--remote") vim "scp://$REMOTE//$TODO_LIST_PATH" ;;
-    "--pull") scp "$REMOTE:$TODO_LIST_PATH" "$TODO_LIST_PATH" ;;
-    "--push") scp "$TODO_LIST_PATH" "$REMOTE:$TODO_LIST_PATH" ;;
+    "-l"|"--local") $EDITOR "$TODO_LIST_PATH" ;;
+    "-r"|"--remote") $EDITOR "scp://$REMOTE//$TODO_LIST_PATH" ;;
+    "--pull")
+      [ ! -d $TODO_LIST_DIR ] && mkdir $TODO_LIST_DIR
+      scp "$REMOTE:$TODO_LIST_PATH" "$TODO_LIST_PATH"
+      ;;
+    "--push")
+      if [ ! -f $TODO_LIST_PATH ]; then
+        echo "todo: cannot push; local todo list not found."
+        return 1
+      fi
+      scp "$TODO_LIST_PATH" "$REMOTE:$TODO_LIST_PATH"
+      ;;
     "-h"|"--help")
       echo "a todo list utility"
       echo ""
