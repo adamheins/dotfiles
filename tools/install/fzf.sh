@@ -2,9 +2,22 @@
 
 FZF_INSTALL_PATH=/usr/local/opt/fzf
 
+ruby_location="$(which ruby)"
+
+# fzf depends on ruby, and building the required gems also depends on ruby-dev.
+if [ ! $ruby_location ]; then
+  echo "Error: ruby is not installed."
+  echo "Make sure you also install ruby-dev."
+  echo "Aborting."
+  exit 1
+fi
+
+# Ruby gem dependencies.
+gem install curses
+
 # Create directory for fzf if it doesn't exist.
 if [ ! -d "$FZF_INSTALL_PATH" ]; then
-  sudo mkdir /usr/local/opt/fzf
+  sudo mkdir -p /usr/local/opt/fzf
 fi
 
 # Change ownership of the directory to current user.
