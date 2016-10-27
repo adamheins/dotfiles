@@ -1,5 +1,6 @@
 {
   "all": [
-    "util/gen-git-config.sh"
+    "util/gen-git-config.sh",
+    "util/link-vim-aliases.sh"
   ]
 }
