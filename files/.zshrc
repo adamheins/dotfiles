@@ -49,7 +49,7 @@ stty -ixon
 
 # ================================== Prompt ================================== #
 
-export PS1='%F{11}%n@%m %F{245}%~ %F{11}$ %F{250}'
+export PS1='%F{222}%n@%m %F{245}%~ %F{222}$ %F{250}'
 
 # Change prompt based on vi mode.
 function zle-line-init zle-keymap-select {

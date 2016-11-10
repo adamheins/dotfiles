@@ -1,3 +1,9 @@
 #!/bin/sh
-mkdir -p ~/.vim/after/plugin
-ln -s ~/.vim/aliases.vim ~/.vim/after/plugin/aliases.vim
+
+symdir=~/.vim/after/plugin
+sympath=$symdir/aliases.vim
+filepath=~/.vim/aliases.vim
+
+mkdir -p $symdir
+[ -f $sympath ] && rm $sympath
+ln -s $filepath $sympath
