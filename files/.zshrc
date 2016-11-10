@@ -5,6 +5,7 @@
 
 # Store the name of the OS globally.
 export OS=$(uname)
+export GOPATH=/usr/local/share/go
 
 # ================================= General ================================== #
 
