@@ -3,14 +3,19 @@
 
 # ================================= General ================================== #
 
-# vim
-alias v="nvim"
-alias vim="nvim"
+# Vim.
+alias v="vim"
 
+# Terminal.
 alias cl="clear"
 alias x="exit"
 alias lo="logout"
-alias psg="ps aux | grep"
+
+# Quickly make a webserver out of the current directory.
+alias serve="python -m SimpleHTTPServer"
+
+# Search for running programs.
+alias psg="ps aux | grep -i"
 
 # Install debian packages.
 alias deb="sudo dpkg -i"
@@ -40,32 +45,15 @@ alias unhex="base 16:10"
 alias -- +x="chmod +x"
 alias -- -x="chmod -x"
 
-# Convert html files to pdfs.
-alias htmltopdf=wkhtmltopdf
-
-# Get the duration of an mp3 file.
-alias mp3len="mp3info -p \"%m:%s\\n\""
-
-# Use foxit for PDFs.
-alias pdf="d foxit"
+# If safe-rm is installed, use that.
+if command -v safe-rm >/dev/null 2>&1; then
+  alias rm=safe-rm
+fi
 
 # Decrypt files to stdout.
 alias show="gpg --decrypt --quiet --batch"
 
-# Dict
-alias syn=synonym
-
-m() {
-  cd ~/dev/lang/matlab
-  matlab
-}
-
 # =============================== Date & Time ================================ #
-
-# Calendar shortcuts.
-alias today="pal -d today"
-alias tomorrow="pal -d tomorrow"
-alias week="pal -r 7"
 
 # Today's date and time, in a nice format.
 alias now="date +%F\ %T"
@@ -88,3 +76,7 @@ case $OS in
 esac
 alias ll="ls -alF"
 alias la="ls -A"
+
+case $OS in
+  Linux) alias open="xdg-open" ;;
+esac

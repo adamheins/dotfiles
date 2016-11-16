@@ -20,7 +20,7 @@ _update_tmux_status() {
 # Restart the current tmux-pane anew.
 restart() {
   [ -z $TMUX ] && return 1
-  tmux restart-pane -k
+  tmux respawn-pane -k
 }
 
 # Shortcut to even out the current tmux layout.
