@@ -12,7 +12,7 @@ cp() {
     if [ "$first_char" != "-" ]; then
       [ ! -d $PST_DIR ] && mkdir $PST_DIR
       setopt localoptions rmstarsilent
-      rm -rf $PST_DIR/*(N)
+      stat "$1" >/dev/null 2>&1 && rm -rf $PST_DIR/*(N)
       cp -r "$1" "$PST_DIR/$1"
       return
     fi
@@ -29,7 +29,7 @@ mv() {
     if [ "$first_char" != "-" ]; then
       [ ! -d $PST_DIR ] && mkdir $PST_DIR
       setopt localoptions rmstarsilent
-      rm -rf $PST_DIR/*(N)
+      stat "$1" >/dev/null 2>&1 && rm -rf $PST_DIR/*(N)
       mv "$1" "$PST_DIR/$1"
       return
     fi
