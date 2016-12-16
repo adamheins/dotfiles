@@ -53,6 +53,12 @@ fi
 # Decrypt files to stdout.
 alias show="gpg --decrypt --quiet --batch"
 
+# Python package source code locations.
+alias p2dist="cd /usr/local/lib/python2.7/dist-packages"
+alias p3dist="cd /usr/local/lib/python3.5/dist-packages"
+alias p2lib="cd /usr/lib/python2.7"
+alias p3lib="cd /usr/lib/python3.5"
+
 # =============================== Date & Time ================================ #
 
 # Today's date and time, in a nice format.
