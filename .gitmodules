@@ -4,3 +4,6 @@
 [submodule "files/.tmux/plugins/tmux-scroll-copy-mode"]
 	path = files/.tmux/plugins/tmux-scroll-copy-mode
 	url = git@github.com:nhdaly/tmux-scroll-copy-mode
+[submodule "files/.zsh/common/plugins/zsh-syntax-highlighting"]
+	path = files/.zsh/common/plugins/zsh-syntax-highlighting
+	url = git@github.com:adamheins/zsh-syntax-highlighting.git
