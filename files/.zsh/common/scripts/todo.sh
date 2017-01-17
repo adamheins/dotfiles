@@ -38,6 +38,4 @@ todo() {
   esac
 }
 
-alias tl="todo -l"
-alias tr="todo -r"
 alias t="todo"
