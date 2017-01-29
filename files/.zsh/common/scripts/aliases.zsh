@@ -5,6 +5,7 @@
 
 # Vim.
 alias v="vim"
+alias vim="nvim"
 
 # Terminal.
 alias cl="clear"
