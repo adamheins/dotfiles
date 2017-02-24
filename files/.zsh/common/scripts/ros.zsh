@@ -1,7 +1,5 @@
 # General ROS configuration.
 
-source /opt/ros/indigo/setup.zsh
-
 catkin() {
   local cur_dir=$(pwd)
   local catkin_dir=$(catkin_toplevel)
