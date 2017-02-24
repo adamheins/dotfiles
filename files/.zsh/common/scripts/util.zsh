@@ -130,3 +130,12 @@ shreddir() {
   find $1 -type f -print0 | xargs -0 shred -fuz
   rm -rf $1
 }
+
+# Shortcut to find and replace in a file.
+re() {
+  if [ -z $3 ]; then
+    echo "usage: re find replace file"
+    return 1
+  fi
+  sed -i "s/$1/$2/g" $3
+}
