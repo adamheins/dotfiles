@@ -31,7 +31,7 @@ alias update="sudo apt-get update && sudo apt-get upgrade"
 alias untar="tar -xf"
 
 # Quick C compilation.
-alias c="gcc -std=c99"
+alias cc="gcc -std=c99"
 
 # Cscope aliases.
 alias cs="cscope -d"
@@ -69,6 +69,9 @@ alias now="date +%F\ %T"
 
 # Start the calculator with math support.
 alias bc="bc -l"
+
+# Use insect as a calculator. npm install -g insect
+alias calc="insect"
 
 # Make cd follow symlinks by default.
 alias cd="cd -P"

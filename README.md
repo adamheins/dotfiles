@@ -11,6 +11,12 @@ the following command:
 chsh -s /bin/zsh
 ```
 
+If you don't have `zsh` installed yet, do:
+
+```sh
+sudo apt-get install zsh
+```
+
 Then restart your shell session.
 
 ## Install
@@ -60,6 +66,18 @@ Open neovim and initialize plugins:
 
 ```
 :PlugInstall
+```
+
+## Further Provisioning
+```sh
+# Install NodeJS. This is needed as a runtime for other utilities.
+sudo apt-get install nodejs
+
+# Install safe-rm.
+sudo apt-get install safe-rm
+
+# Install insect scientific calculator.
+sudo npm install -g insect
 ```
 
 ## User Directories
