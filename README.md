@@ -16,9 +16,7 @@ Then restart your shell session.
 ## User Directories
 Change the `$HOME` directory structure by editing `~/.config/user-dirs.dirs`.
 
-## Dotfiler
-
-### Install
+## Install
 Get set up with these dotfiles:
 
 ```sh
@@ -29,6 +27,33 @@ cd ~/.dotfiles
 
 The dotfiler.py script backs up all of the local machine's current dotfiles and
 then creates symlinks to the dotfiles in this repo.
+
+### Brew
+The `dotfiler.py` script will automatically install the brew package manager.
+Now you need to use it to install some programs:
+
+```sh
+brew install tmux
+
+brew tap neovim/neovim
+brew install neovim
+```
+
+### Tmux
+Initialize the Tmux Plugin Manager:
+
+```sh
+tpm init
+```
+
+### Vim
+Open (neo)vim and initialize plugins:
+
+```
+:PlugInstall
+```
+
+## Dotfiler
 
 ### Add a dotfile
 1. Move the dotfile from its current location to `~/.dotfiles/files/`.
