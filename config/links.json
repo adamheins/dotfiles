@@ -11,7 +11,6 @@
     ".vim/aliases.vim": "~/.vim/after/plugin/aliases.vim",
 
     ".tmux.conf": "~/.tmux.conf",
-    ".tmux": "~/.tmux",
 
     ".editrc": "~/.editrc",
     ".inputrc": "~/.inputrc",
