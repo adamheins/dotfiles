@@ -102,9 +102,9 @@ synonym() {
   dict -d moby-thesaurus "$1"
 }
 
-# Zip a directory. Exclude git directory.
+# Zip a directory.
 zipdir() {
-  zip -r "$1".zip "$1" -x "*.git*"
+  zip -r "$1".zip "$1" -x "*.git*" -x "*~" -x "*.pyc"
 }
 
 # Tar a directory.
