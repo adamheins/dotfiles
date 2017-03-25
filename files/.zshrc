@@ -66,16 +66,24 @@ zle -N zle-keymap-select
 # ================================= External ================================= #
 
 # Configuration common on all systems.
-if [ -f ~/.zsh/common.sh ]; then
-  source ~/.zsh/common.sh
+if [ -f ~/.zsh/common.zsh ]; then
+  source ~/.zsh/common.zsh
 fi
 
 # Configuration local to this system.
-if [ -f ~/.zsh/local.sh ]; then
-  source ~/.zsh/local.sh
+if [ -f ~/.zsh/local.zsh ]; then
+  source ~/.zsh/local.zsh
 fi
 
 # ============================== Autocompletion ============================== #
 
 autoload -U compinit
 compinit -D
+
+# ================================= Plugins ================================== #
+
+# Plugins are managed using antigen.
+
+antigen bundle adamheins/zsh-syntax-highlighting
+
+antigen apply
