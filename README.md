@@ -34,6 +34,11 @@ then creates symlinks to the dotfiles in this repo.
 ### Brew
 The `dotfiler.py` script will automatically install the brew package manager.
 
+### Zsh
+The Antigen plugin manager is used for zsh plugins. It is already packaged as
+part of these dotfiles and should automatically install plugins listed in the
+.zshrc upon session startup.
+
 ### Tmux
 Install a recent version:
 
