@@ -1,4 +1,4 @@
-if command -v brew >/dev/null 2>&1; then
+if [ -d ~/.linuxbrew ]; then
   export PATH="$HOME/.linuxbrew/bin:$PATH"
   export MANPATH="$HOME/.linuxbrew/share/man:$MANPATH"
   export INFOPATH="$HOME/.linuxbrew/share/info:$INFOPATH"
