@@ -60,6 +60,10 @@ alias p3dist="cd /usr/local/lib/python3.5/dist-packages"
 alias p2lib="cd /usr/lib/python2.7"
 alias p3lib="cd /usr/lib/python3.5"
 
+# Size of files and directories.
+alias fsize="du -h --apparent-size"
+alias dsize="du -sh --apparent-size"
+
 # =============================== Date & Time ================================ #
 
 # Today's date and time, in a nice format.

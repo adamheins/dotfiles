@@ -134,7 +134,7 @@ shreddir() {
 # Shortcut to find and replace in a file.
 re() {
   if [ -z $3 ]; then
-    echo "usage: re find replace file"
+    echo "usage: re string_to_find string_to_replace file"
     return 1
   fi
   sed -i "s/$1/$2/g" $3
