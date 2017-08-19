@@ -25,7 +25,7 @@ alias deb="sudo dpkg -i"
 alias ff="nohup firefox > /dev/null 2>&1 &"
 
 # Update packages.
-alias update="sudo apt-get update && sudo apt-get upgrade"
+alias update="sudo apt update && sudo apt upgrade"
 
 # Unpack tarballs.
 alias untar="tar -xf"
