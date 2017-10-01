@@ -15,14 +15,8 @@ alias lo="logout"
 # Quickly make a webserver out of the current directory.
 alias serve="python -m SimpleHTTPServer"
 
-# Search for running programs.
-alias psg="ps aux | grep -i"
-
 # Install debian packages.
 alias deb="sudo dpkg -i"
-
-# Web browser.
-alias ff="nohup firefox > /dev/null 2>&1 &"
 
 # Update packages.
 alias update="sudo apt update && sudo apt upgrade"
@@ -63,6 +57,9 @@ alias p3lib="cd /usr/lib/python3.5"
 # Size of files and directories.
 alias fsize="du -h --apparent-size"
 alias dsize="du -sh --apparent-size"
+
+# Easier copying of passwords from password-store.
+alias p="pass show -c"
 
 # =============================== Date & Time ================================ #
 

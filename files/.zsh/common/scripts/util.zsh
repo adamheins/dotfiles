@@ -21,6 +21,7 @@ dox() {
 d() {
   [ -z "$1" ] && return 1
   nohup "$@" >/dev/null 2>&1 &
+  disown
 }
 
 # Print OS information.
@@ -138,4 +139,10 @@ re() {
     return 1
   fi
   sed -i "s/$1/$2/g" $3
+}
+
+# Grep for processes.
+psg() {
+  [ -z "$1" ] && return 1
+  ps aux | grep -v "grep -i $1" | grep -i "$1"
 }
