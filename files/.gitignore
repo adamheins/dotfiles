@@ -19,3 +19,9 @@ gdbserver_log
 
 # c
 a.out
+
+# generic log files
+*.log
+
+# node.js
+node_modules/
