@@ -19,7 +19,7 @@ dox() {
 
 # Run a process as a daemon.
 d() {
-  [ -z "$1" ] && return 1
+  if [ -z "$1" ] && return 1
   nohup "$@" >/dev/null 2>&1 &
   disown
 }
@@ -68,12 +68,14 @@ unnest() {
 
 # Find by name.
 findn() {
-  find . -name "$1" "${@:2}"
+  # Exclude node_modules directories and ignore directions for which I haven't
+  # permissions.
+  find . -name "$1" "${@:2}" -not -path "*/node_modules/*" 2>&1 | grep -v "Permission denied"
 }
 
 # Find by substring: only part of the name is required.
 finds() {
-  find . -name "*$1*" "${@:2}"
+  find . -name "*$1*" "${@:2}" -not -path "*/node_modules/*" 2>&1 | grep -v "Permission denied"
 }
 
 # Symlinking without the hassle of non-relative paths.
