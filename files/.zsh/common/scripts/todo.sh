@@ -1,4 +1,8 @@
 # Todo list utilities.
 
-alias todo="vim ~/.todo/todo.md"
+# Open to-do list.
+alias todo="$EDITOR ~/.todo/todo.md"
 alias t="todo"
+
+# Open scratch pad.
+alias scratch="$EDITOR ~/.todo/scratch.md"

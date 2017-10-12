@@ -3,11 +3,10 @@ if [ ! $(uname) = "Darwin" ] && [ -d ~/.linuxbrew ]; then
   case ":$PATH:" in
     *:$HOME/.linuxbrew/bin:*) ;;
     *)
-      export PATH="$HOME/.linuxbrew/bin:$PATH"
-      export PATH="$HOME/.linuxbrew/sbin:$PATH"
-      export MANPATH="$HOME/.linuxbrew/share/man:$MANPATH"
-      export INFOPATH="$HOME/.linuxbrew/share/info:$INFOPATH"
-      export XDG_DATA_DIRS="/home/adam/.linuxbrew/share:$XDG_DATA_DIRS"
+      export PATH="$PATH:$HOME/.linuxbrew/bin:$HOME/.linuxbrew/sbin"
+      export MANPATH="$MANPATH:$HOME/.linuxbrew/share/man"
+      export INFOPATH="$INFOPATH:$HOME/.linuxbrew/share/info"
+      export XDG_DATA_DIRS="$XDG_DATA_DIRS:/home/adam/.linuxbrew/share"
     ;;
   esac
 fi

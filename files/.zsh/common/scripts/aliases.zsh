@@ -40,11 +40,6 @@ alias unhex="base 16:10"
 alias -- +x="chmod +x"
 alias -- -x="chmod -x"
 
-# If safe-rm is installed, use that.
-if command -v safe-rm >/dev/null 2>&1; then
-  alias rm=safe-rm
-fi
-
 # Decrypt files to stdout.
 alias show="gpg --decrypt --quiet --batch"
 
@@ -80,13 +75,19 @@ alias cd="cd -P"
 # Allow mkdir to create intermediate directories.
 alias mkdir="mkdir -p"
 
-# Aliases for ls.
-case $OS in
-  Darwin) alias ls="ls -G" ;;
-  *) alias ls="ls --color=auto" ;;
-esac
-alias ll="ls -alF"
-alias la="ls -A"
+# If safe-rm is installed, use that.
+if command -v safe-rm >/dev/null 2>&1; then
+  alias rm=safe-rm
+fi
+
+# Prefer exa to ls, if it is installed.
+if command -v exa > /dev/null 2>&1; then
+  alias ls=exa
+  alias la="exa -a"
+else
+  alias ls="ls --color=auto"
+  alias la="ls -A"
+fi
 
 case $OS in
   Linux) alias open="xdg-open" ;;

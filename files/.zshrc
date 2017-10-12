@@ -5,7 +5,6 @@
 
 # Store the name of the OS globally.
 export OS=$(uname)
-export GOPATH=/usr/local/share/go
 
 # ================================= General ================================== #
 
@@ -36,13 +35,6 @@ bindkey -M vicmd '\e' noop
 
 # Fix default delete key behaviour for vi mode.
 bindkey "^?" backward-delete-char
-
-# Custom ls colors.
-if [ $OS = "Darwin" ]; then
-  export LSCOLORS="gxfxcxdxbxegedabagacad"
-else
-  eval "`dircolors ~/.dircolors`"
-fi
 
 # Turn off legacy behaviour of stopping/resuming tty I/O.
 stty -ixon

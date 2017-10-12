@@ -13,7 +13,11 @@ cp() {
       [ ! -d $PST_DIR ] && mkdir $PST_DIR
       setopt localoptions rmstarsilent
       stat "$1" >/dev/null 2>&1 && rm -rf $PST_DIR/*(N)
-      cp -r "$1" "$PST_DIR/$1"
+      if [ -d "$1" ]; then
+        cp -r "$1" "$PST_DIR/$1"
+      else
+        cp "$1" "$PST_DIR/$1"
+      fi
       return
     fi
   fi
