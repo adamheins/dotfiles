@@ -7,20 +7,32 @@ PST_DIR=$HOME/.pst
 # passed. If that is the case, it copies the file or directory for later
 # pasting.
 cp() {
+  # If only a single non-option argument was passed to cp, this special version
+  # of cp is used.
   if [ -n $1 ] && [ -z $2 ]; then
     first_char=$(echo "$1" | cut -c1)
     if [ "$first_char" != "-" ]; then
+
+      # Create the pst directory if it doesn't exist.
       [ ! -d $PST_DIR ] && mkdir $PST_DIR
+
+      # Remove current contents of the pst directory.
       setopt localoptions rmstarsilent
       stat "$1" >/dev/null 2>&1 && rm -rf $PST_DIR/*(N)
+
+      # Copy the src to the dest in the pst directory.
+      local src="$1"
+      local dest=$PST_DIR/$(basename "$1")
       if [ -d "$1" ]; then
-        cp -r "$1" "$PST_DIR/$1"
+        cp -r "$src" "$dest"
       else
-        cp "$1" "$PST_DIR/$1"
+        cp "$src" "$dest"
       fi
       return
     fi
   fi
+
+  # Otherwise, fallback to normal built-in cp.
   command cp "$@"
 }
 
@@ -48,7 +60,7 @@ pst() {
     cp -r $PST_DIR/* .
   else
     case "$1" in
-      "-l"|"--list") ls -A $PST_DIR ;;
+      "-l"|"--list") command ls -A $PST_DIR ;;
       "-h"|"--help")
         echo "usage: pst [-chl] [dest]"
         echo ""
