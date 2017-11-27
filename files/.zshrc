@@ -39,6 +39,14 @@ bindkey "^?" backward-delete-char
 # Turn off legacy behaviour of stopping/resuming tty I/O.
 stty -ixon
 
+# Set up special environment variables.
+# -U disallows duplicate entries
+# -T creates the special coupling
+export -U PATH path
+export -U MANPATH manpath
+export -UT INFOPATH infopath
+export -UT XDG_DATA_DIRS xdg_data_dirs
+
 # ================================== Prompt ================================== #
 
 export PS1='%F{222}%n@%m %F{245}%~ %F{222}$ %F{250}'
@@ -80,3 +88,4 @@ antigen bundle adamheins/zsh-syntax-highlighting
 antigen bundle zsh-users/zsh-completions
 
 antigen apply
+
