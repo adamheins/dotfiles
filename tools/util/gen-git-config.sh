@@ -10,3 +10,4 @@ git config --global user.email "mail@adamheins.com"
 git config --global core.excludesfile $HOME/.gitignore
 git config --global diff.tool "vimdiff"
 git config --global difftool.prompt "false"
+git config --global url."git@github.com:".insteadOf "https://github.com/"
