@@ -19,6 +19,8 @@ gdbserver_log
 
 # c
 a.out
+*.o
+*.a
 
 # generic log files
 *.log
