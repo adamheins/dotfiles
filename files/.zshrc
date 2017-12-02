@@ -89,3 +89,11 @@ antigen bundle zsh-users/zsh-completions
 
 antigen apply
 
+# ================================= Priorty ================================== #
+
+# Executables that should be prioritized above other versions are placed in the
+# priority-bin directory, which is put first on the path.
+
+if [ -d ~/.priority-bin ]; then
+  path=(~/.priority-bin $path)
+fi

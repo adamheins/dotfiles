@@ -56,24 +56,34 @@ alias dsize="du -sh --apparent-size"
 # Easier copying of passwords from password-store.
 alias p="pass show -c"
 
+# Use insect as a calculator. npm install -g insect
+alias calc="insect"
+
+# Get a nice `open` command, like on macOS.
+case $OS in
+  Linux) alias open="xdg-open" ;;
+esac
+
+
 # =============================== Date & Time ================================ #
 
 # Today's date and time, in a nice format.
 alias now="date +%F\ %T"
+
 
 # ============================ Modified Builtins ============================= #
 
 # Start the calculator with math support.
 alias bc="bc -l"
 
-# Use insect as a calculator. npm install -g insect
-alias calc="insect"
-
 # Make cd follow symlinks by default.
 alias cd="cd -P"
 
 # Allow mkdir to create intermediate directories.
 alias mkdir="mkdir -p"
+
+
+# ============================ Replaced Builtins ============================= #
 
 # If safe-rm is installed, use that.
 if command -v safe-rm >/dev/null 2>&1; then
@@ -84,11 +94,9 @@ fi
 if command -v exa > /dev/null 2>&1; then
   alias ls=exa
   alias la="exa -a"
+  alias tree="exa --tree"
 else
   alias ls="ls --color=auto"
   alias la="ls -A"
 fi
 
-case $OS in
-  Linux) alias open="xdg-open" ;;
-esac
