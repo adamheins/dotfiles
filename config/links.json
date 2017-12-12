@@ -6,19 +6,14 @@
     ".gitignore": "~/.gitignore",
 
     ".vimrc": "~/.vimrc",
-    ".vim": "~/.vim",
-    ".vim": "~/.config/nvim",
+    ".vim": ["~/.vim", "~/.config/nvim"],
     ".vim/aliases.vim": "~/.vim/after/plugin/aliases.vim",
 
     ".tmux.conf": "~/.tmux.conf",
 
     ".editrc": "~/.editrc",
     ".inputrc": "~/.inputrc",
-    ".vimperatorrc": "~/.vimperatorrc",
     ".f": "~/.f"
-  },
-  "linux": {
-    ".dircolors": "~/.dircolors"
   }
 }
 
