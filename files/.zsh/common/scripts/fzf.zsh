@@ -1,18 +1,24 @@
+FZF_PATH="/usr/local/opt/fzf"
+
 # Set up fzf.
-if [[ ! "$PATH" == */usr/local/opt/fzf/bin* ]]; then
-  export PATH="$PATH:/usr/local/opt/fzf/bin"
+if [ -d $FZF_PATH/bin ]; then
+  path=($path $FZF_PATH/bin)
 fi
 
 # Man path.
-if [[ ! "$MANPATH" == */usr/local/opt/fzf/man* && -d "/usr/local/opt/fzf/man" ]]; then
-  export MANPATH="$MANPATH:/usr/local/opt/fzf/man"
+if [ -d $FZF_PATH/man ]; then
+  manpath=($manpath $FZF_PATH/man)
 fi
 
 # Auto-completion.
-[[ $- == *i* ]] && source "/usr/local/opt/fzf/shell/completion.zsh" 2> /dev/null
+if [ -f $FZF_PATH/shell/completion.zsh ]; then
+  source $FZF_PATH/shell/completion.zsh 2> /dev/null
+fi
 
 # Key bindings.
-[ -f "/usr/local/opt/fzf/shell/key-bindings.zsh" ] && source "/usr/local/opt/fzf/shell/key-bindings.zsh"
+if [ -f $FZF_PATH/shell/key-bindings.zsh ]; then
+  source $FZF_PATH/shell/key-bindings.zsh
+fi
 
 # This is the same functionality as fzf's ctrl-t, except that the file or
 # directory selected is now automatically cd'ed or opened, respectively.

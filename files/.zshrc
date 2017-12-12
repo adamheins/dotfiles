@@ -44,6 +44,7 @@ stty -ixon
 # -T creates the special coupling
 export -U PATH path
 export -U MANPATH manpath
+export -U FPATH fpath
 export -UT PYTHONPATH pythonpath
 export -UT INFOPATH infopath
 export -UT XDG_DATA_DIRS xdg_data_dirs
@@ -63,6 +64,21 @@ function zle-line-init zle-keymap-select {
 
 zle -N zle-line-init
 zle -N zle-keymap-select
+
+# =================================== Brew =================================== #
+
+# The expectation is that brew is either installed at ~/.linuxbrew or
+# ~/.linuxbrew is symlinked to the actual install location.
+BREW_PATH=~/.linuxbrew
+
+if [ -d $BREW_PATH ]; then
+  path=($BREW_PATH/bin $BREW_PATH/sbin $path)
+  fpath=($BREW_PATH/share/zsh/site-functions $fpath)
+  manpath=($BREW_PATH/share/man $manpath)
+  infopath=($BREW_PATH/share/info $infopath)
+  xdg_data_dirs=($BREW_PATH/share $xdg_data_dirs)
+  pythonpath=($BREW_PATH/lib/python2.7/site-packages $pythonpath)
+fi
 
 # ================================= External ================================= #
 
