@@ -45,6 +45,7 @@ stty -ixon
 export -U PATH path
 export -U MANPATH manpath
 export -U FPATH fpath
+export -UT LD_LIBRARY_PATH ld_library_path
 export -UT PYTHONPATH pythonpath
 export -UT INFOPATH infopath
 export -UT XDG_DATA_DIRS xdg_data_dirs
