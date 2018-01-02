@@ -67,9 +67,7 @@ zle -N zle-keymap-select
 
 # =================================== Brew =================================== #
 
-# The expectation is that brew is either installed at ~/.linuxbrew or
-# ~/.linuxbrew is symlinked to the actual install location.
-BREW_PATH=~/.linuxbrew
+BREW_PATH=/home/linuxbrew/.linuxbrew
 
 if [ -d $BREW_PATH ]; then
   path=($BREW_PATH/bin $BREW_PATH/sbin $path)
