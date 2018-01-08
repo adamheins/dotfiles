@@ -68,9 +68,7 @@ zle -N zle-keymap-select
 
 # =================================== Brew =================================== #
 
-# The expectation is that brew is either installed at ~/.linuxbrew or
-# ~/.linuxbrew is symlinked to the actual install location.
-BREW_PATH=~/.linuxbrew
+BREW_PATH=/home/linuxbrew/.linuxbrew
 
 if [ -d $BREW_PATH ]; then
   path=($BREW_PATH/bin $BREW_PATH/sbin $path)
@@ -78,10 +76,7 @@ if [ -d $BREW_PATH ]; then
   manpath=($BREW_PATH/share/man $manpath)
   infopath=($BREW_PATH/share/info $infopath)
   xdg_data_dirs=($BREW_PATH/share $xdg_data_dirs)
-  pythonpath=($BREW_PATH/lib/python2.7/site-packages $pythonpath)
 fi
-
-pythonpath=(/usr/local/lib/python2.7/site-packages /usr/local/lib/python2.7/dist-packages /usr/lib/python2.7/dist-packages $pythonpath)
 
 # ================================= External ================================= #
 
