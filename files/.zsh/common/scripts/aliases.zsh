@@ -56,6 +56,8 @@ alias dsize="du -sh --apparent-size"
 # Use insect as a calculator. npm install -g insect
 alias calc="insect"
 
+alias mine="sudo chown -R $(whoami)"
+
 # Get a nice `open` command, like on macOS.
 case $OS in
   Linux) alias open="xdg-open" ;;

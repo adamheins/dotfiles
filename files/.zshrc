@@ -45,6 +45,7 @@ stty -ixon
 export -U PATH path
 export -U MANPATH manpath
 export -U FPATH fpath
+export -UT LD_LIBRARY_PATH ld_library_path
 export -UT PYTHONPATH pythonpath
 export -UT INFOPATH infopath
 export -UT XDG_DATA_DIRS xdg_data_dirs
@@ -75,7 +76,6 @@ if [ -d $BREW_PATH ]; then
   manpath=($BREW_PATH/share/man $manpath)
   infopath=($BREW_PATH/share/info $infopath)
   xdg_data_dirs=($BREW_PATH/share $xdg_data_dirs)
-  pythonpath=($BREW_PATH/lib/python2.7/site-packages $pythonpath)
 fi
 
 # ================================= External ================================= #

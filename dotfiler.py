@@ -86,32 +86,40 @@ def missing_dependencies(deps, system):
     return missing_deps
 
 
+def make_link(src, dest, backup=None, verbose=False):
+    msg = 'Symlinking {} to {}.'.format(src, dest)
+
+    src = os.path.join(FILES_DIR_PATH, src)
+    dest = os.path.expanduser(dest)
+
+    # Create necessary directory structure before creating the symlink.
+    pardir = os.path.dirname(dest)
+    if not os.path.isdir(pardir):
+         os.makedirs(pardir)
+
+    # If a file already exists at the destination, back it up if a backup
+    # is provided. Otherwise, just remove it.
+    if os.path.isfile(dest) or os.path.isdir(dest):
+        # Don't bother backing up symlinks.
+        if backup and not os.path.islink(dest):
+            msg += ' Backed up to {}.'.format(backup.name)
+            backup.move_to(dest)
+        else:
+            os.remove(dest)
+    os.symlink(src, dest)
+
+    if verbose:
+        print(msg)
+
+
 def make_links(items, backup=None, verbose=False):
     ''' Make required symlinks to the dotfiles. '''
-    for src, dest in items.items():
-        msg = 'Symlinking {} to {}.'.format(src, dest)
-
-        src = os.path.join(FILES_DIR_PATH, src)
-        dest = os.path.expanduser(dest)
-
-        # Create necessary directory structure before creating the symlink.
-        pardir = os.path.dirname(dest)
-        if not os.path.isdir(pardir):
-             os.makedirs(pardir)
-
-        # If a file already exists at the destination, back it up if a backup
-        # is provided. Otherwise, just remove it.
-        if os.path.isfile(dest) or os.path.isdir(dest):
-            # Don't bother backing up symlinks.
-            if backup and not os.path.islink(dest):
-                msg += ' Backed up to {}.'.format(backup.name)
-                backup.move_to(dest)
-            else:
-                os.remove(dest)
-        os.symlink(src, dest)
-
-        if verbose:
-            print(msg)
+    for src, dests in items.items():
+        if type(dests) == list:
+            for dest in dests:
+                make_link(src, dest, backup, verbose)
+        else:
+            make_link(src, dests, backup, verbose)
 
 
 def run_next_step(path):
