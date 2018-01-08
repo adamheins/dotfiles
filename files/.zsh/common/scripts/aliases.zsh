@@ -53,9 +53,6 @@ alias p3lib="cd /usr/lib/python3.5"
 alias fsize="du -h --apparent-size"
 alias dsize="du -sh --apparent-size"
 
-# Easier copying of passwords from password-store.
-alias p="pass show -c"
-
 # Use insect as a calculator. npm install -g insect
 alias calc="insect"
 
@@ -86,12 +83,12 @@ alias mkdir="mkdir -p"
 # ============================ Replaced Builtins ============================= #
 
 # If safe-rm is installed, use that.
-if command -v safe-rm >/dev/null 2>&1; then
+if onpath safe-rm; then
   alias rm=safe-rm
 fi
 
 # Prefer exa to ls, if it is installed.
-if command -v exa > /dev/null 2>&1; then
+if onpath exa; then
   alias ls=exa
   alias la="exa -a"
   alias tree="exa --tree"
