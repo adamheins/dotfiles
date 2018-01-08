@@ -81,6 +81,8 @@ if [ -d $BREW_PATH ]; then
   pythonpath=($BREW_PATH/lib/python2.7/site-packages $pythonpath)
 fi
 
+pythonpath=(/usr/local/lib/python2.7/site-packages /usr/local/lib/python2.7/dist-packages /usr/lib/python2.7/dist-packages $pythonpath)
+
 # ================================= External ================================= #
 
 # Configuration common on all systems.
