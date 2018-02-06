@@ -12,9 +12,6 @@ alias cl="clear"
 alias x="exit"
 alias lo="logout"
 
-# Quickly make a webserver out of the current directory.
-alias serve="python -m SimpleHTTPServer"
-
 # Install debian packages.
 alias deb="sudo dpkg -i"
 

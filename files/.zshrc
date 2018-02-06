@@ -103,4 +103,3 @@ antigen bundle adamheins/zsh-syntax-highlighting
 antigen bundle zsh-users/zsh-completions
 
 antigen apply
-
