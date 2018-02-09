@@ -5,7 +5,9 @@
 
 # Vim.
 alias v="vim"
-alias vim="nvim"
+if onpath nvim; then
+  alias vim="nvim"
+fi
 
 # Terminal.
 alias cl="clear"
