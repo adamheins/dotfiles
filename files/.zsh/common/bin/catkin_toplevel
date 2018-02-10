@@ -1,0 +1,54 @@
+#!/usr/bin/env python
+
+from __future__ import print_function
+
+import os
+
+
+CMAKELISTS_FILE_NAME = 'CMakeLists.txt'
+
+
+def dir_is_ws_src(d):
+    ''' Returns true if the directory d is the src directory of a catkin
+        workspace. False otherwise. '''
+    dirs = os.listdir(d)
+    if CMAKELISTS_FILE_NAME in dirs:
+        cmakelists_path = os.path.join(d, CMAKELISTS_FILE_NAME)
+        return (os.path.islink(cmakelists_path)
+                and 'toplevel' in os.readlink(cmakelists_path))
+    return False
+
+
+def dir_is_ws_root(d):
+    ''' Return True is the directory d is the root of a catkin workspace. False
+        otherwise. '''
+    dirs = os.listdir(d)
+    if 'src' in dirs:
+        src_dir = os.path.join(d, 'src')
+        return dir_is_ws_src(src_dir)
+    return False
+
+
+def main():
+    home_dir = os.path.expanduser('~')
+
+    while True:
+        cur_dir = os.path.abspath(os.curdir)
+
+        # We don't want to progress any further if we're not under a user's
+        # home directory. If you're not making your workspaces under a home
+        # directory... start.
+        if cur_dir == home_dir or home_dir not in cur_dir:
+            return 1
+
+        if dir_is_ws_root(cur_dir):
+            print(cur_dir)
+            return 0
+
+        # Go up a directory.
+        os.chdir('..')
+
+
+if __name__ == '__main__':
+    status = main()
+    exit(status)

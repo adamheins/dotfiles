@@ -1,0 +1,132 @@
+#!/usr/bin/env python
+
+from __future__ import print_function
+
+import argparse
+import json
+import os
+import re
+import requests
+
+from colorama import Fore, Style
+from datetime import date
+
+try:
+    prompt = raw_input
+except NameError:
+    prompt = input
+
+LICENSES = ['APACHE', 'MIT', 'BSD-2-CLAUSE', 'BSD-3-CLAUSE']
+LICENSE_ROOT_URL = 'https://raw.githubusercontent.com/adamheins/lick/master/licenses'
+DEFAULT_LICENSE_FILE = 'LICENSE'
+DEFAULT_LICK_FIELD_FILE = '~/.lick.json'
+
+def load_field_values(required_fields):
+    """ Load the values of the fields required to fill out the license. """
+    fields = {}
+
+    # First, check for a file pointed to $LICK_FIELD_FILE_PATH. If that does
+    # not exist, attempt to load the default config at ~/.lick.json.
+    fp = os.environ.get('LICK_FIELD_FILE_PATH')
+    print(Fore.RED, end='')
+    if fp is not None:
+        try:
+            with open(fp) as f:
+                fields.update(json.load(f))
+        except IOError:
+            print('  warning: file pointed to by $LICK_FIELD_FILE_PATH'
+                  ' could not be opened')
+        except ValueError:
+            print("  warning: lick fields file at '{}' contains malformed"
+                  " JSON".format(fp))
+    else:
+        default_file_path = os.path.expanduser(DEFAULT_LICK_FIELD_FILE)
+        try:
+            with open(default_file_path) as f:
+                fields.update(json.load(f))
+        except IOError:
+            pass
+        except ValueError:
+            print("  warning: lick fields file at '{}' contains malformed"
+                  " JSON".format(default_file_path))
+    print(Fore.RESET, end='')
+
+    required_fields = set(required_fields) - set(fields.keys())
+
+    # Use the current year if is hasn't already been defined.
+    if 'year' in required_fields:
+        fields['year'] = str(date.today().year)
+        required_fields.remove('year')
+
+    # Get the rest of the required fields from terminal input.
+    if len(required_fields) > 0:
+        print('Enter fields:')
+        for field in required_fields:
+            fields[field] = prompt('  {}: '.format(field))
+    return fields
+
+def parse_required_fields(text):
+    """ Parse fields required to fill out the license. """
+    return set(re.findall(r'<(\S+)>', text))
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('type', nargs='?', help='Type of license to use.')
+    parser.add_argument('-o', '--output', help='File to which to output the'
+                        ' license.')
+    parser.add_argument('-l', '--list', help='List all available licenses.',
+                        action='store_true')
+    args = parser.parse_args()
+
+    # If the list option was passed, just list available license types and exit.
+    if args.list:
+        for license in LICENSES:
+            print(license)
+        exit(0)
+
+    if not args.type:
+        print('Nothing to lick')
+        exit(1)
+
+    # Check if the license type is supported.
+    license = args.type.upper()
+    if license not in LICENSES:
+        print(Fore.RED, end='')
+        print("error: unsupported license type '{}'".format(args.type))
+        print(Fore.RESET, end='')
+        exit(1)
+
+    # GET request for the license text.
+    print('Licking {}...'.format(license))
+    url = '/'.join([LICENSE_ROOT_URL, license])
+    req = requests.get(url)
+    if req.status_code != 200:
+        print(Fore.RED, end='')
+        print('  error: {} {}'.format(req.status_code, req.text))
+        print(Fore.RESET, end='')
+        exit(1)
+
+    # Load required fields.
+    text = req.text
+    required_fields = parse_required_fields(text)
+    fields = load_field_values(required_fields)
+    for field in fields:
+        text = text.replace('<' + field + '>', fields[field])
+
+    license_file_path = args.output if args.output else 'LICENSE'
+
+    # Check if overwriting existing file is acceptable.
+    if os.path.exists(license_file_path):
+        overwrite = prompt("Overwrite '{}'? [Y/n] ".format(license_file_path))
+        if len(overwrite) > 0 and overwrite[0].upper() == 'N':
+            print('Aborted')
+            exit(1)
+
+    # Write the license file.
+    with open(license_file_path, 'w') as license:
+        license.write(text)
+    print("License '{}' written to '{}'".format(args.type, license_file_path))
+
+if __name__ == '__main__':
+    main()
+    exit(0)
