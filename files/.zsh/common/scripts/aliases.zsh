@@ -9,6 +9,8 @@ if onpath nvim; then
   alias vim="nvim"
 fi
 
+alias mine="sudo chown -R $USER"
+
 # Terminal.
 alias cl="clear"
 alias x="exit"
