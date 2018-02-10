@@ -52,13 +52,22 @@ export -UT XDG_DATA_DIRS xdg_data_dirs
 
 # ================================== Prompt ================================== #
 
-export PS1='%F{222}%n@%m %F{245}%~ %F{222}$ %F{250}'
+# Change the prompt if we're in a Docker container.
+has_docker=""
+if [ -f /.dockerenv ]; then
+  has_docker="%F{110}(D)"
+fi
+
+prompt_ins="$has_docker%F{222}%n@%m %F{245}%~ %F{222}$ %F{250}"
+prompt_cmd="$has_docker%F{139}%n@%m %F{245}%~ %F{139}$ %F{250}"
+
+export PS1=$prompt_ins
 
 # Change prompt based on vi mode.
 function zle-line-init zle-keymap-select {
   case $KEYMAP in
-    vicmd) export PS1='%F{139}%n@%m %F{245}%~ %F{139}$ %F{250}' ;;
-    viins|main) export PS1='%F{222}%n@%m %F{245}%~ %F{222}$ %F{250}' ;;
+    vicmd) export PS1=$prompt_cmd ;;
+    viins|main) export PS1=$prompt_ins ;;
   esac
   zle reset-prompt
 }
@@ -103,3 +112,4 @@ antigen bundle adamheins/zsh-syntax-highlighting
 antigen bundle zsh-users/zsh-completions
 
 antigen apply
+
