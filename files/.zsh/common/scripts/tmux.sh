@@ -45,12 +45,16 @@ layout() {
 
 # Don't automatically run tmux if
 # * It isn't installed
-# * We're in an ssh session
-# * We're in a docker container
 if ! onpath tmux; then
   return
 fi
 
+# * We're in a docker container
+if [ -f /.dockerenv ]; then
+  return
+fi
+
+# * We're in an ssh session
 if [ -z "$SSH_CLIENT" ] || [ -z "$SSH_TTY" ] || ! [ -f /.dockerenv ]; then
   precmd_functions=(_update_tmux_status)
 
