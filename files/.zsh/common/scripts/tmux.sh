@@ -55,16 +55,11 @@ if [ -f /.dockerenv ]; then
 fi
 
 # * We're in an ssh session
-if [ -z "$SSH_CLIENT" ] || [ -z "$SSH_TTY" ] || ! [ -f /.dockerenv ]; then
+if [ -z "$SSH_CLIENT" ] || [ -z "$SSH_TTY" ]; then
   precmd_functions=(_update_tmux_status)
 
-  # Lower the current tmux window to the lowest available index.
-  tmux bind \< run "tmux-window-lower"
-
-  # Lower all windows to the lowest available indices.
-  tmux bind / run "tmux-window-lower --all"
-
-  # Only start tmux when the session is interactive.
+  # Only start tmux when the session is interactive and we're not already in a
+  # tmux session.
   if [[ $- == *i* ]] && [ -z "$TMUX" ]; then
     if ! tmux list-sessions; then
       tmux -2
