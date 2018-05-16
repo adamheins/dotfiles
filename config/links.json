@@ -12,8 +12,7 @@
     ".tmux.conf": "~/.tmux.conf",
 
     ".editrc": "~/.editrc",
-    ".inputrc": "~/.inputrc",
-    ".f": "~/.f"
+    ".inputrc": "~/.inputrc"
   }
 }
 
