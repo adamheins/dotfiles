@@ -1,4 +1,4 @@
-FZF_PATH="/usr/local/opt/fzf"
+FZF_PATH="$(dirname $(readlink -f $(which fzf)))/.."
 
 # Set up fzf.
 if [ -d $FZF_PATH/bin ]; then
