@@ -134,17 +134,31 @@ shreddir() {
   rm -rf $1
 }
 
-# Shortcut to find and replace in a file.
+# Shortcut to find and replace a string in a file or directory.
 re() {
-  if [ -z $3 ]; then
-    echo "usage: re string_to_find string_to_replace file"
+  if [ -z $2 ]; then
+    echo "usage: re searchtext replacetext [file]"
     return 1
   fi
-  sed -i "s/$1/$2/g" $3
+  if [ -z $3 ]; then
+    grep -r -l "$1" . | sort -u | xargs perl -e "s/$1/$2/g" -pi
+  else
+    sed -i "s/$1/$2/g" $3
+  fi
 }
 
 # Grep for processes.
 psg() {
   [ -z "$1" ] && return 1
   ps aux | grep -v "grep -i $1" | grep -i "$1"
+}
+
+# A which command which sees through symlinks.
+which+() {
+  readlink -f $(which $1)
+}
+
+# cd to directory containing the executable.
+whichcd() {
+  cd $(dirname $(readlink -f $(which $1)))
 }
