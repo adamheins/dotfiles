@@ -46,7 +46,7 @@ mv() {
       [ ! -d $PST_DIR ] && mkdir $PST_DIR
       setopt localoptions rmstarsilent
       stat "$1" >/dev/null 2>&1 && rm -rf $PST_DIR/*(N)
-      mv "$1" "$PST_DIR/$1"
+      mv "$1" $PST_DIR/$(basename "$1")
       return
     fi
   fi
@@ -57,6 +57,7 @@ mv() {
 pst() {
   [ ! -d $PST_DIR ] && return
   if [ -z $1 ]; then
+    ls $PST_DIR
     cp -r $PST_DIR/* .
   else
     case "$1" in
