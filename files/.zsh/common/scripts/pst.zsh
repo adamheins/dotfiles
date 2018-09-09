@@ -56,9 +56,22 @@ mv() {
 # Paste the last files or directories that were cut or copied.
 pst() {
   [ ! -d $PST_DIR ] && return
+
+  # With no argument, paste whatever is stored in the "clipboard" to the cwd.
   if [ -z $1 ]; then
-    ls $PST_DIR
-    cp -r $PST_DIR/* .
+    # If all is well, there should be only one item in the clipboard at any
+    # given time, but just in case, we take the newest file.
+    local item=$(command ls -t $PST_DIR | head -n 1)
+
+    # If an item with the same name already exists, ask for confirmation before
+    # pasting over it.
+    if [ -f ./"$item" ] || [ -d ./"$item" ]; then
+      read -q "?An item named $item already exists. Continue? [yN]" || return
+      echo ""
+    fi
+
+    echo "$item"
+    cp -r "$PST_DIR/$item" .
   else
     case "$1" in
       "-l"|"--list") command ls -A $PST_DIR ;;
