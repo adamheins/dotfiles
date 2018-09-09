@@ -2,6 +2,30 @@
 # other parts of the system.
 
 PST_DIR=$HOME/.pst
+PST_CURR_DIR=$PST_DIR/current
+PST_OLD_DIR=$PST_DIR/old
+
+
+# Create the pst directories if they don't exist.
+_pst_mkdirs() {
+  [ ! -d $PST_CURR_DIR ] && mkdir -p $PST_CURR_DIR
+  [ ! -d $PST_OLD_DIR  ] && mkdir -p $PST_OLD_DIR
+}
+
+
+# Move current contents to backup directory.
+_pst_backup() {
+  if [[ $(command ls $PST_CURR_DIR | wc -l) != 0 ]]; then
+    mv $PST_CURR_DIR/* $PST_OLD_DIR
+
+    # Only keep most recent 5 items in the backup area.
+    local rm_items=($(command ls -t $PST_OLD_DIR | tail -n +6))
+    for item in $rm_items; do
+      rm "$PST_OLD_DIR/$item"
+    done
+  fi
+}
+
 
 # Behaves the same as normal `cp', unless exactly one non-flag argument is
 # passed. If that is the case, it copies the file or directory for later
@@ -13,16 +37,18 @@ cp() {
     first_char=$(echo "$1" | cut -c1)
     if [ "$first_char" != "-" ]; then
 
-      # Create the pst directory if it doesn't exist.
-      [ ! -d $PST_DIR ] && mkdir $PST_DIR
+      # If the argument is neither a file nor a directory, abort.
+      if [ ! -f "$1" ] && [ ! -d "$1" ]; then
+        echo "No such file or directory $1."
+        return 1
+      fi
 
-      # Remove current contents of the pst directory.
-      setopt localoptions rmstarsilent
-      stat "$1" >/dev/null 2>&1 && rm -rf $PST_DIR/*(N)
+      _pst_mkdirs
+      _pst_backup
 
       # Copy the src to the dest in the pst directory.
       local src="$1"
-      local dest=$PST_DIR/$(basename "$1")
+      local dest=$PST_CURR_DIR/$(basename "$1")
       if [ -d "$1" ]; then
         cp -r "$src" "$dest"
       else
@@ -36,6 +62,7 @@ cp() {
   command cp "$@"
 }
 
+
 # Behaves the same as normal `mv', unless exactly one non-flag argument is
 # passed. If that is the case, it cuts the file or directory for later
 # pasting.
@@ -43,13 +70,23 @@ mv() {
   if [ -n $1 ] && [ -z $2 ]; then
     first_char=$(echo "$1" | cut -c1)
     if [ "$first_char" != "-" ]; then
-      [ ! -d $PST_DIR ] && mkdir $PST_DIR
-      setopt localoptions rmstarsilent
-      stat "$1" >/dev/null 2>&1 && rm -rf $PST_DIR/*(N)
-      mv "$1" $PST_DIR/$(basename "$1")
+
+      # If the argument is neither a file nor a directory, abort.
+      if [ ! -f "$1" ] && [ ! -d "$1" ]; then
+        echo "No such file or directory $1."
+        return 1
+      fi
+
+      _pst_mkdirs
+      _pst_backup
+
+      # Move in the new item.
+      mv "$1" $PST_CURR_DIR/$(basename "$1")
       return
     fi
   fi
+
+  # Otherwise, fallback to normal built-in cp.
   command mv "$@"
 }
 
@@ -61,7 +98,7 @@ pst() {
   if [ -z $1 ]; then
     # If all is well, there should be only one item in the clipboard at any
     # given time, but just in case, we take the newest file.
-    local item=$(command ls -t $PST_DIR | head -n 1)
+    local item=$(command ls -t $PST_CURR_DIR | head -n 1)
 
     # If an item with the same name already exists, ask for confirmation before
     # pasting over it.
@@ -71,10 +108,10 @@ pst() {
     fi
 
     echo "$item"
-    cp -r "$PST_DIR/$item" .
+    cp -r "$PST_CURR_DIR/$item" .
   else
     case "$1" in
-      "-l"|"--list") command ls -A $PST_DIR ;;
+      "-l"|"--list") command ls -A $PST_CURR_DIR ;;
       "-h"|"--help")
         echo "usage: pst [-chl] [dest]"
         echo ""
@@ -85,9 +122,10 @@ pst() {
       ;;
       "-c"|"--clean")
         setopt localoptions rmstarsilent
-        rm -rf $PST_DIR/*(N)
+        rm -rf $PST_CURR_DIR/*(N)
+        rm -rf $PST_OLD_DIR/*(N)
       ;;
-      *) cp -r $PST_DIR/* "$1" ;;
+      *) cp -r $PST_CURR_DIR/* "$1" ;;
     esac
   fi
 }
