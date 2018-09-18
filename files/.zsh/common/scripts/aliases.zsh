@@ -60,9 +60,15 @@ alias calc="insect"
 alias mine="sudo chown -R $(whoami)"
 
 # Get a nice `open` command, like on macOS.
-case $OS in
-  Linux) alias open="xdg-open" ;;
-esac
+# case $OS in
+#   Linux) alias open="xdg-open" ;;
+# esac
+
+alias timer='while true; do echo -ne "`date +%H:%M:%S:%N`\r"; done'
+
+open() {
+  xdg-open $1 </dev/null &>/dev/null &
+}
 
 
 # =============================== Date & Time ================================ #
@@ -85,12 +91,12 @@ alias mkdir="mkdir -p"
 
 # ============================ Replaced Builtins ============================= #
 
-# If safe-rm is installed, use that.
+# Override by using `\builtin` or `command builtin`
+
 if onpath safe-rm; then
   alias rm=safe-rm
 fi
 
-# Prefer exa to ls, if it is installed.
 if onpath exa; then
   alias ls=exa
   alias la="exa -a"
@@ -100,3 +106,18 @@ else
   alias la="ls -A"
 fi
 
+if onpath bat; then
+  alias cat=bat
+fi
+
+if onpath htop; then
+  alias top=htop
+fi
+
+if onpath prettyping; then
+  alias ping=prettyping
+fi
+
+if onpath icdiff; then
+  alias diff=icdiff
+fi
