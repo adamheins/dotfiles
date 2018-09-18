@@ -21,7 +21,7 @@ _pst_backup() {
     # Only keep most recent 5 items in the backup area.
     local rm_items=($(command ls -t $PST_OLD_DIR | tail -n +6))
     for item in $rm_items; do
-      rm "$PST_OLD_DIR/$item"
+      rm -r "$PST_OLD_DIR/$item"
     done
   fi
 }
