@@ -50,6 +50,9 @@ export -UT PYTHONPATH pythonpath
 export -UT INFOPATH infopath
 export -UT XDG_DATA_DIRS xdg_data_dirs
 
+# Initialize the manpath.
+manpath=(/usr/share/man)
+
 # ================================== Prompt ================================== #
 
 # Change the prompt if we're in a Docker container.
