@@ -18,10 +18,9 @@ _pst_backup() {
   if [[ $(command ls $PST_CURR_DIR | wc -l) != 0 ]]; then
     mv $PST_CURR_DIR/* $PST_OLD_DIR
 
-    # Only keep most recent 5 items in the backup area.
-    local rm_items=($(command ls -t $PST_OLD_DIR | tail -n +6))
-    for item in $rm_items; do
-      rm -r "$PST_OLD_DIR/$item"
+    # Only keep 5 most recent items in the backup area.
+    command ls -t $PST_OLD_DIR | tail -n +6 | while read file; do
+      rm -r "$PST_OLD_DIR/$file"
     done
   fi
 }
