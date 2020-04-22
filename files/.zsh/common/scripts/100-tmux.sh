@@ -2,18 +2,15 @@
 
 # If the cwd is a git repo, display the branch name in the tmux status bar.
 _update_tmux_status() {
-  if [ "$(git rev-parse --is-inside-work-tree 2>/dev/null)" ]; then
-    local branch short_branch
-    branch=$(git symbolic-ref -q HEAD)
-    branch=${branch##refs/heads/}
-    branch=${branch:-HEAD}
-    short_branch=$(echo "$branch" | cut -c1-40)
+  local branch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null)
+  if [ -z "$branch" ]; then
+    tmux set -g status-right "#[fg=white] %R #[fg=colour243]| #[fg=white]%Y-%m-%d "
+  else
+    local short_branch=$(echo "$branch" | cut -c1-40)
     if [ ${#branch} -gt ${#short_branch} ]; then
       short_branch=${short_branch}...
     fi
     tmux set -g status-right "#[fg=colour222] [$short_branch] #[fg=colour243]| #[fg=white]%R #[fg=colour243]| #[fg=white]%Y-%m-%d "
-  else
-    tmux set -g status-right "#[fg=white] %R #[fg=colour243]| #[fg=white]%Y-%m-%d "
   fi
 }
 

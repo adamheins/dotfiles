@@ -114,10 +114,6 @@ if onpath htop; then
   alias top=htop
 fi
 
-if onpath prettyping; then
-  alias ping=prettyping
-fi
-
 if onpath icdiff; then
   alias diff=icdiff
 fi

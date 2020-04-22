@@ -20,8 +20,7 @@ dox() {
 # Run a process as a daemon.
 d() {
   if [ -z "$1" ] && return 1
-  nohup "$@" >/dev/null 2>&1 &
-  disown
+  nohup "$@" >/dev/null 2>&1 &!
 }
 
 # Print OS information.
@@ -95,14 +94,6 @@ recent() {
   else
     ls -rt | tail -n "$1"
   fi
-}
-
-define() {
-  dict "$1" | less
-}
-
-synonym() {
-  dict -d moby-thesaurus "$1"
 }
 
 # Zip a directory.
