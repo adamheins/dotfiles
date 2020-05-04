@@ -11,13 +11,13 @@ if [ -d $FZF_PATH/man ]; then
 fi
 
 # Auto-completion.
-if [ -f $FZF_PATH/shell/completion.zsh ]; then
-  source $FZF_PATH/shell/completion.zsh 2> /dev/null
+if [ -f $FZF_PATH/share/fzf/completion.zsh ]; then
+  source $FZF_PATH/share/fzf/completion.zsh 2> /dev/null
 fi
 
 # Key bindings.
-if [ -f $FZF_PATH/shell/key-bindings.zsh ]; then
-  source $FZF_PATH/shell/key-bindings.zsh
+if [ -f $FZF_PATH/share/fzf/key-bindings.zsh ]; then
+  source $FZF_PATH/share/fzf/key-bindings.zsh
 fi
 
 # This is the same functionality as fzf's ctrl-t, except that the file or
