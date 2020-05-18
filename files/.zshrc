@@ -79,28 +79,50 @@ function zle-line-init zle-keymap-select {
 zle -N zle-line-init
 zle -N zle-keymap-select
 
-# ================================= External ================================= #
+# ============================= Basic utilities ============================== #
 
-# Configuration common on all systems.
-if [ -f ~/.zsh/common.zsh ]; then
-  source ~/.zsh/common.zsh
+# Source all scripts in a directory.
+sourcedir() {
+  [ -z "$1" ] && return 1
+  # Note the glob pattern:
+  #   .  Match plain files
+  #   ,  "OR"
+  #   @  Match symbolic files
+  #   N  NULL_GLOB - don't print an error if nothing matched
+  if [ -d "$1" ]; then
+    for f in "$1"/*.sh(.,@N); do source "$f"; done
+    for f in "$1"/*.zsh(.,@N); do source "$f"; done
+  fi
+}
+
+# Return 0 exit code if executable exists on the path.
+onpath() {
+  [ -z "$1" ] && return 1
+  command -v "$1" > /dev/null 2>&1 && return 0
+  return 1
+}
+
+
+# ============================== Common config =============================== #
+
+if [ -d ~/.zsh/bin ]; then
+  path=(~/.zsh/bin $path)
 fi
 
-# Local completions
+if [ -d ~/.zsh/comp ]; then
+  fpath=(~/.zsh/comp $fpath)
+fi
+
+sourcedir ~/.zsh/scripts
+
+
+# =============================== Local config =============================== #
+
 if [ -d ~/zsh/comp ]; then
   fpath=(~/zsh/comp $fpath)
 fi
 
-# Local scripts to be sourced.
-# Note the glob pattern:
-#   .  Match plain files
-#   ,  "OR"
-#   @  Match symbolic files
-#   N  NULL_GLOB - don't print an error if nothing matched
-if [ -d ~/zsh/scripts ]; then
-  for f in ~/zsh/scripts/*.sh(.,@N); do source "$f"; done
-  for f in ~/zsh/scripts/*.zsh(.,@N); do source "$f"; done
-fi
+sourcedir ~/zsh/scripts
 
 # ============================== Autocompletion ============================== #
 
