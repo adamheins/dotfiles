@@ -61,8 +61,9 @@ if [ -f /.dockerenv ]; then
   has_docker="%F{110}(D)"
 fi
 
-prompt_ins="$has_docker%F{222}%n@%m %F{245}%~ %F{222}$ %F{250}"
-prompt_cmd="$has_docker%F{139}%n@%m %F{245}%~ %F{139}$ %F{250}"
+# %(5~|%-1~/…/%3~|%4~) limits the CWD of 5 or more components to a/.../b/c/d.
+prompt_ins="$has_docker%F{222}%n@%m %F{245}%(5~|%-1~/…/%3~|%4~) %F{222}$ %F{250}"
+prompt_cmd="$has_docker%F{139}%n@%m %F{245}%(5~|%-1~/…/%3~|%4~) %F{139}$ %F{250}"
 
 export PS1=$prompt_ins
 
@@ -78,18 +79,6 @@ function zle-line-init zle-keymap-select {
 zle -N zle-line-init
 zle -N zle-keymap-select
 
-# =================================== Brew =================================== #
-
-BREW_PATH=/home/linuxbrew/.linuxbrew
-
-if [ -d $BREW_PATH ]; then
-  path=($BREW_PATH/bin $BREW_PATH/sbin $path)
-  fpath=($BREW_PATH/share/zsh/site-functions $fpath)
-  manpath=($BREW_PATH/share/man $manpath)
-  infopath=($BREW_PATH/share/info $infopath)
-  xdg_data_dirs=($BREW_PATH/share $xdg_data_dirs)
-fi
-
 # ================================= External ================================= #
 
 # Configuration common on all systems.
@@ -97,9 +86,20 @@ if [ -f ~/.zsh/common.zsh ]; then
   source ~/.zsh/common.zsh
 fi
 
-# Configuration local to this system.
-if [ -f ~/.zsh/local.zsh ]; then
-  source ~/.zsh/local.zsh
+# Local completions
+if [ -d ~/zsh/comp ]; then
+  fpath=(~/zsh/comp $fpath)
+fi
+
+# Local scripts to be sourced.
+# Note the glob pattern:
+#   .  Match plain files
+#   ,  "OR"
+#   @  Match symbolic files
+#   N  NULL_GLOB - don't print an error if nothing matched
+if [ -d ~/zsh/scripts ]; then
+  for f in ~/zsh/scripts/*.sh(.,@N); do source "$f"; done
+  for f in ~/zsh/scripts/*.zsh(.,@N); do source "$f"; done
 fi
 
 # ============================== Autocompletion ============================== #
