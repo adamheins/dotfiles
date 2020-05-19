@@ -1,0 +1,15 @@
+[push]
+	default = simple
+[user]
+	name = Adam Heins
+	email = mail@adamheins.com
+[core]
+	excludesfile = /home/adam/.gitignore
+[diff]
+	tool = vimdiff
+[difftool]
+	prompt = false
+[url "git@github.com:"]
+	insteadOf = https://github.com/
+[alias]
+	untrack = rm -r --cached
