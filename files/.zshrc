@@ -79,6 +79,7 @@ function zle-line-init zle-keymap-select {
 zle -N zle-line-init
 zle -N zle-keymap-select
 
+
 # ============================= Basic utilities ============================== #
 
 # Source all scripts in a directory.
@@ -123,6 +124,7 @@ if [ -d ~/zsh/comp ]; then
 fi
 
 sourcedir ~/zsh/scripts
+
 
 # ============================== Autocompletion ============================== #
 
