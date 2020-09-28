@@ -119,6 +119,10 @@ sourcedir ~/.zsh/scripts
 
 # =============================== Local config =============================== #
 
+if [ -d ~/bin ]; then
+  path=(~/bin $path)
+fi
+
 if [ -d ~/zsh/comp ]; then
   fpath=(~/zsh/comp $fpath)
 fi
