@@ -7,9 +7,15 @@ dotfiles=${0:a:h}
 backup-and-link() {
   [ -z "$2" ] && return 1
 
+  local backup_file
   if [ -e "$1" ]; then
+    backup_file="$1.back"
+    if [ -e "$backup_file" ]; then
+      echo "$backup_file already exists. Aborting."
+      exit 1
+    fi
+    mv "$1" "$backup_file"
     echo "Moved $1 -> $1.back"
-    mv "$1" "$1".back
   fi
 
   ln -s "$2" "$1"
