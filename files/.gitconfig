@@ -13,3 +13,5 @@
 	insteadOf = https://github.com/
 [alias]
 	untrack = rm -r --cached
+[pull]
+	rebase = false
