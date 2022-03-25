@@ -61,11 +61,29 @@ if [ -f /.dockerenv ]; then
   has_docker="%F{110}(D)"
 fi
 
+# get pretty string of Python virtualenv name
+get_py_venv() {
+  py_venv=""
+  if [ -n "$VIRTUAL_ENV" ]; then
+    py_venv=$(basename $VIRTUAL_ENV)
+    py_venv="%F{112}(${py_venv:0:10})"
+  fi
+}
+
 # %(5~|%-1~/…/%3~|%4~) limits the CWD of 5 or more components to a/.../b/c/d.
-prompt_ins="$has_docker%F{222}%n@%m %F{245}%(5~|%-1~/…/%3~|%4~) %F{222}$ %F{250}"
-prompt_cmd="$has_docker%F{139}%n@%m %F{245}%(5~|%-1~/…/%3~|%4~) %F{139}$ %F{250}"
+prompt_ins="$has_docker$py_venv%F{222}%n@%m %F{245}%(5~|%-1~/…/%3~|%4~) %F{222}$ %F{250}"
+prompt_cmd="$has_docker$py_venv%F{139}%n@%m %F{245}%(5~|%-1~/…/%3~|%4~) %F{139}$ %F{250}"
 
 export PS1=$prompt_ins
+
+# since the virtualenv could change at any point, we need to update it each
+# before each command prompt
+precmd() {
+  get_py_venv
+  prompt_ins="$has_docker$py_venv%F{222}%n@%m %F{245}%(5~|%-1~/…/%3~|%4~) %F{222}$ %F{250}"
+  prompt_cmd="$has_docker$py_venv%F{139}%n@%m %F{245}%(5~|%-1~/…/%3~|%4~) %F{139}$ %F{250}"
+  export PS1=$prompt_ins
+}
 
 # Change prompt based on vi mode.
 function zle-line-init zle-keymap-select {
@@ -138,3 +156,4 @@ sourcedir ~/zsh/scripts
 
 autoload -U compinit
 compinit -D
+

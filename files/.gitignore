@@ -27,3 +27,9 @@ a.out
 
 # node.js
 node_modules/
+
+# ctags
+tags
+
+# latex
+.latex.out
