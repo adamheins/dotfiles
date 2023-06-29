@@ -30,3 +30,5 @@ backup-and-link ~/.editrc    "$dotfiles"/files/.editrc
 backup-and-link ~/.inputrc   "$dotfiles"/files/.inputrc
 backup-and-link ~/.gitignore "$dotfiles"/files/.gitignore
 backup-and-link ~/.gitconfig "$dotfiles"/files/.gitconfig
+backup-and-link ~/.config/kitty/kitty.conf "$dotfiles"/files/kitty.conf
+backup-and-link ~/.config/user-dirs.dirs "$dotfiles"/files/user-dirs.dirs
