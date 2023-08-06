@@ -12,6 +12,7 @@
 [url "git@github.com:"]
 	insteadOf = https://github.com/
 [alias]
-	untrack = rm -r --cached
+  untrack = rm -r --cached
+  unstage = reset --
 [pull]
 	rebase = false
