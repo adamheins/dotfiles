@@ -11,10 +11,7 @@ fi
 
 alias mine="sudo chown -R $USER"
 
-# Terminal.
 alias cl="clear"
-alias x="exit"
-alias lo="logout"
 
 # Install debian packages.
 alias deb="sudo dpkg -i"
