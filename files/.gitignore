@@ -33,3 +33,9 @@ tags
 
 # latex
 .latex.out
+
+# local python version from pyenv
+.python-version
+
+# tox
+.tox
