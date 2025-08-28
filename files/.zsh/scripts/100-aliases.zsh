@@ -21,18 +21,6 @@ alias update="sudo apt update && sudo apt upgrade"
 # Unpack tarballs.
 alias untar="tar -xf"
 
-# Quick C compilation.
-# alias cc="gcc -std=c99"
-
-# Cscope aliases.
-# alias cs="cscope -d"
-# alias csb="cscope -bq"
-
-# Base conversion. Note that the `base' tool must be installed.
-# https://github.com/adamheins/base
-# alias hex="base 10:16"
-# alias unhex="base 16:10"
-
 # Change file's executability permissions.
 alias -- +x="chmod +x"
 alias -- -x="chmod -x"
@@ -94,8 +82,8 @@ else
   alias la="ls -A"
 fi
 
-if onpath bat; then
-  alias cat=bat
+if onpath batcat; then
+  alias bat=batcat
 fi
 
 if onpath htop; then
