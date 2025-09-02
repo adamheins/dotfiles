@@ -39,29 +39,3 @@ layout() {
     *) echo "unrecognized argument '$1'" ;;
   esac
 }
-
-# # Don't automatically run tmux if
-# # * It isn't installed
-# if ! onpath tmux; then
-#   return
-# fi
-#
-# # * We're in a docker container
-# if [ -f /.dockerenv ]; then
-#   return
-# fi
-#
-# # * We're in an ssh session
-# if [ -z "$SSH_CLIENT" ] || [ -z "$SSH_TTY" ]; then
-#   precmd_functions=(_update_tmux_status)
-#
-#   # Only start tmux when the session is interactive and we're not already in a
-#   # tmux session.
-#   if [[ $- == *i* ]] && [ -z "$TMUX" ]; then
-#     if ! tmux list-sessions; then
-#       tmux -2
-#     else
-#       echo "Tmux sessions exist. Run 'tmux attach-session -t <num>' to restore one."
-#     fi
-#   fi
-# fi

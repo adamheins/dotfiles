@@ -16,3 +16,5 @@
   unstage = reset --
 [pull]
 	rebase = false
+[safe]
+	directory = /home/adam/dev/IsaacSim
