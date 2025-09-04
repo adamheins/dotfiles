@@ -7,6 +7,7 @@
 if onpath nvim; then
   alias vim="nvim"
 fi
+alias v="vim"
 
 alias mine="sudo chown -R $USER"
 
@@ -45,9 +46,6 @@ alias timer='while true; do echo -ne "`date +%H:%M:%S:%N`\r"; done'
 function open() {
   xdg-open $1 </dev/null &>/dev/null &
 }
-
-# easily source Python virtualenv
-alias v="source .venv/bin/activate"
 
 
 # =============================== Date & Time ================================ #
