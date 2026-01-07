@@ -1,6 +1,4 @@
-#!/usr/bin/env python
-
-from __future__ import print_function
+#!/usr/bin/env python3
 
 import argparse
 import json
@@ -10,11 +8,6 @@ import requests
 
 from colorama import Fore, Style
 from datetime import date
-
-try:
-    prompt = raw_input
-except NameError:
-    prompt = input
 
 LICENSES = ['APACHE', 'MIT', 'BSD-2-CLAUSE', 'BSD-3-CLAUSE']
 LICENSE_ROOT_URL = 'https://raw.githubusercontent.com/adamheins/lick/master/licenses'
@@ -62,7 +55,7 @@ def load_field_values(required_fields):
     if len(required_fields) > 0:
         print('Enter fields:')
         for field in required_fields:
-            fields[field] = prompt('  {}: '.format(field))
+            fields[field] = input('  {}: '.format(field))
     return fields
 
 def parse_required_fields(text):
@@ -117,7 +110,7 @@ def main():
 
     # Check if overwriting existing file is acceptable.
     if os.path.exists(license_file_path):
-        overwrite = prompt("Overwrite '{}'? [Y/n] ".format(license_file_path))
+        overwrite = input("Overwrite '{}'? [Y/n] ".format(license_file_path))
         if len(overwrite) > 0 and overwrite[0].upper() == 'N':
             print('Aborted')
             exit(1)
