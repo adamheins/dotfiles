@@ -18,3 +18,5 @@
 	rebase = false
 [safe]
 	directory = /home/adam/dev/IsaacSim
+[init]
+	defaultBranch = main

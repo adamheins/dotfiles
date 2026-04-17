@@ -15,9 +15,11 @@ export KEYTIMEOUT=1
 setopt AUTO_PUSHD
 
 # Command history.
-HISTSIZE=10000
-SAVEHIST=10000
-HISTFILE=~/.zsh/.history
+HISTSIZE=1000000
+SAVEHIST=1000000
+HISTFILE=~/.zsh/history
+setopt INC_APPEND_HISTORY
+setopt EXTENDED_HISTORY  # save start:elapsed;command
 setopt SHARE_HISTORY
 setopt HIST_IGNORE_ALL_DUPS
 
@@ -70,10 +72,6 @@ get_py_venv() {
   fi
 }
 
-# get_conda_env() {
-#   conda_env="
-# }
-
 # %(5~|%-1~/…/%3~|%4~) limits the CWD of 5 or more components to a/.../b/c/d.
 prompt_ins="$has_docker$py_venv%F{222}%n@%m %F{245}%(5~|%-1~/…/%3~|%4~) %F{222}$ %F{250}"
 prompt_cmd="$has_docker$py_venv%F{139}%n@%m %F{245}%(5~|%-1~/…/%3~|%4~) %F{139}$ %F{250}"
@@ -93,8 +91,8 @@ precmd() {
   fi
 
   get_py_venv
-  prompt_ins="$has_docker%F{203}$CONDA_PROMPT_MODIFIER$py_venv%F{222}%n@%m %F{245}%(5~|%-1~/…/%3~|%4~) %F{222}$ %F{250}"
-  prompt_cmd="$has_docker%F{203}$CONDA_PROMPT_MODIFIER$py_venv%F{139}%n@%m %F{245}%(5~|%-1~/…/%3~|%4~) %F{139}$ %F{250}"
+  prompt_ins="$has_docker%F{203}$CONDA_PROMPT_MODIFIER$PIXI_PROMPT$py_venv%F{222}%n@%m %F{245}%(5~|%-1~/…/%3~|%4~) %F{222}$ %F{250}"
+  prompt_cmd="$has_docker%F{203}$CONDA_PROMPT_MODIFIER$PIXI_PROMPT$py_venv%F{139}%n@%m %F{245}%(5~|%-1~/…/%3~|%4~) %F{139}$ %F{250}"
   export PS1=$prompt_ins
 }
 
@@ -169,4 +167,3 @@ sourcedir ~/zsh/scripts
 
 autoload -U compinit
 compinit -D
-
